@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Honest Analysis of Variables that Co-Vary</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="honest-eval-of-variables-that-co-vary_files/libs/clipboard/clipboard.min.js"></script>
+<script src="honest-eval-of-variables-that-co-vary_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="honest-eval-of-variables-that-co-vary_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="honest-eval-of-variables-that-co-vary_files/libs/quarto-html/popper.min.js"></script>
+<script src="honest-eval-of-variables-that-co-vary_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="honest-eval-of-variables-that-co-vary_files/libs/quarto-html/anchor.min.js"></script>
+<link href="honest-eval-of-variables-that-co-vary_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="honest-eval-of-variables-that-co-vary_files/libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="honest-eval-of-variables-that-co-vary_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="honest-eval-of-variables-that-co-vary_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="honest-eval-of-variables-that-co-vary_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Honest Analysis of Variables that Co-Vary</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><br></p>
+<section id="terminology" class="level2">
+<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
+<p>In statistical analysis, I use ‘co-vary’ when you might use the word ‘correlated’, ‘related’ or ‘associated’.</p>
+<section id="avoid-confusing-jargon" class="level3">
+<h3 class="anchored" data-anchor-id="avoid-confusing-jargon">Avoid Confusing Jargon</h3>
+<ul>
+<li><p>Like it or not, the jargon invented by statisticians such as “association”, “relationship”, “correlation”, “explains”, and even “accounts for” have very strong implications of causation, <strong><em>even when no causation between the variables is present</em></strong>.</p></li>
+<li><p>“Co-vary” conveys only that variables <strong><em>in the specific data examined</em></strong> change values in a more or less predictable manner, whatever the reasons (known or unknown). The more restricted the data examined, the less applicable the predictions are to other situations.</p></li>
+<li><p>Reserves “correlation” and “covariance” for their respective mathematical computations and interpretations for technical explanations directed at scientists.</p></li>
+</ul>
+</section>
+<section id="address-statistical-questions-in-a-neutral-honest-way" class="level3">
+<h3 class="anchored" data-anchor-id="address-statistical-questions-in-a-neutral-honest-way">Address Statistical Questions in a Neutral, Honest Way</h3>
+<p><strong>Assessing Existence</strong>: “Do these variables co-vary?”<br>
+<strong>Assessing Direction</strong>: “Height and weight co-vary positively”<br>
+</p>
+<p><strong>Assessing Functional Form</strong> : “These variables co-vary along a straight line”<br>
+<strong>Assessing Functional Form</strong>: “These variables co-vary along a curve”<br>
+<strong>Assessing Functional Form</strong>: “X and Y² co-vary along a parabola”<br>
+</p>
+<p><strong>Technical analysis</strong>: “The covariance is positive, indicating they co-vary along a line and in the same direction.”</p>
+<p><strong>Technical analysis</strong>: “These variables co-vary, but their covariance is zero because the relationship isn’t linear.”</p>
+</section>
+<section id="the-function-below-has-perfect-predictability-but-zero-correlation-or-covariance" class="level3">
+<h3 class="anchored" data-anchor-id="the-function-below-has-perfect-predictability-but-zero-correlation-or-covariance">The function below has perfect predictability, but zero correlation or covariance</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="scaling" class="level3">
+<h3 class="anchored" data-anchor-id="scaling">Scaling</h3>
+<p>The covariance statistic alone will not reveal the relative <strong>magnitude</strong> of how much they co-vary. Even when the correlation is identical in two scenario, one calculation of the covariance can be much larger than the other, depending on the scale of measurement (e.g., inches vs feet, pounds vs kg). This is because covariance statistics are entirely dependent on the units of measurement.</p>
+<p>Correlation statistics, on the other hand, reveal <strong>relative magnitudes</strong>. This, of course, is the great advantage of standardizing any measure.</p>
+<p>Example: These variables co-vary along a line (linear). Using the covariance statistic alone we can know the direction, but we cannot determine the relative magnitude. The <strong>magnitude</strong> of the covariances is revealed by using the correlation statistic, which is the STANDARDIZED covariance.</p>
+<p>Plots show identical lines, but with they are measured on different scales</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="take-aways" class="level3">
+<h3 class="anchored" data-anchor-id="take-aways">Take Aways</h3>
+<p><strong><em>Covariance</em></strong>: Raw, non-standardized measure reflecting the scale used<br>
+<strong><em>Correlation</em></strong>: standardized covariance (unitless measure)</p>
+</section>
+<section id="causal-language" class="level3">
+<h3 class="anchored" data-anchor-id="causal-language">Causal Language?</h3>
+<p>“The relationship suggests X causes Y” (<strong><em>WRONG!</em></strong>, unless you have postulated the causal theory, protocols and procedures in advance and completed further analysis to support a causal inference) <br></p>
+<p>“The relationship may suggest that X causes Y” (<strong><em>STILL WRONG</em></strong>, unless you have postulated the causal theory, protocols and procedures in advance and completed further analysis to support a causal inference) <br></p>
+<p>“X co-varies with Y along a line, and the slope is positive” (<strong><em>HONEST</em></strong>) <br></p>
+<p>“No causal inference can be made from this correlational analysis alone.” (<strong><em>HONEST</em></strong>, unless you have simulated an experimental study when controlling for variables)</p>
+</section>
+</section>
+<section id="understanding-the-phrase-controlling-for-with-variables" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-the-phrase-controlling-for-with-variables">Understanding the Phrase “Controlling for” with Variables</h2>
+<p>In analysis, when we talk about “controlling for” a variable we’re trying to understand the nature of the covariance between two (or more) variables by removing the statistical influence of one or more other variables. (Note: a statistical influence alone is NOT evidence of a causal influence)</p>
+<p>This helps determine how much of an observed statistical covariance is direct, or whether it is also statistically influenced by other factors.</p>
+<section id="conceptual-example" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-example">Conceptual Example</h3>
+<p>Imagine analyzing the covariance between ice cream sales and drowning deaths. Although these variables show a very strong positive statistical correlation, ice cream sales do NOT <strong><em>cause</em></strong> drownings. A third variable (summer temperature) statistically influences both and this type of variable can ‘fool’ us.</p>
+<p>What we can say:</p>
+<ul>
+<li>Ice cream sales and drownings co-vary along a line, with positive slope.</li>
+</ul>
+<p>Here is a chart using synthetic data. It shows perfect correlation (1.0) and a ‘high’ covariance because ice cream sales are in dollars, and drownings are in individuals.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Adding temperature as an statistical influence:</p>
+<ul>
+<li><p>Higher temperatures (Z) → More ice cream sales (X)</p></li>
+<li><p>Higher temperatures (Z) → More swimming → More drowning incidents (Y)</p></li>
+</ul>
+<p>By “controlling for” the statistical effect of temperature, we can see a covariance between ice cream (X) and drownings (Y) after removing the statistical influence of temperature (Z), (but not that of swimming).</p>
+</section>
+</section>
+<section id="other-methods-to-assess-the-statistical-influence-of-variables-on-each-other" class="level2">
+<h2 class="anchored" data-anchor-id="other-methods-to-assess-the-statistical-influence-of-variables-on-each-other">Other Methods to Assess the Statistical Influence of Variables on Each Other</h2>
+<section id="examine-partial-correlation-between-3-variables-using-r-stats-functions-only" class="level3">
+<h3 class="anchored" data-anchor-id="examine-partial-correlation-between-3-variables-using-r-stats-functions-only">Examine Partial Correlation Between 3 Variables Using R Stats Functions Only</h3>
+<p>Partial correlation measures the covariance between two variables while removing the statistical influences of others (‘controlling for’).</p>
+<p>Consider this DAG:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, compare the regular correlations and the partial correlation</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Regular correlation of Sleep and Test Score: 0.375 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Regular correlation of Study Time and Test Score: 0.513 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Partial correlation of Sleep and Test Score (controlling for statistical influence of Study Time): 0.315 </code></pre>
+</div>
+</div>
+<p>The difference between regular correlation and partial correlation can be important, depending on the magnitude and practical implications of the statistical influences observed (see below).</p>
+</section>
+<section id="regular-correlation-vs.-partial-correlation" class="level3">
+<h3 class="anchored" data-anchor-id="regular-correlation-vs.-partial-correlation">Regular Correlation vs.&nbsp;Partial Correlation</h3>
+<ul>
+<li><p>Regular correlation (0.375) measures the total linear covariance between Sleep Time (X) and Test Score (Y) without removing the statistical influence of any other variables. It answers: “How strongly do Sleep Time (X) and Test Scores (Y) co-vary, including the statistical influences of other known and unknown variables (with no controls)?”</p></li>
+<li><p>Partial correlation (0.315) measures the co-variation between Sleep Time (X) and Test Score (Y) after removing the statistical influence of Study Time (Z). It answers: “How strongly do Sleep Time (X) and Test Score (Y) co-vary after removing the statistical influence of Study Time (Z) on both variables?”</p></li>
+</ul>
+<p>In this example, the correlation dropped from 0.375 to 0.315 when controlling for the statistical influence of Study Time (Z). This indicates that:</p>
+<ol type="1">
+<li><p>A measurable portion of the original X-Y covariance was actually due to Z’s statistical influence on both variables.</p></li>
+<li><p>About 84% (0.315/0.375 = 0.61) of the original correlation strength remains when the statistical influence of Z was taken into account (controlled for).</p></li>
+</ol>
+<p>There is still a measurable covariance between X and Y (0.315) that exists independently of Z.</p>
+<p>There are other tests you can apply to determine the statistical significance, AND the practical significance. Both are equally important (see below).</p>
+<p>This is similar to comparing the R² from a simple model versus looking at the specific coefficient for X in a multiple regression model .</p>
+<p>This is similar to comparing the R² from a simple model where Y is predicted by X alone (Y ~ X) versus looking at the specific coefficient for X in a multiple regression model where Y is predicted by both X and Z together (Y ~ X + Z).</p>
+<p>In practical terms:</p>
+<p>Y ~ X: “How well does X alone predict Y?” Y ~ X + Z: “How well does X predict Y when we also account for Z’s statistical influence?”</p>
+<p>The comparison shows how much X’s apparent predictive power changes when you control for Z.</p>
+<p><br></p>
+</section>
+<section id="using-linear-regression-models-to-analyze-predictability-between-3-variables" class="level3">
+<h3 class="anchored" data-anchor-id="using-linear-regression-models-to-analyze-predictability-between-3-variables">Using Linear Regression Models to Analyze Predictability Between 3 Variables</h3>
+<p>Linear regression ALSO allows you to examine covariance while statistically adjusting for other variables.</p>
+<p>Using the same data, and the same DAG, we see that:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple Regression - Sleep coefficient: 0.438 | R² = 0.14 | MAE = ± 0.589 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Multiple Regression - Sleep coefficient: 0.324 (controlling for Study Time) | R² = 0.336 | MAE = ± 0.529 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple Regression - Sleep coefficient: 0.375 | R² = 14 | MAE = ± 0.589 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-6-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The coefficient for X in model2 represents the covariance between X and Y AFTER removing the statistical statistical influence of Z (controlling for Z).</p>
+<p>We specifically want the coefficient for X because it tells us:<br>
+“How much does Y change for each unit increase in X, when Z is held constant?”<br>
+</p>
+<p>Note: This X coefficient is mathematically equivalent to the partial correlation between X and Y (controlling for Z) that we calculated earlier.</p>
+</section>
+<section id="comparing-approaches" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-approaches">Comparing Approaches</h3>
+<p><strong><em>Partial Correlation:</em></strong></p>
+<p>Regular correlation: 0.513<br>
+Partial correlation (controlling for Z): 0.315</p>
+<p><strong><em>Linear Regression:</em></strong></p>
+<p>Simple Linear Regression coefficient for X (not controlling for Z): 0.438<br>
+Multiple Regression coefficient for X (controlling for Z): 0.324</p>
+<p>The similarity in results is not coincidental.</p>
+<p>These methods are mathematically related and represent different ways of approaching the same fundamental question: “What is the covariance between X and Y after accounting for the statistical influence of Z?”</p>
+</section>
+<section id="why-theyre-similar" class="level3">
+<h3 class="anchored" data-anchor-id="why-theyre-similar">Why They’re Similar</h3>
+<p>In standardized form (when variables are scaled to mean=0 and SD=1):</p>
+<ul>
+<li><p>The standardized regression coefficient for X in a simple regression (Y ~ X) is equivalent to the correlation between X and Y</p></li>
+<li><p>The standardized regression coefficient for X in a multiple regression (Y ~ X + Z) is equivalent to the partial correlation between X and Y controlling for Z</p></li>
+</ul>
+<p>The slight numerical differences you see (0.513 vs 0.438 and 0.315 vs 0.324) are due to:</p>
+<ul>
+<li>The correlation coefficient being standardized by default<br>
+</li>
+<li>The regression coefficients in your output not being standardized (they’re in the original units of measurement)</li>
+</ul>
+<p>This demonstrates an important concept in R programming: there are often multiple ways to achieve the same analytical goal. The choice between using partial correlation and multiple regression might depend on:</p>
+<ul>
+<li>Your specific research question<br>
+</li>
+<li>How you plan to interpret and communicate results<br>
+</li>
+<li>Other analytical needs (e.g., if you need to control for many variables, regression might be more practical)<br>
+</li>
+<li>Your disciplinary conventions (some fields prefer one approach over another)</li>
+</ul>
+<p>For this particular scenario of controlling for a third variable, both approaches lead to the same conclusion: the covariance between X and Y is weaker (but still present) after accounting for Z’s statistical influence.</p>
+</section>
+<section id="residuals-method" class="level3">
+<h3 class="anchored" data-anchor-id="residuals-method">Residuals Method</h3>
+<p>You can extract residuals from a regression model to create ‘adjusted’ variables.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The residual method is mathematically equivalent to partial correlation. Here’s why they’re the same:</p>
+<p><strong><em>Why These Methods Are Equivalent</em></strong></p>
+<p>When you:</p>
+<ul>
+<li>Regress X on Z and get residuals (X_residuals)</li>
+<li>Regress Y on Z and get residuals (Y_residuals)</li>
+<li>Calculate the correlation between these residuals</li>
+</ul>
+<p>You’re effectively measuring what’s “left over” in the X-Y covariance after removing Z’s statistical influence on both variables. This is precisely what partial correlation does.</p>
+<p>In mathematical terms:</p>
+<ul>
+<li>X_residuals represent the part of X that cannot be predicted by Z</li>
+<li>Y_residuals represent the part of Y that cannot be predicted by Z</li>
+<li>Their correlation represents the covariance between X and Y that is independent of Z</li>
+</ul>
+<p><strong><em>Comparing All Three Methods</em></strong></p>
+<p>For controlling for Z in the X-Y covariance:</p>
+<div id="tbl-methods" class="striped hover quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Comparison of Methods for Controlling Variables
+</figcaption>
+<div aria-describedby="tbl-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: center;">Result</th>
+<th style="text-align: left;">Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Partial correlation</td>
+<td style="text-align: center;">0.315</td>
+<td style="text-align: left;">Direct calculation of X-Y covariance after removing Z’s statistical influence</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Multiple regression</td>
+<td style="text-align: center;">0.324</td>
+<td style="text-align: left;">Coefficient of X when the statistical influence of Z is held constant</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Residual correlation</td>
+<td style="text-align: center;">0.315</td>
+<td style="text-align: left;">Correlation between the parts of X and Y that do not co-vary with Z</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The slight difference in the regression coefficient (0.324) compared to the other methods (0.315) is due to scaling differences as mentioned before. If you were to standardize all variables before regression, the coefficient would match exactly.</p>
+<p><strong><em>Why This Matters</em></strong></p>
+<p>This equivalence across methods is powerful because:</p>
+<ol type="1">
+<li>It gives you confidence in your results when different approaches yield the same answer</li>
+<li>It allows you to choose the method that best fits your workflow or communication needs</li>
+<li>It demonstrates the mathematical coherence of statistical theory</li>
+</ol>
+<p>If you’re working with R, this also means you can choose the most computationally efficient or syntactically convenient method for your specific analysis without sacrificing accuracy.</p>
+<p><br></p>
+</section>
+<section id="semi-partial-correlation" class="level3">
+<h3 class="anchored" data-anchor-id="semi-partial-correlation">Semi-partial Correlation</h3>
+<p>Semi-partial correlations measure unique contributions.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Semi-partial correlation: 0.308 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Correlation_Type Value
+1          Regular 0.375
+2          Partial 0.315
+3     Semi-Partial 0.308
+                                           Interpretation R_squared
+1                        Total X-Y statistical influences     0.140
+2 X-Y after removing statistical influence of Z from both     0.099
+3                     Unique X statistical influence on Y     0.095
+  Variance_Explained
+1                14%
+2               9.9%
+3               9.5%</code></pre>
+</div>
+</div>
+<p>The semi-partial correlation (0.308) is giving you a different and quite useful perspective compared to the partial correlation (0.315) we discussed earlier. Let me explain what this number is telling you:</p>
+<p><strong><em>Semi-Partial Correlation Procedure Explained</em></strong></p>
+<p>While partial correlation (0.315) measures the covariance between X and Y after removing Z’s statistical effect from both variables, semi-partial correlation (0.251) removes Z’s statistical effect from only one variable (typically X).</p>
+<p>In this example, the semi-partial correlation of 0.308 represents:</p>
+<ul>
+<li>The correlation between X (with Z’s statistical statistical influence removed) and Y (with Z’s statistical statistical influence still present)</li>
+</ul>
+<p>Think of it as answering: “What is the unique statistical statistical influence of X on the Y we observe, beyond what statistical influence Z contributes?”</p>
+<p><strong><em>Interpretation in Your Data</em></strong></p>
+<p>The semi-partial correlation (0.308) is smaller than the partial correlation (0.315), which is expected and tells you:</p>
+<ol type="1">
+<li><p>When you remove Z’s statistical effect from X but keep Y in its original form, the covariance between X and Y becomes weaker</p></li>
+<li><p>The unique statistical influence of X to the variation observed in Y (after accounting for Z) is less than the covariance between the Z-adjusted versions of both variables Approximately 9.5% (0.308²) of the total variance in Y comes uniquely from the statistical influence of X, beyond the statistical influence of Z.</p></li>
+</ol>
+<p><strong><em>Practical Example to Understand This</em></strong></p>
+<p>Imagine a real-world scenario:</p>
+<p>Y = Job performance X = Technical skills Z = Years of experience</p>
+<p>The semi-partial correlation would tell you: “How much do technical skills uniquely statistical influence to job performance beyond what statistical influence is contributed by experience?”</p>
+<p>This is particularly useful in regression contexts because the square of the semi-partial correlation tells you exactly how much R² would decrease if you removed X from a model that already contains Z.</p>
+<p><strong><em>Comparing All Four Methods</em></strong></p>
+<div id="tbl-correlation-methods" class="striped quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-correlation-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Comparison of Correlation Methods
+</figcaption>
+<div aria-describedby="tbl-correlation-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: center;">Result</th>
+<th style="text-align: left;">Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Regular correlation</td>
+<td style="text-align: center;">0.565</td>
+<td style="text-align: left;">Total covariance between X and Y</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Partial correlation</td>
+<td style="text-align: center;">0.315</td>
+<td style="text-align: left;">covariance between X and Y with Z’s statistical effect removed from both</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Semi-partial correlation</td>
+<td style="text-align: center;">0.251</td>
+<td style="text-align: left;">Unique statistical influence of X to Y beyond the statistical influence of Z</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Multiple regression coefficient</td>
+<td style="text-align: center;">0.324</td>
+<td style="text-align: left;">statistical effect of X on Y when Z is held constant</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The semi-partial correlation is particularly valuable in research contexts where you want to determine the unique contribution of specific predictors, especially when deciding which variables to include in a model.</p>
+</section>
+</section>
+<section id="covariances-to-generative-equations" class="level2">
+<h2 class="anchored" data-anchor-id="covariances-to-generative-equations">covariances to Generative Equations</h2>
+<p>The correlation results observed directly relate to the equations used to generate the data. Let’s break down the connection:</p>
+<p>Original Data-Generating Equations</p>
+<p>Z &lt;- rnorm(n) # Random variable Z x &lt;- 0.6 * Z + rnorm(n, 0, 0.7) # X depends on Z with coefficient 0.6 y &lt;- 0.5 * Z + 0.3 * x + rnorm(n, 0, 0.7) # Y depends on Z with coefficient 0.5 # and on X with coefficient 0.3</p>
+<p><br></p>
+<p><strong><em>How This Relates to Our Results</em></strong></p>
+<div id="tbl-data-covariances" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-covariances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: covariance Between Statistical Results and Data-Generating Equations
+</figcaption>
+<div aria-describedby="tbl-data-covariances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Result</th>
+<th>Relation to Data-Generating Equations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Regular correlation</td>
+<td>0.565</td>
+<td>This high correlation exists because: (1) X directly statistical influences Y (0.3 coefficient) AND (2) Z creates an indirect path between X and Y (0.6 * 0.5 = 0.3)</td>
+</tr>
+<tr class="even">
+<td>Partial correlation</td>
+<td>0.315</td>
+<td>Close to the true direct statistical effect of X on Y (0.3) in your equation since it removes Z’s statistical influence on both X and Y</td>
+</tr>
+<tr class="odd">
+<td>Semi-partial correlation</td>
+<td>0.251</td>
+<td>Lower than 0.3 because it only removes Z’s statistical effect from X but not from Y</td>
+</tr>
+<tr class="even">
+<td>Multiple regression coefficient</td>
+<td>0.324</td>
+<td>Approximates the 0.3 coefficient you specified for X’s statistical effect on Y</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><br></p>
+<p><strong><em>The Math Behind This</em></strong></p>
+<p>The equations describe a classic confounding scenario:</p>
+<ul>
+<li>Direct statistical effect: X → Y (coefficient = 0.3)</li>
+<li>Indirect statistical effect: X ← Z → Y (coefficients: Z→X = 0.6, Z→Y = 0.5)</li>
+<li>Total statistical effect: Direct + Indirect</li>
+</ul>
+<p>The regular correlation captures both statistical effects. The partial correlation and regression coefficient try to isolate just the direct statistical effect, which is why they’re close to 0.3 (the true direct statistical effect).</p>
+<p>The small differences from exactly 0.3 are due to random variation in the simulated data (we only have n=100 observations, and there’s random noise in each equation).</p>
+<p>In causal inference terms, the data generating process created is a perfect example of confounding, where:</p>
+<ul>
+<li>Z is a confounder (statistically influences both X and Y)</li>
+<li>X has an observable statistical effect on Y of 0.3</li>
+<li>The total correlation between X and Y (0.565) overestimates the true causal effect due to confounding</li>
+<li>Controlling for Z brings us closer to the true causal effect</li>
+</ul>
+<p>This demonstrates why controlling for variables is crucial for understanding true covariances in observational data. This simulation perfectly shows how controlling for Z helps to recover the true X→Y covariance (0.3) that is built into the data.</p>
+<section id="why-the-scatter-patterns-differ" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-scatter-patterns-differ">Why the Scatter Patterns Differ</h3>
+<p><strong><em>Original Plot (X vs Y):</em></strong></p>
+<ul>
+<li>Shows the raw covariance between X and Y</li>
+<li>Points are more spread out across a wider range of values</li>
+<li>The scatter includes both the direct X→Y covariance AND the indirect covariance through Z</li>
+<li>The pattern is statistical influenced by Z pulling points in particular directions</li>
+</ul>
+<p><strong><em>Residuals Plot (X_residuals vs Y_residuals):</em></strong></p>
+<ul>
+<li>Shows only what’s left of X and Y after Z’s statistical influence is removed</li>
+<li>Points are more concentrated around zero (by definition of residuals)</li>
+<li>The scatter pattern represents only the direct X→Y covariance</li>
+<li>The overall variance is reduced because Z’s contribution has been removed</li>
+</ul>
+</section>
+<section id="why-the-regression-lines-look-similar" class="level3">
+<h3 class="anchored" data-anchor-id="why-the-regression-lines-look-similar">Why the Regression Lines Look Similar</h3>
+<p>The similarity in the regression lines (despite different scatter patterns) occurs because:</p>
+<p><strong><em>The Slope</em></strong></p>
+<p><strong>First plot:</strong></p>
+<ul>
+<li>The total covariance (direct + indirect)</li>
+<li>The slope of the residuals regression line approaches the true direct statistical effect of X on Y (around 0.3 in your data-generating equation), which is what the partial correlation also measures</li>
+<li>Linear covariance: Both plots are showing fundamentally the same underlying - linear covariance - just from different perspectives</li>
+</ul>
+<p><strong>Second plot:</strong></p>
+<p>Only the direct covariance (after Z is removed)</p>
+<p><strong><em>Direction:</em></strong></p>
+<ul>
+<li>The direction of the covariance remains consistent even after removing Z’s statistical influence</li>
+</ul>
+<p><br></p>
+</section>
+<section id="an-analogy-to-understand-this" class="level3">
+<h3 class="anchored" data-anchor-id="an-analogy-to-understand-this">An Analogy to Understand This</h3>
+<p>Think of it like comparing two photographs of the same mountain:</p>
+<ol type="1">
+<li>The first photo shows the mountain with surrounding landscape (X, Y with Z’s statistical influence)</li>
+<li>The second photo shows just the mountain with background removed (X_residuals, Y_residuals)</li>
+</ol>
+<p>The mountain’s basic shape (the regression line) is similar in both, but the context and spread around it (the scatter pattern) differs dramatically.</p>
+<p><strong>Technical Explanation</strong></p>
+<p>What you’re seeing is the essence of the Frisch-Waugh-Lovell theorem in econometrics: regressing residuals from one regression on residuals from another gives the same coefficient as the multiple regression would. The narrower spread in the residuals plot also shows why the partial correlation (0.315) is lower than the regular correlation (0.565) - there’s less shared variance after removing Z’s contribution.</p>
+<p><br></p>
+</section>
+</section>
+<section id="visual-demonstration" class="level2">
+<h2 class="anchored" data-anchor-id="visual-demonstration">Visual Demonstration</h2>
+<p>Let’s visualize how controlling for a variable works:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption>VisualiZation of controlling for Z</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="practical-example-education-income-and-experience" class="level2">
+<h2 class="anchored" data-anchor-id="practical-example-education-income-and-experience">Practical Example: Education, Income and Experience</h2>
+<p>Let’s look at a more concrete example: the covariance between education and income, controlling for years of experience.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Regular correlation (education-income): 0.885 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Partial correlation (controlling for experience): 0.569 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Estimate Std. Error 
+ 9238.2771   399.3233 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Estimate Std. Error 
+ 4885.4219   582.8745 </code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation">Interpretation</h2>
+<p>When we control for a variable:</p>
+<ol type="1">
+<li>If the correlation weakens substantially, the control variable contributes much of the original covariance</li>
+<li>If the correlation remains strong, the covariance exists independently of the control variable</li>
+<li>If the correlation changes direction, we may have uncovered a suppression statistical effect</li>
+</ol>
+</section>
+<section id="practical-tips" class="level2">
+<h2 class="anchored" data-anchor-id="practical-tips">Practical Tips</h2>
+<ul>
+<li>Always consider potential confounding variables in your analysis</li>
+<li>Controlling for too many variables can lead to over-fitting</li>
+<li>Correlation (even partial) does not imply causation</li>
+<li>Consider using directed acyclic graphs (DAGs) to identify which variables to control for</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If using DAGs for causal inference</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggdag")</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>dag <span class="ot">&lt;-</span> <span class="fu">dagify</span>(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> Z,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  X <span class="sc">~</span> Z,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">exposure =</span> <span class="st">"X"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="st">"Y"</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluating-your-controlled-models-practical-value" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-your-controlled-models-practical-value">Evaluating Your Controlled Model’s Practical Value</h2>
+<p>After controlling for confounding variables, you need to assess whether your model is practically useful for decision-making. This is where <strong>Residual Standard Error (RSE)</strong> and <strong>Mean Absolute Error (MAE)</strong> become crucial - they tell you about the <strong>size of your prediction errors in real-world units</strong>.</p>
+<section id="understanding-prediction-error-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-prediction-error-metrics">Understanding Prediction Error Metrics</h3>
+<p><strong>R² tells you about relative improvement</strong> (how much variance you can predict), but <strong>RSE and MAE tell you about absolute accuracy</strong> (how wrong your predictions typically are).</p>
+<p>Think of it this way: - <strong>R² = 0.36</strong>: “I can predict 36% of the variation” - <strong>RSE = ±15 points</strong>: “My predictions are typically off by about 15 points” - <strong>MAE = 12 points</strong>: “On average, I’m wrong by 12 points”</p>
+</section>
+<section id="residual-standard-error-rse" class="level3">
+<h3 class="anchored" data-anchor-id="residual-standard-error-rse">Residual Standard Error (RSE)</h3>
+<p>RSE estimates the <strong>typical size of your prediction errors</strong> in the original units of your outcome variable.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>R² = 0.86 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RSE = ±$ 14722 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Interpretation:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Model identifies 86 % of variation observed in the income variable</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Typical prediction error: ±$ 14722 </code></pre>
+</div>
+</div>
+<p><strong>What RSE Tells You:</strong> - <strong>68% of predictions</strong> will be within ±1 RSE of actual values - <strong>95% of predictions</strong> will be within ±2 RSE of actual values - Gives you a <strong>confidence interval</strong> for any individual prediction</p>
+</section>
+<section id="mean-absolute-error-mae" class="level3">
+<h3 class="anchored" data-anchor-id="mean-absolute-error-mae">Mean Absolute Error (MAE)</h3>
+<p>MAE shows the <strong>average size of prediction errors</strong>, regardless of direction.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>MAE = $ 11512 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Interpretation:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>On average, predictions are off by $ 11512 </code></pre>
+</div>
+</div>
+<p><strong>RSE vs MAE:</strong> - <strong>MAE is typically smaller</strong> than RSE (less sensitive to outliers) - <strong>MAE = average error</strong>; <strong>RSE = typical spread of errors</strong> - Both measure accuracy in <strong>real-world units</strong></p>
+</section>
+<section id="practical-decision-framework" class="level3">
+<h3 class="anchored" data-anchor-id="practical-decision-framework">Practical Decision Framework</h3>
+<p>Use this framework to assess if your controlled model is useful:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>=== MODEL USEFULNESS ASSESSMENT ===</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>STATISTICAL PERFORMANCE:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- R² = 0.86 (describes 86 % of variation)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- RSE = ±$ 14722 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- MAE = $ 11512 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>PRACTICAL QUESTIONS TO ASK:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1. Is ±$ 14722 accurate enough for your decision?</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2. Can you act on predictions with 11512 average error?</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3. What's your 'error budget' for this application?</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>EXAMPLE DECISION CONTEXTS:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- HR salary setting: Is ±$ 14722 acceptable for pay bands?</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Budget planning: Can you plan with $ 11512 average error?</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Individual advice: Would you make career decisions with this accuracy?</code></pre>
+</div>
+</div>
+</section>
+<section id="when-good-r²-doesnt-mean-useful-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="when-good-r²-doesnt-mean-useful-predictions">When Good R² Doesn’t Mean Useful Predictions</h3>
+<p><strong>Example 1: High R² but Useless Predictions</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>STOCK PREDICTION MODEL:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- R² = 0.772 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- RSE = ±$ 48.5 per share</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Conclusion: High R² ( 0.772 ) but ±$ 48.5 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  errors still make this useless for trading!</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="the-key-insight" class="level2">
+<h2 class="anchored" data-anchor-id="the-key-insight">The Key Insight</h2>
+<p><strong>R² and absolute error size are partially independent:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Scenario</th>
+<th style="text-align: left;">R²</th>
+<th style="text-align: left;">Absolute Error</th>
+<th style="text-align: left;">Practical Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Weather (°F)</td>
+<td style="text-align: left;">0.85</td>
+<td style="text-align: left;">±3°F</td>
+<td style="text-align: left;">Excellent!</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Weather (°K)</td>
+<td style="text-align: left;">0.85</td>
+<td style="text-align: left;">±3°K</td>
+<td style="text-align: left;">Same accuracy, different units</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Stock prices</td>
+<td style="text-align: left;">0.85</td>
+<td style="text-align: left;">±$50/share</td>
+<td style="text-align: left;">Useless for trading</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Manufacturing</td>
+<td style="text-align: left;">0.30</td>
+<td style="text-align: left;">±0.1mm</td>
+<td style="text-align: left;">Perfect for quality control</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="why-this-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters">Why This Matters</h2>
+<p><strong>R² alone can be misleading because:</strong></p>
+<ol type="1">
+<li><strong>High R² + Large scale = Large absolute errors</strong></li>
+<li><strong>Low R² + Small scale = Tiny absolute errors</strong></li>
+<li><strong>Practical utility depends on your error tolerance, not R²</strong></li>
+</ol>
+<p><strong>Example:</strong> Predicting tomorrow’s temperature</p>
+<ul>
+<li><strong>Model A:</strong> R² = 0.95, errors ±20°F → Terrible!</li>
+<li><strong>Model B:</strong> R² = 0.60, errors ±5°F → Excellent!</li>
+</ul>
+<p>The lesson: <strong>Always check absolute error metrics (RSE, MAE) against your real-world tolerance, regardless of how impressive your R² looks!</strong></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

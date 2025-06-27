@@ -1,0 +1,10 @@
+# Mark CSS files as vendored (third-party) so they don't count toward language stats
+*.css linguist-vendored=true
+
+# Or mark them as documentation if they're styling docs
+*.css linguist-documentation=true
+
+# Ensure R files are properly detected
+*.R linguist-language=R
+*.Rmd linguist-language=R
+*.qmd linquist-language=R
