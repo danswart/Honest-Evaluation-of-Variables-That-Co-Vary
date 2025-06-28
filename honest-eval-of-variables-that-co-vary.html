@@ -99,19 +99,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><br></p>
-<section id="terminology" class="level2">
-<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<section id="statistical-jargon-is-often-misleading-to-the-layperson" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-jargon-is-often-misleading-to-the-layperson">Statistical Jargon Is Often Misleading to the Layperson</h3>
 <p>In statistical analysis, I use ‘co-vary’ when you might use the word ‘correlated’, ‘related’ or ‘associated’.</p>
-<section id="avoid-confusing-jargon" class="level3">
-<h3 class="anchored" data-anchor-id="avoid-confusing-jargon">Avoid Confusing Jargon</h3>
-<ul>
-<li><p>Like it or not, the jargon invented by statisticians such as “association”, “relationship”, “correlation”, “explains”, and even “accounts for” have very strong implications of causation, <strong><em>even when no causation between the variables is present</em></strong>.</p></li>
-<li><p>“Co-vary” conveys only that variables <strong><em>in the specific data examined</em></strong> change values in a more or less predictable manner, whatever the reasons (known or unknown). The more restricted the data examined, the less applicable the predictions are to other situations.</p></li>
-<li><p>Reserves “correlation” and “covariance” for their respective mathematical computations and interpretations for technical explanations directed at scientists.</p></li>
-</ul>
+<p>Terms with dual meanings can easily mislead. Subject-matter experts often forget that terms of art in statistics take on new meanings for a layperson.</p>
+<p>Like it or not, the jargon invented by statisticians such as “association”, “relationship”, “correlation”, “explains”, and even “accounts for” have very strong implications of causation, <strong><em>even when no causation between the variables is present</em></strong>.</p>
+<p>On the other hand, “co-vary” conveys only that variables <strong><em>in the specific data examined</em></strong> change values in a more or less predictable manner, whatever the reasons (known or unknown). The more restricted the data examined, the less applicable the predictions are to other situations.</p>
+<p>I reserve the words “correlation” and “covariance” for the statistically curious to explain their respective mathematical computations and interpretations.</p>
 </section>
-<section id="address-statistical-questions-in-a-neutral-honest-way" class="level3">
-<h3 class="anchored" data-anchor-id="address-statistical-questions-in-a-neutral-honest-way">Address Statistical Questions in a Neutral, Honest Way</h3>
+<section id="you-can-assess-statistical-questions-in-a-neutral-honest-way" class="level3">
+<h3 class="anchored" data-anchor-id="you-can-assess-statistical-questions-in-a-neutral-honest-way">You CAN Assess Statistical Questions in a Neutral, Honest Way</h3>
 <p><strong>Assessing Existence</strong>: “Do these variables co-vary?”<br>
 <strong>Assessing Direction</strong>: “Height and weight co-vary positively”<br>
 </p>
@@ -119,11 +118,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <strong>Assessing Functional Form</strong>: “These variables co-vary along a curve”<br>
 <strong>Assessing Functional Form</strong>: “X and Y² co-vary along a parabola”<br>
 </p>
-<p><strong>Technical analysis</strong>: “The covariance is positive, indicating they co-vary along a line and in the same direction.”</p>
+<p><strong>Technical analysis</strong>: “The covariance is positive, indicating they co-vary along a line and in the same direction. The slope of the line is not calculated.”</p>
 <p><strong>Technical analysis</strong>: “These variables co-vary, but their covariance is zero because the relationship isn’t linear.”</p>
 </section>
-<section id="the-function-below-has-perfect-predictability-but-zero-correlation-or-covariance" class="level3">
-<h3 class="anchored" data-anchor-id="the-function-below-has-perfect-predictability-but-zero-correlation-or-covariance">The function below has perfect predictability, but zero correlation or covariance</h3>
+<section id="the-covariance-statistic" class="level3">
+<h3 class="anchored" data-anchor-id="the-covariance-statistic">The Covariance Statistic</h3>
+<p>The covariance statistic only tells you the direction of the slope ( ‘positive’, ‘negative’ or ‘zero’). Alone it can not reveal the <strong>rate of change</strong> (slope) between variables.</p>
+<p>The function below has excellent predictability, but has zero correlation and zero covariance.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -133,13 +134,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section>
-<section id="scaling" class="level3">
-<h3 class="anchored" data-anchor-id="scaling">Scaling</h3>
-<p>The covariance statistic alone will not reveal the relative <strong>magnitude</strong> of how much they co-vary. Even when the correlation is identical in two scenario, one calculation of the covariance can be much larger than the other, depending on the scale of measurement (e.g., inches vs feet, pounds vs kg). This is because covariance statistics are entirely dependent on the units of measurement.</p>
-<p>Correlation statistics, on the other hand, reveal <strong>relative magnitudes</strong>. This, of course, is the great advantage of standardizing any measure.</p>
-<p>Example: These variables co-vary along a line (linear). Using the covariance statistic alone we can know the direction, but we cannot determine the relative magnitude. The <strong>magnitude</strong> of the covariances is revealed by using the correlation statistic, which is the STANDARDIZED covariance.</p>
-<p>Plots show identical lines, but with they are measured on different scales</p>
+<p><br></p>
+<p>Even when the correlation is identical in two scenarios, one calculation of the covariance can be much different than another because it depends on the scale of measurement (e.g., inches vs feet, pounds vs kg). This makes the covariance statistics nearly useless by itself.</p>
+<p>Example: These variables co-vary along a line (linear), but the covariance differs a lot (note the different scales on both axis)</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -152,8 +149,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="take-aways" class="level3">
 <h3 class="anchored" data-anchor-id="take-aways">Take Aways</h3>
-<p><strong><em>Covariance</em></strong>: Raw, non-standardized measure reflecting the scale used<br>
-<strong><em>Correlation</em></strong>: standardized covariance (unitless measure)</p>
+<p><strong><em>Covariance</em></strong>: By itself conveys little useful info, but needed to compute the correlation statistics<br>
+</p>
+<p><strong><em>Correlation</em></strong>: Standardized covariance (unitless measure) revealing rate of change between variables the co-vary</p>
+<p>The function below has excellent predictability, but has zero correlation and zero covariance. The purpose of the analysis matters</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
 </section>
 <section id="causal-language" class="level3">
 <h3 class="anchored" data-anchor-id="causal-language">Causal Language?</h3>
@@ -179,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -202,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -249,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -265,21 +276,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-6-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -333,7 +344,7 @@ Multiple Regression coefficient for X (controlling for Z): 0.324</p>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -416,28 +427,28 @@ Table&nbsp;1: Comparison of Methods for Controlling Variables
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-9-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -649,7 +660,7 @@ Table&nbsp;3: covariance Between Statistical Results and Data-Generating Equatio
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="864"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="864"></p>
 <figcaption>VisualiZation of controlling for Z</figcaption>
 </figure>
 </div>
@@ -694,21 +705,21 @@ Table&nbsp;3: covariance Between Statistical Results and Data-Generating Equatio
 <li>Consider using directed acyclic graphs (DAGs) to identify which variables to control for</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If using DAGs for causal inference</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggdag")</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>dag <span class="ot">&lt;-</span> <span class="fu">dagify</span>(</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> Z,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  X <span class="sc">~</span> Z,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">exposure =</span> <span class="st">"X"</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="st">"Y"</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If using DAGs for causal inference</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggdag")</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>dag <span class="ot">&lt;-</span> <span class="fu">dagify</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> X <span class="sc">+</span> Z,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  X <span class="sc">~</span> Z,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">exposure =</span> <span class="st">"X"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="st">"Y"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="honest-eval-of-variables-that-co-vary_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

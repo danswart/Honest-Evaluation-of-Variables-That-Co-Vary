@@ -9,7 +9,6 @@ editor: source
 ---
 
 
-
 ```{r, setup, include=FALSE}
 #| message: false
 #| warning: false
@@ -27,21 +26,23 @@ library(ggdag)
 
 <br>
 
-## Terminology
+## Background
+
+
+### Statistical Jargon Is Often Misleading to the Layperson
 
 In statistical analysis, I use 'co-vary' when you might use the word 'correlated', 'related' or 'associated'.
 
+Terms with dual meanings can easily mislead.  Subject-matter experts often forget that terms of art in statistics take on new meanings for a layperson.
 
-### Avoid Confusing Jargon
+Like it or not, the jargon invented by statisticians such as "association", "relationship", "correlation", "explains", and even "accounts for" have very strong implications of causation, ***even when no causation between the variables is present***. 
 
--   Like it or not, the jargon invented by statisticians such as "association", "relationship", "correlation", "explains", and even "accounts for" have very strong implications of causation, ***even when no causation between the variables is present***.
+On the other hand, "co-vary" conveys only that variables ***in the specific data examined*** change values in a more or less predictable manner, whatever the reasons (known or unknown).  The more restricted the data examined, the less applicable the predictions are to other situations.
 
--   "Co-vary" conveys only that variables ***in the specific data examined*** change values in a more or less predictable manner, whatever the reasons (known or unknown).  The more restricted the data examined, the less applicable the predictions are to other situations.
-
--   Reserves "correlation" and "covariance" for their respective mathematical computations and interpretations for technical explanations directed at scientists.
+I reserve the words "correlation" and "covariance" for the statistically curious to explain their respective mathematical computations and interpretations.
 
 
-### Address Statistical Questions in a Neutral, Honest Way
+### You CAN Assess Statistical Questions in a Neutral, Honest Way
 
 **Assessing Existence**: "Do these variables co-vary?" \
 **Assessing Direction**: "Height and weight co-vary positively" \
@@ -50,43 +51,48 @@ In statistical analysis, I use 'co-vary' when you might use the word 'correlated
 **Assessing Functional Form**: "These variables co-vary along a curve"\
 **Assessing Functional Form**: "X and Y² co-vary along a parabola"\
 
-**Technical analysis**: "The covariance is positive, indicating they co-vary along a line and in the same direction."  
+**Technical analysis**: "The covariance is positive, indicating they co-vary along a line and in the same direction.  The slope of the line is not calculated."  
 
 **Technical analysis**: "These variables co-vary, but their covariance is zero because the relationship isn't linear."
 
 
-### The function below has perfect predictability, but zero correlation or covariance
+### The Covariance Statistic
+
+The covariance statistic only tells you the direction of the slope ( 'positive', 'negative' or 'zero').  Alone it can not reveal the **rate of change** (slope) between variables.  
+
+The function below has excellent predictability, but has zero correlation and zero covariance.
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
 
+
 set.seed(123)
-# This function has perfect predictability but zero correlation/covariance
 x <- -10:10
 y <- x^2
-plot(x, 
-     y, 
-     col  = "blue",    # sets point color
-     pch  = 16,        # solid circle
-     main = paste("Correlation = ", round(stats::cor(x, y), 2),
-                   "Covariance = ", round(stats::cov(x, y), 2)
-                   ),
-     xlab = "x", ylab = "y")
+df <- data.frame(x = x, y = y)
 
+ggplot(df, aes(x, y)) +
+  geom_point(color = "blue", size = 3) +
+  labs(
+    title = paste("Correlation = ", round(cor(x, y), 2),
+                  "      Covariance = ", round(cov(x, y), 2)),
+    x = "x", 
+    y = "y"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold")
+  )
 
 ```
+<br>
 
-### Scaling
+Even when the correlation is identical in two scenarios, one calculation of the covariance can be much different than another because it depends on the scale of measurement (e.g., inches vs feet, pounds vs kg). This makes the covariance statistics nearly useless by itself.  
 
-The covariance statistic alone will not reveal the relative **magnitude** of how much they co-vary. Even when the correlation is identical in two scenario, one calculation of the covariance can be much larger than the other, depending on the scale of measurement (e.g., inches vs feet, pounds vs kg). This is because covariance statistics are entirely dependent on the units of measurement.
-
-Correlation statistics, on the other hand, reveal **relative magnitudes**. This, of course, is the great advantage of standardizing any measure.
-
-Example: These variables co-vary along a line (linear). Using the covariance statistic alone we can know the direction, but we cannot determine the relative magnitude. The **magnitude** of the covariances is revealed by using the correlation statistic, which is the STANDARDIZED covariance.
-
-Plots show identical lines, but with they are measured on different scales
+Example: These variables co-vary along a line (linear), but the covariance differs a lot (note the different scales on both axis)
 
 ```{r}
 #| echo: false
@@ -109,7 +115,7 @@ cov1 <- cov(df$height_inches, df$weight_pounds)
 cor2 <- cor(df$height_feet, df$weight_kg)
 cov2 <- cov(df$height_feet, df$weight_kg)
 
-# plot with the correct correlation in the title
+# plot with the correlation and covariance in the titles
 p1 <- ggplot(df, aes(height_inches, weight_pounds)) +
   geom_point(color = "blue", size = 3) +
   labs(
@@ -117,10 +123,16 @@ p1 <- ggplot(df, aes(height_inches, weight_pounds)) +
     subtitle = paste("Covariance =", round(cov1, 2)),
     x     = "Height (inches)",
     y     = "Weight (pounds)"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "bold"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold")
   )
 
 
-# plot with the correct correlation in the title
+# plot with the correlation and covariance in the titles
 p2 <- ggplot(df, aes(height_feet, weight_kg)) +
   geom_point(color = "blue", size = 3) +
   labs(
@@ -128,6 +140,12 @@ p2 <- ggplot(df, aes(height_feet, weight_kg)) +
     subtitle = paste("Covariance =", round(cov2, 2)),
     x     = "Height (feet)",
     y     = "Weight (kg)"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "bold"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold")
   )
 
 
@@ -138,10 +156,13 @@ p1 + p2
 
 
 
+
+
 ### Take Aways
 
-***Covariance***: Raw, non-standardized measure reflecting the scale used\
-***Correlation***: standardized covariance (unitless measure)
+***Covariance***: By itself conveys little useful info, but needed to compute the correlation statistics\
+
+***Correlation***: Standardized covariance (unitless measure) revealing rate of change between variables that co-vary
 
 
 
