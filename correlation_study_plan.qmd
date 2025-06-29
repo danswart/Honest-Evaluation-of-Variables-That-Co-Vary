@@ -1,14 +1,41 @@
+---
+title: "Correlation Study Plan"
+format:
+  html:
+    css: swart-20250327.css
+    page-layout: full
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    df-print: paged
+    code-overflow: wrap
+    toc: true
+  typst:
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    margin:
+      x: 1in
+      y: 1in
+    toc: true
+    fontsize: 14pt
+    mainfont: "Latin Modern Roman"
+execute:
+  echo: false
+  message: false
+  warning: false
+  fig-width: 12
+  fig-height: 10
+---
+
+
 # Correlation Analysis: A Graduated Study Plan
+
 
 *From Visual Intuition to Advanced Methods*
 
 ```{r}
 #| label: setup
-#| include: false
-#| message: false
-#| warning: false
-#| paged-print: false
-#| echo: false
 
 # Load required packages
 library(tidyverse)
@@ -27,10 +54,16 @@ library(patchwork)
 # Set theme for consistent plots
 theme_set(theme_minimal(base_size = 16) + 
           theme(
-    plot.title = element_text(face = "bold"),
-    plot.subtitle = element_text(face = "bold"),
+    plot.title = element_text(face = "bold", size = 24),    # adjust title size
+    plot.subtitle = element_text(face = "bold", size = 20), # adjust subtitle size
     axis.title.x = element_text(face = "bold"),
-    axis.title.y = element_text(face = "bold")
+    axis.title.y = element_text(face = "bold"),
+    axis.text = element_text(face = "bold"),
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold"),
+    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
+    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
+    plot.margin = margin(20, 20, 20, 20, "pt")
    )
   )
 
@@ -47,13 +80,14 @@ set.seed(42)
 
 **Why This Matters**: Before diving into numbers, you need to "see" relationships in data. This visual literacy prevents you from being fooled by correlation coefficients that don't match the actual pattern.
 
-**Real-World Problems This Solves**:
-- **Quality Control**: Spotting when manufacturing processes go off-track
-- **Marketing**: Identifying if ad spend truly relates to sales increases
-- **Health Research**: Recognizing dose-response relationships in treatments
-- **Finance**: Detecting if two stocks actually move together or just coincidentally
+**Real-World Problems This Solves**:  
 
-**Research Skills Developed**: Visual data exploration, pattern recognition, intuitive understanding of association strength
+- **Quality Control**: Spotting when manufacturing processes go off-track  
+- **Marketing**: Identifying if ad spend truly relates to sales increases  
+- **Health Research**: Recognizing dose-response relationships in treatments  
+- **Finance**: Detecting if two stocks actually move together or just coincidentally  
+
+**Research Skills Developed**: Visual data exploration, pattern recognition, intuitive understanding of association strength  
 
 ### Core Concepts
 
@@ -66,6 +100,7 @@ set.seed(42)
 
 ```{r}
 #| label: level1-practice
+
 # Create synthetic data for different correlation patterns
 set.seed(123)
 
@@ -108,16 +143,17 @@ p1 <- ggplot(correlation_patterns, aes(x = x, y = y)) +
   labs(title = "Visual Patterns of Correlation",
        subtitle = "Learning to 'see' relationships before calculating",
        x = "X Variable", 
-       y = "Y Variable") +
-  theme(strip.text = element_text(face = "bold"))
+       y = "Y Variable")
 
 print(p1)
+
 ```
 
 
 
 ```{r}
 #| label: level1-real-world-examples
+
 # Real-world examples with synthetic data
 
 # Quality Control: Temperature vs Defect Rate
@@ -167,27 +203,38 @@ p2c <- ggplot(health_data, aes(x = dose, y = response)) +
   geom_smooth(se = FALSE, color = "darkblue") +
   labs(title = "Dose-Response", x = "Drug Dose (mg)", y = "Response (%)")
 
-p2d <- ggplot(finance_data, aes(x = day, y = return, color = stock)) +
+p2d <- ggplot(finance_data, 
+              aes(x = day, 
+                  y = return, 
+                  color = stock
+                  )
+              ) +
   geom_line(linewidth = 1) +
-  scale_color_manual(values = c("purple", "orange")) +
+  scale_color_manual(values = c("purple", 
+                                "orange"
+                                )
+                     ) +
   labs(title = "Stock Correlation", x = "Trading Day", y = "Cumulative Return",
-       color = "Stock") +
-  theme(legend.position = "bottom")
+       color = "Stock") 
 
-# Combine plots
+
+# Combine plots & add annotation
 combined_plot <- (p2a | p2b) / (p2c | p2d)
-combined_plot + plot_annotation(
-  title = "Real-World Correlation Patterns",
-  subtitle = "Recognizing relationships across different domains"
-)
+
+combined_plot <- combined_plot + 
+  plot_annotation(
+    title = "Real-World Correlation Patterns",
+    subtitle = "Recognizing relationships across different domains"
+  )
+
+print(combined_plot)  
 
 ```
 
 
 **Milestone**: Can look at any scatter plot and predict correlation direction and rough strength
 
-
----
+<br>
 
 ## Level 2: Pearson Correlation Basics
 
@@ -197,12 +244,13 @@ combined_plot + plot_annotation(
 
 **Why This Matters**: Pearson's r is the "common language" of correlation - used in 90% of research papers. Without understanding it, you can't critically evaluate most scientific literature or business analytics reports.
 
-**Real-World Problems This Solves**:
-- **Academic Research**: Writing papers that meet publication standards
-- **Business Analytics**: Quantifying relationships for stakeholder reports (e.g., "Customer satisfaction correlates r=0.73 with retention")
-- **Risk Management**: Measuring how closely different investments move together
-- **Survey Research**: Validating that questionnaire items measure the same construct
-- **Performance Evaluation**: Establishing if training programs actually improve outcomes
+**Real-World Problems This Solves**:  
+
+- **Academic Research**: Writing papers that meet publication standards  
+- **Business Analytics**: Quantifying relationships for stakeholder reports (e.g., "Customer satisfaction correlates r=0.73 with retention")  
+- **Risk Management**: Measuring how closely different investments move together  
+- **Survey Research**: Validating that questionnaire items measure the same construct  
+- **Performance Evaluation**: Establishing if training programs actually improve results  
 
 **Research Skills Developed**: Standardized effect size interpretation, basic statistical communication, hypothesis formation
 
@@ -330,7 +378,7 @@ print(p5)
 
 **Milestone**: Comfortable calculating and interpreting basic correlation coefficients
 
----
+<br>
 
 ## Level 3: Statistical Inference
 
@@ -340,15 +388,16 @@ print(p5)
 
 **Why This Matters**: Anyone can find correlations in data by chance. This level teaches you to distinguish between meaningful relationships and statistical flukes - critical for making sound decisions based on data.
 
-**Real-World Problems This Solves**:
-- **Clinical Trials**: Determining if treatment effects are real or just random variation
-- **Market Research**: Avoiding costly business decisions based on spurious correlations
-- **A/B Testing**: Knowing when you have enough data to make reliable conclusions  
-- **Academic Integrity**: Meeting peer review standards for statistical rigor
-- **Investment Decisions**: Understanding when historical correlations are reliable predictors
-- **Policy Making**: Ensuring public health or economic policies are based on solid evidence
+**Real-World Problems This Solves**:  
 
-**Research Skills Developed**: Hypothesis testing logic, p-value interpretation, confidence interval reasoning, sample size planning
+- **Clinical Trials**: Determining if treatment effects are real or just random variation  
+- **Market Research**: Avoiding costly business decisions based on spurious correlations  
+- **A/B Testing**: Knowing when you have enough data to make reliable conclusions  
+- **Academic Integrity**: Meeting peer review standards for statistical rigor  
+- **Investment Decisions**: Understanding when historical correlations are reliable predictors  
+- **Policy Making**: Ensuring public health or economic policies are based on solid evidence  
+
+**Research Skills Developed**: Hypothesis testing logic, p-value interpretation, confidence interval reasoning, sample size planning  
 
 ### Core Concepts
 
@@ -472,7 +521,7 @@ print(p8)
 
 **Milestone**: Can assess statistical significance and understand confidence in correlation estimates
 
----
+<br>
 
 ## Level 4: Alternative Correlation Methods
 
@@ -482,16 +531,17 @@ print(p8)
 
 **Why This Matters**: Real-world data rarely meets Pearson correlation's assumptions. This level prevents you from missing important relationships or drawing wrong conclusions from messy, real data.
 
-**Real-World Problems This Solves**:
-- **Survey Research**: Analyzing Likert scale responses (ordinal data) properly
-- **Medical Research**: Handling skewed biomarkers or ranked outcomes
-- **Environmental Studies**: Detecting monotonic relationships in ecological data
-- **Social Sciences**: Working with ranked preferences or income data
-- **Machine Learning**: Feature selection with mixed data types
-- **Quality Control**: Monitoring non-linear process relationships
-- **Customer Analytics**: Understanding satisfaction rankings vs continuous metrics
+**Real-World Problems This Solves**:  
 
-**Research Skills Developed**: Assumption checking, method selection based on data characteristics, non-parametric thinking
+- **Survey Research**: Analyzing Likert scale responses (ordinal data) properly  
+- **Medical Research**: Handling skewed biomarkers or ranked results  
+- **Environmental Studies**: Detecting monotonic relationships in ecological data  
+- **Social Sciences**: Working with ranked preferences or income data  
+- **Machine Learning**: Feature selection with mixed data types  
+- **Quality Control**: Monitoring non-linear process relationships  
+- **Customer Analytics**: Understanding satisfaction rankings vs continuous metrics  
+
+**Research Skills Developed**: Assumption checking, method selection based on data characteristics, non-parametric thinking  
 
 ### Core Concepts
 
@@ -502,8 +552,14 @@ print(p8)
 
 ### R Practice
 
+### Choosing the Right Correlation Method
+
+*Pearson vs Spearman vs Kendall for different data types*
+
 ```{r}
 #| label: level4-practice
+
+
 # Demonstrate different correlation methods with synthetic data
 set.seed(404)
 
@@ -579,12 +635,11 @@ p9c <- ggplot(ordinal_responses, aes(x = factor(satisfaction_rank), y = factor(l
        x = "Satisfaction Rank", y = "Loyalty Rank",
        size = "Count")
 
-# Combine plots
-correlation_methods <- (p9a | p9b | p9c)
-correlation_methods + plot_annotation(
-  title = "Choosing the Right Correlation Method",
-  subtitle = "Pearson vs Spearman vs Kendall for different data types"
-)
+
+print(p9a)
+print(p9b)
+print(p9c)
+
 ```
 
 ```{r}
@@ -624,6 +679,7 @@ print(p10)
 
 ```
 
+
 ```{r}
 #| label: level4-survey-research
 # Survey research with Likert scales
@@ -653,8 +709,8 @@ p11 <- ggplot(survey_data, aes(x = factor(job_satisfaction), y = factor(work_eng
     x = "Job Satisfaction (1-7 scale)", 
     y = "Work Engagement (1-7 scale)",
     size = "Response\nCount"
-  ) +
-  theme(legend.position = "right")
+  ) 
+  # theme(legend.position = "right")
 
 print(p11)
 ```
@@ -670,7 +726,7 @@ Think of these as different tools for different data "textures":
 **Milestone**: Can choose appropriate correlation method based on data characteristics
 
 
-
+<br>
 
 ## Level 5: Partial and Semi-Partial Correlations
 
@@ -680,16 +736,17 @@ Think of these as different tools for different data "textures":
 
 **Why This Matters**: Most real-world relationships involve multiple variables. This level helps you isolate the specific relationship you care about while controlling for confounding factors - essential for causal inference.
 
-**Real-World Problems This Solves**:
-- **Medical Research**: Isolating treatment effects while controlling for age, gender, baseline health
-- **Educational Research**: Measuring teaching effectiveness while controlling for student background
-- **Economic Analysis**: Understanding wage-education relationships while controlling for experience
-- **Marketing Attribution**: Determining which advertising channels truly drive sales
-- **HR Analytics**: Identifying what really predicts job performance beyond obvious factors
-- **Environmental Studies**: Separating climate effects from other environmental factors
-- **Social Research**: Understanding pure relationships between variables of interest
+**Real-World Problems This Solves**:  
 
-**Research Skills Developed**: Confound identification, variable selection, causal reasoning, advanced statistical modeling preparation
+- **Medical Research**: Isolating treatment effects while controlling for age, gender, baseline health  
+- **Educational Research**: Measuring teaching effectiveness while controlling for student background  
+- **Economic Analysis**: Understanding wage-education relationships while controlling for experience  
+- **Marketing Attribution**: Determining which advertising channels truly drive sales  
+- **HR Analytics**: Identifying what really predicts job performance beyond obvious factors  
+- **Environmental Studies**: Separating climate effects from other environmental factors  
+- **Social Research**: Understanding pure relationships between variables of interest  
+
+**Research Skills Developed**: Confound identification, variable selection, causal reasoning, advanced statistical modeling preparation  
 
 ### Core Concepts
 
@@ -771,12 +828,12 @@ set.seed(909)
 
 medical_data <- tibble(
   patient_id = 1:120,
-  # Baseline health affects both treatment dose and outcome
+  # Baseline health affects both treatment dose and result
   baseline_health = rnorm(120, 70, 15),
   # Treatment dose adjusted based on patient health
   treatment_dose = pmax(10, pmin(100, 
                                 50 + 0.2 * baseline_health + rnorm(120, 0, 10))),
-  # Recovery outcome depends on both dose and baseline health
+  # Recovery result depends on both dose and baseline health
   recovery_score = pmax(0, pmin(100,
                                20 + 0.4 * treatment_dose + 0.3 * baseline_health + rnorm(120, 0, 12)))
 )
@@ -849,9 +906,8 @@ print(p14)
 
 **Milestone**: Can disentangle complex multi-variable relationships
 
----
 
-
+<br>
 
 ## Level 6: Correlation Matrices and Visualization
 
@@ -861,7 +917,8 @@ print(p14)
 
 **Why This Matters**: Modern datasets often contain dozens or hundreds of variables. This level teaches you to find patterns in high-dimensional data and communicate complex relationships effectively to stakeholders.
 
-**Real-World Problems This Solves**:
+**Real-World Problems This Solves**:  
+
 - **Genomics**: Identifying co-expressed genes in large gene expression datasets
 - **Financial Portfolio Management**: Understanding correlations between many assets simultaneously
 - **Customer Segmentation**: Finding patterns across multiple customer behaviors
@@ -1003,6 +1060,7 @@ print(p16c)
 
 ```{r}
 #| label: level6-genomics-example
+
 # Genomics: Gene expression correlation analysis
 set.seed(1313)
 
@@ -1036,7 +1094,7 @@ gene_expression <- tibble(
 
 # Calculate gene correlation matrix
 gene_cor <- gene_expression %>%
-  select(-sample_id) %>%
+  dplyr::select(-sample_id) %>%
   cor()
 
 # Create clustered heatmap showing pathway groups
@@ -1046,18 +1104,19 @@ p17 <- ggcorrplot(gene_cor,
                   lab = TRUE,
                   lab_size = 2.5,
                   colors = c("blue", "white", "red"),
-                  title = "Gene Expression Correlation Matrix",
-                  subtitle = "Clustering reveals co-expressed pathway groups") +
+                  title = "Gene Expression Correlation Matrix\n
+                  Clustering reveals co-expressed pathway groups"
+                  ) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 print(p17)
+
 ```
 
 **Milestone**: Can explore and visualize complex multi-dimensional relationships
 
----
 
-
+<br>
 
 ## Level 7: Advanced Diagnostics and Assumptions
 
@@ -1067,7 +1126,8 @@ print(p17)
 
 **Why This Matters**: Correlations can be deeply misleading when assumptions are violated. This level teaches you to be a "correlation detective" - spotting when relationships aren't what they seem and avoiding costly analytical mistakes.
 
-**Real-World Problems This Solves**:
+**Real-World Problems This Solves**:  
+
 - **Financial Risk Management**: Detecting when correlations break down during market stress
 - **Clinical Research**: Identifying when patient subgroups have different treatment responses
 - **Business Analytics**: Spotting when aggregate trends hide important subgroup patterns
@@ -1276,8 +1336,8 @@ print(p21)
 
 **Milestone**: Can diagnose problematic correlations and understand their limitations
 
----
 
+<br>
 
 
 ## Level 8: Modern Robust Methods
@@ -1288,17 +1348,18 @@ print(p21)
 
 **Why This Matters**: This is the "advanced practitioner" level - you can now handle the messy, imperfect data that exists in the real world. These methods are what separate amateur from professional data analysis.
 
-**Real-World Problems This Solves**:
-- **Big Data Analytics**: Handling datasets with inevitable outliers and measurement errors
-- **Longitudinal Studies**: Managing missing data and varying measurement conditions
-- **Cross-Cultural Research**: Accounting for different response patterns across populations
-- **Sensor Data Analysis**: Dealing with equipment malfunctions and environmental interference
-- **Financial Modeling**: Creating robust models that work during market anomalies
-- **Medical Diagnostics**: Developing reliable tests that work across diverse patient populations
-- **Climate Research**: Analyzing data from multiple sources with different reliability levels
-- **Social Media Analytics**: Handling noisy, unstructured behavioral data
+**Real-World Problems This Solves**:  
 
-**Research Skills Developed**: Advanced statistical methodology, uncertainty quantification, robust analytical thinking, cutting-edge research methods
+- **Big Data Analytics**: Handling datasets with inevitable outliers and measurement errors  
+- **Longitudinal Studies**: Managing missing data and varying measurement conditions  
+- **Cross-Cultural Research**: Accounting for different response patterns across populations  
+- **Sensor Data Analysis**: Dealing with equipment malfunctions and environmental interference  
+- **Financial Modeling**: Creating robust models that work during market anomalies  
+- **Medical Diagnostics**: Developing reliable tests that work across diverse patient populations  
+- **Climate Research**: Analyzing data from multiple sources with different reliability levels  
+- **Social Media Analytics**: Handling noisy, unstructured behavioral data  
+
+**Research Skills Developed**: Advanced statistical methodology, uncertainty quantification, robust analytical thinking, cutting-edge research methods  
 
 ### Core Concepts
 
@@ -1621,7 +1682,7 @@ bayes_cor
 
 **Milestone**: Can handle non-ideal data with sophisticated methods
 
----
+<br>
 
 ## Study Strategy
 
@@ -1641,6 +1702,8 @@ bayes_cor
 - **Level 6**: Gene expression or financial data
 - **Level 8**: Climate data with outliers and missing values
 
+<br>
+
 ### Key Resources
 
 ```{r}
@@ -1652,6 +1715,7 @@ install.packages(c(
   "WRS2", "boot", "BayesFactor", "pwr", "qgraph", "patchwork"
 ))
 ```
+<br>
 
 ### Practice Projects by Level
 
@@ -1670,6 +1734,8 @@ health_study <- tibble(
 # Your task: Calculate correlation, test significance, determine sample size needed
 ```
 
+<br>
+
 **Level 5 Practice**: Economics data with multiple predictors
 ```{r}
 #| label: practice-project-5
@@ -1685,6 +1751,8 @@ economic_data <- tibble(
 
 # Your task: Use partial correlation to isolate education's effect on life expectancy
 ```
+
+<br>
 
 **Level 6 Practice**: Gene expression or financial data
 ```{r}
@@ -1704,6 +1772,8 @@ portfolio_analysis <- tibble(
 
 # Your task: Create correlation matrix, identify clusters, visualize relationships
 ```
+
+<br>
 
 **Level 8 Practice**: Climate data with outliers and missing values
 ```{r}
@@ -1731,6 +1801,8 @@ climate_study <- tibble(
 
 # Your task: Handle missing data, identify outliers, use robust methods
 ```
+
+<br>
 
 ### Session Info
 
