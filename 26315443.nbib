@@ -1,0 +1,607 @@
+PMID- 26315443
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20160219
+LR  - 20250529
+IS  - 1095-9203 (Electronic)
+IS  - 0036-8075 (Linking)
+VI  - 349
+IP  - 6251
+DP  - 2015 Aug 28
+TI  - PSYCHOLOGY. Estimating the reproducibility of psychological science.
+PG  - aac4716
+LID - 10.1126/science.aac4716 [doi]
+AB  - Reproducibility is a defining feature of science, but the extent to which it 
+      characterizes current research is unknown. We conducted replications of 100 
+      experimental and correlational studies published in three psychology journals 
+      using high-powered designs and original materials when available. Replication 
+      effects were half the magnitude of original effects, representing a substantial 
+      decline. Ninety-seven percent of original studies had statistically significant 
+      results. Thirty-six percent of replications had statistically significant 
+      results; 47% of original effect sizes were in the 95% confidence interval of the 
+      replication effect size; 39% of effects were subjectively rated to have 
+      replicated the original result; and if no bias in original results is assumed, 
+      combining original and replication results left 68% with statistically 
+      significant effects. Correlational tests suggest that replication success was 
+      better predicted by the strength of original evidence than by characteristics of 
+      the original and replication teams.
+CI  - Copyright © 2015, American Association for the Advancement of Science.
+CN  - Open Science Collaboration
+LA  - eng
+GR  - MC_UU_12013/6/MRC_/Medical Research Council/United Kingdom
+PT  - Journal Article
+PT  - Research Support, Non-U.S. Gov't
+PL  - United States
+TA  - Science
+JT  - Science (New York, N.Y.)
+JID - 0404511
+SB  - IM
+CIN - Science. 2015 Aug 28;349(6251):910-1. doi: 10.1126/science.349.6251.910. PMID: 
+      26315412
+CIN - GMS Z Med Ausbild. 2015 Nov 16;32(5):Doc57. doi: 10.3205/zma000999. PMID: 
+      26604999
+CIN - Science. 2016 Mar 4;351(6277):1037. doi: 10.1126/science.aad7243. PMID: 26941311
+CIN - Science. 2016 Mar 4;351(6277):1037. doi: 10.1126/science.aad9163. PMID: 26941312
+CIN - Atten Percept Psychophys. 2016 Apr;78(3):721-2. doi: 10.3758/s13414-016-1095-6. 
+      PMID: 26988566
+CIN - Nature. 2019 Sep;573(7775):465. doi: 10.1038/d41586-019-02842-8. PMID: 31551562
+CIN - Nature. 2019 Nov;575(7781):9. doi: 10.1038/d41586-019-03350-5. PMID: 31695216
+MH  - *Behavioral Research
+MH  - Confidence Intervals
+MH  - Periodicals as Topic
+MH  - *Psychology
+MH  - Publication Bias
+MH  - *Publishing
+MH  - Reproducibility of Results
+MH  - *Research
+MH  - Research Design
+FIR - Aarts, Alexander A
+IR  - Aarts AA
+FIR - Anderson, Joanna E
+IR  - Anderson JE
+FIR - Anderson, Christopher J
+IR  - Anderson CJ
+FIR - Attridge, Peter R
+IR  - Attridge PR
+FIR - Attwood, Angela
+IR  - Attwood A
+FIR - Axt, Jordan
+IR  - Axt J
+FIR - Babel, Molly
+IR  - Babel M
+FIR - Bahník, Štěpán
+IR  - Bahník Š
+FIR - Baranski, Erica
+IR  - Baranski E
+FIR - Barnett-Cowan, Michael
+IR  - Barnett-Cowan M
+FIR - Bartmess, Elizabeth
+IR  - Bartmess E
+FIR - Beer, Jennifer
+IR  - Beer J
+FIR - Bell, Raoul
+IR  - Bell R
+FIR - Bentley, Heather
+IR  - Bentley H
+FIR - Beyan, Leah
+IR  - Beyan L
+FIR - Binion, Grace
+IR  - Binion G
+FIR - Borsboom, Denny
+IR  - Borsboom D
+FIR - Bosch, Annick
+IR  - Bosch A
+FIR - Bosco, Frank A
+IR  - Bosco FA
+FIR - Bowman, Sara D
+IR  - Bowman SD
+FIR - Brandt, Mark J
+IR  - Brandt MJ
+FIR - Braswell, Erin
+IR  - Braswell E
+FIR - Brohmer, Hilmar
+IR  - Brohmer H
+FIR - Brown, Benjamin T
+IR  - Brown BT
+FIR - Brown, Kristina
+IR  - Brown K
+FIR - Brüning, Jovita
+IR  - Brüning J
+FIR - Calhoun-Sauls, Ann
+IR  - Calhoun-Sauls A
+FIR - Callahan, Shannon P
+IR  - Callahan SP
+FIR - Chagnon, Elizabeth
+IR  - Chagnon E
+FIR - Chandler, Jesse
+IR  - Chandler J
+FIR - Chartier, Christopher R
+IR  - Chartier CR
+FIR - Cheung, Felix
+IR  - Cheung F
+FIR - Christopherson, Cody D
+IR  - Christopherson CD
+FIR - Cillessen, Linda
+IR  - Cillessen L
+FIR - Clay, Russ
+IR  - Clay R
+FIR - Cleary, Hayley
+IR  - Cleary H
+FIR - Cloud, Mark D
+IR  - Cloud MD
+FIR - Cohn, Michael
+IR  - Cohn M
+FIR - Cohoon, Johanna
+IR  - Cohoon J
+FIR - Columbus, Simon
+IR  - Columbus S
+FIR - Cordes, Andreas
+IR  - Cordes A
+FIR - Costantini, Giulio
+IR  - Costantini G
+FIR - Cramblet Alvarez, Leslie D
+IR  - Cramblet Alvarez LD
+FIR - Cremata, Ed
+IR  - Cremata E
+FIR - Crusius, Jan
+IR  - Crusius J
+FIR - DeCoster, Jamie
+IR  - DeCoster J
+FIR - DeGaetano, Michelle A
+IR  - DeGaetano MA
+FIR - Della Penna, Nicolás
+IR  - Della Penna N
+FIR - den Bezemer, Bobby
+IR  - den Bezemer B
+FIR - Deserno, Marie K
+IR  - Deserno MK
+FIR - Devitt, Olivia
+IR  - Devitt O
+FIR - Dewitte, Laura
+IR  - Dewitte L
+FIR - Dobolyi, David G
+IR  - Dobolyi DG
+FIR - Dodson, Geneva T
+IR  - Dodson GT
+FIR - Donnellan, M Brent
+IR  - Donnellan M
+FIR - Donohue, Ryan
+IR  - Donohue R
+FIR - Dore, Rebecca A
+IR  - Dore RA
+FIR - Dorrough, Angela
+IR  - Dorrough A
+FIR - Dreber, Anna
+IR  - Dreber A
+FIR - Dugas, Michelle
+IR  - Dugas M
+FIR - Dunn, Elizabeth W
+IR  - Dunn EW
+FIR - Easey, Kayleigh
+IR  - Easey K
+FIR - Eboigbe, Sylvia
+IR  - Eboigbe S
+FIR - Eggleston, Casey
+IR  - Eggleston C
+FIR - Embley, Jo
+IR  - Embley J
+FIR - Epskamp, Sacha
+IR  - Epskamp S
+FIR - Errington, Timothy M
+IR  - Errington TM
+FIR - Estel, Vivien
+IR  - Estel V
+FIR - Farach, Frank J
+IR  - Farach FJ
+FIR - Feather, Jenelle
+IR  - Feather J
+FIR - Fedor, Anna
+IR  - Fedor A
+FIR - Fernández-Castilla, Belén
+IR  - Fernández-Castilla B
+FIR - Fiedler, Susann
+IR  - Fiedler S
+FIR - Field, James G
+IR  - Field JG
+FIR - Fitneva, Stanka A
+IR  - Fitneva SA
+FIR - Flagan, Taru
+IR  - Flagan T
+FIR - Forest, Amanda L
+IR  - Forest AL
+FIR - Forsell, Eskil
+IR  - Forsell E
+FIR - Foster, Joshua D
+IR  - Foster JD
+FIR - Frank, Michael C
+IR  - Frank MC
+FIR - Frazier, Rebecca S
+IR  - Frazier RS
+FIR - Fuchs, Heather
+IR  - Fuchs H
+FIR - Gable, Philip
+IR  - Gable P
+FIR - Galak, Jeff
+IR  - Galak J
+FIR - Galliani, Elisa Maria
+IR  - Galliani EM
+FIR - Gampa, Anup
+IR  - Gampa A
+FIR - Garcia, Sara
+IR  - Garcia S
+FIR - Gazarian, Douglas
+IR  - Gazarian D
+FIR - Gilbert, Elizabeth
+IR  - Gilbert E
+FIR - Giner-Sorolla, Roger
+IR  - Giner-Sorolla R
+FIR - Glöckner, Andreas
+IR  - Glöckner A
+FIR - Goellner, Lars
+IR  - Goellner L
+FIR - Goh, Jin X
+IR  - Goh JX
+FIR - Goldberg, Rebecca
+IR  - Goldberg R
+FIR - Goodbourn, Patrick T
+IR  - Goodbourn PT
+FIR - Gordon-McKeon, Shauna
+IR  - Gordon-McKeon S
+FIR - Gorges, Bryan
+IR  - Gorges B
+FIR - Gorges, Jessie
+IR  - Gorges J
+FIR - Goss, Justin
+IR  - Goss J
+FIR - Graham, Jesse
+IR  - Graham J
+FIR - Grange, James A
+IR  - Grange JA
+FIR - Gray, Jeremy
+IR  - Gray J
+FIR - Hartgerink, Chris
+IR  - Hartgerink C
+FIR - Hartshorne, Joshua
+IR  - Hartshorne J
+FIR - Hasselman, Fred
+IR  - Hasselman F
+FIR - Hayes, Timothy
+IR  - Hayes T
+FIR - Heikensten, Emma
+IR  - Heikensten E
+FIR - Henninger, Felix
+IR  - Henninger F
+FIR - Hodsoll, John
+IR  - Hodsoll J
+FIR - Holubar, Taylor
+IR  - Holubar T
+FIR - Hoogendoorn, Gea
+IR  - Hoogendoorn G
+FIR - Humphries, Denise J
+IR  - Humphries DJ
+FIR - Hung, Cathy O-Y
+IR  - Hung CO
+FIR - Immelman, Nathali
+IR  - Immelman N
+FIR - Irsik, Vanessa C
+IR  - Irsik VC
+FIR - Jahn, Georg
+IR  - Jahn G
+FIR - Jäkel, Frank
+IR  - Jäkel F
+FIR - Jekel, Marc
+IR  - Jekel M
+FIR - Johannesson, Magnus
+IR  - Johannesson M
+FIR - Johnson, Larissa G
+IR  - Johnson LG
+FIR - Johnson, David J
+IR  - Johnson DJ
+FIR - Johnson, Kate M
+IR  - Johnson KM
+FIR - Johnston, William J
+IR  - Johnston WJ
+FIR - Jonas, Kai
+IR  - Jonas K
+FIR - Joy-Gaba, Jennifer A
+IR  - Joy-Gaba JA
+FIR - Kappes, Heather Barry
+IR  - Kappes HB
+FIR - Kelso, Kim
+IR  - Kelso K
+FIR - Kidwell, Mallory C
+IR  - Kidwell MC
+FIR - Kim, Seung Kyung
+IR  - Kim SK
+FIR - Kirkhart, Matthew
+IR  - Kirkhart M
+FIR - Kleinberg, Bennett
+IR  - Kleinberg B
+FIR - Knežević, Goran
+IR  - Knežević G
+FIR - Kolorz, Franziska Maria
+IR  - Kolorz FM
+FIR - Kossakowski, Jolanda J
+IR  - Kossakowski JJ
+FIR - Krause, Robert Wilhelm
+IR  - Krause RW
+FIR - Krijnen, Job
+IR  - Krijnen J
+FIR - Kuhlmann, Tim
+IR  - Kuhlmann T
+FIR - Kunkels, Yoram K
+IR  - Kunkels YK
+FIR - Kyc, Megan M
+IR  - Kyc MM
+FIR - Lai, Calvin K
+IR  - Lai CK
+FIR - Laique, Aamir
+IR  - Laique A
+FIR - Lakens, Daniël
+IR  - Lakens D
+FIR - Lane, Kristin A
+IR  - Lane KA
+FIR - Lassetter, Bethany
+IR  - Lassetter B
+FIR - Lazarević, Ljiljana B
+IR  - Lazarević LB
+FIR - LeBel, Etienne P
+IR  - LeBel EP
+FIR - Lee, Key Jung
+IR  - Lee KJ
+FIR - Lee, Minha
+IR  - Lee M
+FIR - Lemm, Kristi
+IR  - Lemm K
+FIR - Levitan, Carmel A
+IR  - Levitan CA
+FIR - Lewis, Melissa
+IR  - Lewis M
+FIR - Lin, Lin
+IR  - Lin L
+FIR - Lin, Stephanie
+IR  - Lin S
+FIR - Lippold, Matthias
+IR  - Lippold M
+FIR - Loureiro, Darren
+IR  - Loureiro D
+FIR - Luteijn, Ilse
+IR  - Luteijn I
+FIR - Mackinnon, Sean
+IR  - Mackinnon S
+FIR - Mainard, Heather N
+IR  - Mainard HN
+FIR - Marigold, Denise C
+IR  - Marigold DC
+FIR - Martin, Daniel P
+IR  - Martin DP
+FIR - Martinez, Tylar
+IR  - Martinez T
+FIR - Masicampo, E J
+IR  - Masicampo EJ
+FIR - Matacotta, Josh
+IR  - Matacotta J
+FIR - Mathur, Maya
+IR  - Mathur M
+FIR - May, Michael
+IR  - May M
+FIR - Mechin, Nicole
+IR  - Mechin N
+FIR - Mehta, Pranjal
+IR  - Mehta P
+FIR - Meixner, Johannes
+IR  - Meixner J
+FIR - Melinger, Alissa
+IR  - Melinger A
+FIR - Miller, Jeremy K
+IR  - Miller JK
+FIR - Miller, Mallorie
+IR  - Miller M
+FIR - Moore, Katherine
+IR  - Moore K
+FIR - Möschl, Marcus
+IR  - Möschl M
+FIR - Motyl, Matt
+IR  - Motyl M
+FIR - Müller, Stephanie M
+IR  - Müller SM
+FIR - Munafo, Marcus
+IR  - Munafo M
+FIR - Neijenhuijs, Koen I
+IR  - Neijenhuijs KI
+FIR - Nervi, Taylor
+IR  - Nervi T
+FIR - Nicolas, Gandalf
+IR  - Nicolas G
+FIR - Nilsonne, Gustav
+IR  - Nilsonne G
+FIR - Nosek, Brian A
+IR  - Nosek BA
+FIR - Nuijten, Michèle B
+IR  - Nuijten MB
+FIR - Olsson, Catherine
+IR  - Olsson C
+FIR - Osborne, Colleen
+IR  - Osborne C
+FIR - Ostkamp, Lutz
+IR  - Ostkamp L
+FIR - Pavel, Misha
+IR  - Pavel M
+FIR - Penton-Voak, Ian S
+IR  - Penton-Voak IS
+FIR - Perna, Olivia
+IR  - Perna O
+FIR - Pernet, Cyril
+IR  - Pernet C
+FIR - Perugini, Marco
+IR  - Perugini M
+FIR - Pipitone, R Nathan
+IR  - Pipitone RN
+FIR - Pitts, Michael
+IR  - Pitts M
+FIR - Plessow, Franziska
+IR  - Plessow F
+FIR - Prenoveau, Jason M
+IR  - Prenoveau JM
+FIR - Rahal, Rima-Maria
+IR  - Rahal RM
+FIR - Ratliff, Kate A
+IR  - Ratliff KA
+FIR - Reinhard, David
+IR  - Reinhard D
+FIR - Renkewitz, Frank
+IR  - Renkewitz F
+FIR - Ricker, Ashley A
+IR  - Ricker AA
+FIR - Rigney, Anastasia
+IR  - Rigney A
+FIR - Rivers, Andrew M
+IR  - Rivers AM
+FIR - Roebke, Mark
+IR  - Roebke M
+FIR - Rutchick, Abraham M
+IR  - Rutchick AM
+FIR - Ryan, Robert S
+IR  - Ryan RS
+FIR - Sahin, Onur
+IR  - Sahin O
+FIR - Saide, Anondah
+IR  - Saide A
+FIR - Sandstrom, Gillian M
+IR  - Sandstrom GM
+FIR - Santos, David
+IR  - Santos D
+FIR - Saxe, Rebecca
+IR  - Saxe R
+FIR - Schlegelmilch, René
+IR  - Schlegelmilch R
+FIR - Schmidt, Kathleen
+IR  - Schmidt K
+FIR - Scholz, Sabine
+IR  - Scholz S
+FIR - Seibel, Larissa
+IR  - Seibel L
+FIR - Selterman, Dylan Faulkner
+IR  - Selterman DF
+FIR - Shaki, Samuel
+IR  - Shaki S
+FIR - Simpson, William B
+IR  - Simpson WB
+FIR - Sinclair, H Colleen
+IR  - Sinclair HC
+FIR - Skorinko, Jeanine L M
+IR  - Skorinko JL
+FIR - Slowik, Agnieszka
+IR  - Slowik A
+FIR - Snyder, Joel S
+IR  - Snyder JS
+FIR - Soderberg, Courtney
+IR  - Soderberg C
+FIR - Sonnleitner, Carina
+IR  - Sonnleitner C
+FIR - Spencer, Nick
+IR  - Spencer N
+FIR - Spies, Jeffrey R
+IR  - Spies JR
+FIR - Steegen, Sara
+IR  - Steegen S
+FIR - Stieger, Stefan
+IR  - Stieger S
+FIR - Strohminger, Nina
+IR  - Strohminger N
+FIR - Sullivan, Gavin B
+IR  - Sullivan GB
+FIR - Talhelm, Thomas
+IR  - Talhelm T
+FIR - Tapia, Megan
+IR  - Tapia M
+FIR - te Dorsthorst, Anniek
+IR  - te Dorsthorst A
+FIR - Thomae, Manuela
+IR  - Thomae M
+FIR - Thomas, Sarah L
+IR  - Thomas SL
+FIR - Tio, Pia
+IR  - Tio P
+FIR - Traets, Frits
+IR  - Traets F
+FIR - Tsang, Steve
+IR  - Tsang S
+FIR - Tuerlinckx, Francis
+IR  - Tuerlinckx F
+FIR - Turchan, Paul
+IR  - Turchan P
+FIR - Valášek, Milan
+IR  - Valášek M
+FIR - van 't Veer, Anna E
+IR  - van 't Veer AE
+FIR - Van Aert, Robbie
+IR  - Van Aert R
+FIR - van Assen, Marcel
+IR  - van Assen M
+FIR - van Bork, Riet
+IR  - van Bork R
+FIR - van de Ven, Mathijs
+IR  - van de Ven M
+FIR - van den Bergh, Don
+IR  - van den Bergh D
+FIR - van der Hulst, Marije
+IR  - van der Hulst M
+FIR - van Dooren, Roel
+IR  - van Dooren R
+FIR - van Doorn, Johnny
+IR  - van Doorn J
+FIR - van Renswoude, Daan R
+IR  - van Renswoude DR
+FIR - van Rijn, Hedderik
+IR  - van Rijn H
+FIR - Vanpaemel, Wolf
+IR  - Vanpaemel W
+FIR - Vásquez Echeverría, Alejandro
+IR  - Vásquez Echeverría A
+FIR - Vazquez, Melissa
+IR  - Vazquez M
+FIR - Velez, Natalia
+IR  - Velez N
+FIR - Vermue, Marieke
+IR  - Vermue M
+FIR - Verschoor, Mark
+IR  - Verschoor M
+FIR - Vianello, Michelangelo
+IR  - Vianello M
+FIR - Voracek, Martin
+IR  - Voracek M
+FIR - Vuu, Gina
+IR  - Vuu G
+FIR - Wagenmakers, Eric-Jan
+IR  - Wagenmakers EJ
+FIR - Weerdmeester, Joanneke
+IR  - Weerdmeester J
+FIR - Welsh, Ashlee
+IR  - Welsh A
+FIR - Westgate, Erin C
+IR  - Westgate EC
+FIR - Wissink, Joeri
+IR  - Wissink J
+FIR - Wood, Michael
+IR  - Wood M
+FIR - Woods, Andy
+IR  - Woods A
+FIR - Wright, Emily
+IR  - Wright E
+FIR - Wu, Sining
+IR  - Wu S
+FIR - Zeelenberg, Marcel
+IR  - Zeelenberg M
+FIR - Zuni, Kellylynn
+IR  - Zuni K
+EDAT- 2015/09/01 06:00
+MHDA- 2016/02/20 06:00
+CRDT- 2015/08/29 06:00
+PHST- 2015/08/29 06:00 [entrez]
+PHST- 2015/09/01 06:00 [pubmed]
+PHST- 2016/02/20 06:00 [medline]
+AID - 349/6251/aac4716 [pii]
+AID - 10.1126/science.aac4716 [doi]
+PST - ppublish
+SO  - Science. 2015 Aug 28;349(6251):aac4716. doi: 10.1126/science.aac4716.
