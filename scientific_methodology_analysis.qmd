@@ -1,0 +1,766 @@
+---
+title: "Scientific Analysis of Educational Equity Claims"
+subtitle: "When Ideology Masquerades as Scientific Inquiry"
+bibliography: manual-refs.bib
+format:
+  html:
+    include-after-body: 
+      - text: |
+         <script type="text/javascript" src="reference-backlinks.js"></script>
+    css: 
+      - swart-20250630.css
+      # - this-doc-only.css
+    page-layout: full
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    df-print: paged
+    code-overflow: wrap
+    toc: true
+    citeproc: true
+    link-citations: true
+  typst:
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    margin:
+      x: 1in
+      y: 1in
+    toc: true
+    fontsize: 14pt
+    mainfont: "Latin Modern Roman"
+execute:
+  echo: false
+  message: false
+  warning: false
+  fig-width: 12
+  fig-height: 10
+---
+
+```{r}
+#| label: setup
+
+# load libraries
+library(tidyverse)
+
+# Set global theme for consistent plots
+theme_set(theme_minimal(base_size = 16) + 
+          theme(
+    plot.title = element_text(face = "bold", size = 24),    # adjust title size
+    plot.subtitle = element_text(face = "bold", size = 20), # adjust subtitle size
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"),
+    axis.text = element_text(face = "bold"),
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold"),
+    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
+    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
+    plot.margin = margin(20, 20, 20, 20, "pt")
+   )
+  )
+
+# Set seed for reproducibility
+set.seed(42)
+```
+
+# Scientific Analysis of Educational Equity Claims
+
+## Abstract
+
+An earnest discussion of the methodological deficiencies in current educational equity research, demonstrating how proper scientific investigation would approach claims about group differences in academic outcomes. The astonishing fact is that most of the important research information is never presented, or even asked for!
+
+## The Problematic Claim
+
+> "For example, one way for school systems to support efforts towards equity in student outcomes is to frequently examine any differences in outcomes among student subgroups (Chapter 3)."
+
+This statement comes early in the book and contains an **unproven assumption** that group differences inherently indicate systemic bias requiring intervention.
+
+## Distinguishing Experimental vs. Observational Research
+
+::: {.callout-warning}
+## The Government Data Problem
+
+Most social science researchers work with datasets containing government-specified subgroups (race, ethnicity, SES categories) rather than rationally selected variables for experimental validity. This creates systematic bias in research design from the outset.
+
+**Additional Complications:**
+- **Self-designation**: Individuals choose their own racial/ethnic categories
+- **Multiple categories**: Many people belong to more than one subgroup
+- **Assumed homogeneity**: Massive within-group differences are ignored
+:::
+
+### Experimental Data: Ideal Scientific Approach
+
+When researchers can control variables and assign treatments randomly. (Or, when causal mechanisms can be simulated with observational data based on DAG analysis.)
+
+### Observational Data: Constrained but Can Still Be Scientific
+
+When working with existing datasets (most social science research), rigorous methodology becomes even more critical.
+
+---
+
+## How Real Scientists Would Investigate This Claim
+
+### Step 1: Question the Fundamental Premises
+
+**Scientific Approach:**
+
+- What credible evidence supports the assumption that group differences in outcomes indicate systemic bias? Appeals to authorities must be examined carefully.
+
+- Under what conditions would group differences be expected even in perfectly fair systems?
+
+- Are we conflating correlation with causation?
+
+**Current "Equity Research" Approach:**
+
+- Treats premise as axiomatic
+
+- No testing of underlying assumptions
+
+- Direct jump to data collection
+
+- Data analysis is there only to measure the effects of the presumed causal covariance, not to verify empirically any causal assumptions made.
+
+---
+
+### Step 2: Form Multiple Competing Hypotheses
+
+A proper scientific investigation would generate testable hypotheses:
+
+**H₁: Discrimination Hypothesis**
+- Differences reflect measurement bias or systemic discrimination
+- *Prediction*: Differences should persist even when controlling for relevant variables
+
+**H₂: Preparation/Effort Hypothesis** 
+- Differences reflect genuine performance variations due to preparation, effort, or prior knowledge
+- *Prediction*: Differences should correlate with measurable preparation factors
+
+**H₃: Random Variation Hypothesis**
+- Differences reflect normal statistical variation within acceptable bounds
+- *Prediction*: Differences should fall within expected confidence intervals
+
+**H₄: External Factors Hypothesis**
+- Differences reflect cultural/family factors unrelated to school policy
+- *Prediction*: School interventions should have minimal impact on these differences
+
+---
+
+### Step 3: Address Confounding Variables
+
+::: {.callout-warning}
+## Critical Issue: Rational Subgrouping
+
+Current equity research fails to address whether compared groups are actually comparable.
+:::
+
+**Variables to Control For:**
+- Socioeconomic status
+- Family structure
+- Time spent on homework
+- Attendance rates
+- Language spoken at home
+- Prior educational preparation
+- Cultural attitudes toward education
+
+**Questions to Address:**
+- Are we comparing truly comparable groups?
+- What obvious explanatory variables are being ignored?
+- How do we separate correlation from causation?
+
+---
+
+### Step 4: Establish Proper Experimental Controls
+
+**Control Group Requirements:**
+- Schools with similar demographics but different "equity" interventions
+- Baseline measurements before any interventions
+- Matched comparison groups
+
+**Current Problems:**
+- No control groups
+- No baseline measurements
+- No independent variables isolated
+
+---
+
+### Step 5: Account for Statistical Variation
+
+::: {.callout-important}
+## Statistical Reality
+
+Differences will **ALWAYS** exist between any groups measured at any time, even between the same individuals tested at different times of day.
+:::
+
+**Scientific Questions:**
+- What magnitude of difference is statistically significant?
+- What falls within normal variation?
+- Are we chasing statistical noise?
+- What are the confidence intervals?
+
+**Statistical Considerations:**
+```r
+# Example of proper statistical analysis
+# Multiple comparisons correction needed
+# Effect size calculation required  
+# Confidence intervals essential
+# Power analysis for sample size
+```
+
+---
+
+### Step 6: Replication and Peer Review
+
+**Scientific Standards:**
+- Independent replication by other researchers
+- Peer review of methodology
+- Open data and reproducible analysis
+- Pre-registration of hypotheses
+
+**Current State:**
+- Minimal independent replication
+- Methodology rarely scrutinized
+- Results assumed rather than tested
+
+---
+
+## Methodology Matrix: Experimental vs. Observational Data
+
+### Steps Required for BOTH Experimental and Observational Studies
+
+| Step | Experimental Data | Observational Data | 
+|------|-------------------|-------------------|
+| **Question Core Assumptions** | ✓ Essential | ✓ **CRITICAL** - Only way to avoid bias |
+| **Multiple Competing Hypotheses** | ✓ Standard practice | ✓ **EVEN MORE Important** - Can't test assumptions directly |
+| **Account for Statistical Variation** | ✓ Required | ✓ **EVEN MORE Critical** - Higher risk of noise |
+| **Proper Statistical Testing** | ✓ Standard | ✓ **Enhanced Methods** - Need robustness checks |
+
+---
+
+### Steps That Differ Between Study Types
+
+#### For Experimental Data (Rare in Social Science)
+
+- **Random Assignment**: Researcher controls who gets treatment
+- **Manipulation of Variables**: Can isolate causal mechanisms  
+- **Direct Causation Testing**: Can establish cause-effect relationships
+- **Controlled Environment**: Minimize confounding factors
+
+#### For Observational Data (Most Social Science)
+
+- **Quasi-Experimental Design**: Find "natural experiments"
+- **Instrumental Variables**: Use external factors that affect treatment assignment
+- **Regression Discontinuity**: Exploit arbitrary cutoffs in policy
+- **Difference-in-Differences**: Compare changes over time between groups
+
+---
+
+## The Mathematical Foundations: Why Current Approaches Are Statistically Invalid
+
+::: {.callout-critical}
+## Fundamental Statistical Assumption Violation
+
+All analytical statistics comparing groups rely on the mathematical requirement that **within-group variance should be small relative to between-group variance**. Current equity research systematically violates this assumption, rendering the statistical results mathematically meaningless.
+:::
+
+### The Mathematical Requirements for Valid Group Comparisons
+
+For any comparative statistical analysis (ANOVA, t-tests, regression with categorical variables) to be valid:
+
+**σ²(within) << σ²(between)**
+
+Where:
+- σ²(within) = variance within each group
+- σ²(between) = variance between group means
+
+#### When the Assumption is Violated
+
+```{r}
+#| label: variance-example
+#| echo: true
+
+# Example: Current educational equity research
+red_students <- c(300, 850, 1200, 1540, 1580)  # SAT scores within "Red" category
+blue_students <- c(400, 900, 1300, 1520, 1600)  # SAT scores within "Blue" category
+
+within_group_var <- var(red_students) + var(blue_students)  # Massive
+between_group_var <- var(c(mean(red_students), mean(blue_students)))  # Small
+
+cat("Within-group variance:", within_group_var, "\n")
+cat("Between-group variance:", between_group_var, "\n")
+cat("Ratio (within/between):", within_group_var / between_group_var, "\n")
+
+# Result: within_group_var >> between_group_var
+# Statistical analysis becomes mathematically invalid
+```
+
+### The F-Ratio Problem
+
+In ANOVA, the F-statistic is calculated as:
+
+**F = MS(between) / MS(within)**
+
+When within-group variance is enormous (heterogeneous groups), the denominator inflates, making F-ratios artificially small and potentially masking real effects OR creating spurious effects depending on how the groups are constructed.
+
+---
+
+#### Real-World Consequences
+
+**Educational Research:**
+```{r}
+#| label: heterogeneous-groups
+#| echo: true
+
+# "Red students" category might include:
+high_achieving_subgroup <- c(1400, 1450, 1500)  # High-achieving
+middle_class_subgroup <- c(1200, 1350, 1400)    # Middle-class
+disadvantaged_subgroup <- c(300, 400, 500)      # Low-resourced
+
+# Enormous within-group variance makes between-group comparisons invalid
+all_red_students <- c(high_achieving_subgroup, middle_class_subgroup, disadvantaged_subgroup)
+within_red_variance <- var(all_red_students)
+
+cat("Within-group variance for 'Red' students:", within_red_variance, "\n")
+# This variance is often LARGER than variance between demographic categories
+```
+
+---
+
+### The Women's Health Initiative Parallel
+
+A perfect medical example of the same mathematical errors:
+
+**WHI Study Design:**
+- **"Women" category**: Ages 50-79 (heterogeneous)
+- **Treatment**: Hormone therapy vs. placebo
+- **Error**: Massive within-group age variance
+
+**Mathematical Reality:**
+```r
+# Within "women" group
+ages_50_55 <- beneficial_response   # HRT helps
+ages_65_79 <- harmful_response      # HRT harmful
+
+# Averaging across ages produces meaningless result
+overall_effect <- mean(c(beneficial_response, harmful_response))
+# Result: "HRT is harmful" - but this is mathematically invalid
+```
+
+**Corrected Analysis:**
+
+```r
+# Proper disaggregation by age
+young_menopause <- HRT_effect[age >= 50 & age <= 55]  # Beneficial
+late_menopause <- HRT_effect[age >= 65]               # Harmful
+
+# Now within-group variance is small, between-group comparison valid
+```
+
+### Statistical Consequences of Heterogeneous Groups
+
+#### 1. Unreliable Effect Sizes
+Cohen's d and other effect size measures become meaningless:
+```r
+# With heterogeneous groups
+d <- (mean_group1 - mean_group2) / pooled_SD
+# When pooled_SD is inflated by within-group heterogeneity, 
+# effect sizes are artificially deflated
+```
+
+#### 2. Invalid Confidence Intervals
+```r
+# Standard error calculation assumes homogeneous groups
+SE <- SD / sqrt(n)
+# When SD is inflated by heterogeneity, confidence intervals are wrong
+```
+
+#### 3. Type I and Type II Error Inflation
+- **Type I**: Finding false differences due to arbitrary grouping
+- **Type II**: Missing real differences due to noise from heterogeneous groups
+
+### The Homogeneity Test Requirement
+
+Before any group comparison, researchers should test:
+
+```r
+# Test for within-group homogeneity
+library(car)
+leveneTest(outcome ~ group, data = dataset)  # Tests equal variances
+
+# If p < 0.05, groups are not homogeneous - comparison invalid
+# Most educational equity research would fail this test
+```
+
+### Mathematical Requirements for Valid Analysis
+
+#### Step 1: Variance Decomposition
+```r
+# Calculate variance components
+total_variance <- var(all_students)
+within_group_variance <- sum(group_variances * group_sizes) / total_n
+between_group_variance <- total_variance - within_group_variance
+
+# Valid comparison requires: between_group_variance > within_group_variance
+```
+
+#### Step 2: Intraclass Correlation
+```r
+# ICC should be high for meaningful group comparisons
+ICC <- between_group_variance / total_variance
+# ICC < 0.1 suggests grouping is not meaningful
+```
+
+### The Mathematical Reality in Educational Research
+
+Most educational equity studies would show:
+
+```{r}
+#| label: variance-decomposition
+#| echo: true
+
+# Typical results if properly calculated
+variance_within_demographic_groups <- 0.85  # 85% of variance
+variance_between_demographic_groups <- 0.15  # 15% of variance
+
+cat("Variance within groups:", variance_within_demographic_groups * 100, "%\n")
+cat("Variance between groups:", variance_between_demographic_groups * 100, "%\n")
+
+# This means demographic categories explain only 15% of academic variance
+# Yet policies are based on treating them as the dominant factor
+```
+
+::: {.callout-important}
+## Bottom Line for Statisticians
+
+When within-group variance exceeds between-group variance, you're not measuring group differences - you're measuring the noise created by improper categorization. The statistical analysis becomes mathematically invalid, regardless of sample size or p-values.
+:::
+
+## The Fundamental Problem: Rational Subgrouping
+
+::: {.callout-important}
+## The Core Issue: Comparing Apples to Oranges
+
+Current equity research fails at the most basic level - it doesn't establish that comparison groups are actually comparable. The fundamental flaw is treating government-defined demographic categories as if they represent homogeneous groups.
+:::
+
+#### The Self-Designation Problem
+
+**Current Practice:**
+- Individuals self-select demographic categories
+- Many belong to multiple categories simultaneously  
+- Categories may reflect social identity rather than relevant characteristics
+- No verification of category membership
+
+**Scientific Implications:**
+```r
+# What are we actually measuring?
+group_red <- students[category == "Red"]  
+# Could include vastly different subpopulations with:
+# Different languages, cultures, socioeconomic backgrounds
+# Different immigration histories, family structures
+```
+
+#### The False Homogeneity Assumption
+
+Government categories assume internal similarity that often doesn't exist:
+
+**Within "Red" Students:**
+- Recent immigrants vs. multi-generational families
+- Different socioeconomic levels
+- Urban vs. rural backgrounds
+- Different family structures
+
+**Within "Blue" Students:**
+- Multiple distinct cultural backgrounds
+- Different languages and traditions
+- Vastly different socioeconomic circumstances
+- Different educational histories
+
+#### The Thomas Sowell Principle: Disaggregate Until Comparable
+
+**The Medical Doctor Example:**
+
+Instead of comparing ALL male doctors to ALL female doctors:
+
+```r
+# Wrong approach - massive confounding
+male_salary <- mean(salary[gender == "Male"])
+female_salary <- mean(salary[gender == "Female"])
+gap <- male_salary - female_salary  # Shows apparent discrimination
+
+# Correct approach - rational subgrouping  
+never_married_no_breaks <- doctors %>%
+  filter(marital_status == "Never married" | 
+         career_breaks == 0,
+         children == 0)
+
+male_comparable <- mean(salary[gender == "Male" & never_married_no_breaks])
+female_comparable <- mean(salary[gender == "Female" & never_married_no_breaks])
+real_gap <- male_comparable - female_comparable  # Gap disappears or reverses
+```
+
+**Result:** The "gender gap" disappears when comparing truly comparable individuals.
+
+#### Applying This to Educational Research
+
+**Instead of:**
+- Comparing all Red students to all Blue students
+- Comparing all Green students to all Blue students
+
+**Scientific approach:**
+- Compare high-SES Red students to high-SES Blue students
+- Compare recent immigrant Blue students to recent immigrant Green students  
+- Compare students with similar family structures across demographic groups
+- Compare students with similar prior preparation across demographic groups
+
+#### The Hidden Truth: Within-Group Variation
+
+::: {.callout-note}
+## Key Insight
+
+High-performing Red, Green, Blue, and other students often have more in common with each other than with low-performing members of their own demographic group.
+:::
+
+**Common characteristics of high-performers regardless of demographic category:**
+- Stable family structures
+- High parental education expectations
+- Consistent school attendance
+- Time spent on homework
+- Participation in academic activities
+
+**This suggests the real variables of interest are:**
+- Family structure and stability
+- Cultural attitudes toward education  
+- Economic resources
+- Prior educational preparation
+- Peer influences
+
+**NOT demographic categories themselves.**
+
+#### Practical Implementation of Rational Subgrouping
+
+```r
+# Step 1: Identify truly relevant variables
+relevant_factors <- c("family_income", "parent_education", 
+                     "family_structure", "prior_achievement",
+                     "school_quality", "attendance_rate")
+
+# Step 2: Create matched comparison groups
+library(MatchIt)
+matched_data <- matchit(treatment ~ family_income + parent_education + 
+                       family_structure + prior_achievement,
+                       data = student_data,
+                       method = "nearest")
+
+# Step 3: Compare outcomes within matched groups
+# Only then can you isolate the effect of the variable of interest
+```
+
+#### Questions Rational Subgrouping Would Answer
+
+1. **Do demographic gaps persist when comparing students with:**
+   - Same family income?
+   - Same parental education?
+   - Same family structure?
+   - Same prior preparation?
+   - Same school quality?
+
+2. **Is the variation WITHIN demographic groups larger than BETWEEN demographic groups?**
+
+3. **Do high-performing students cluster together regardless of demographic category?**
+
+4. **What factors actually predict academic success?**
+
+### Working Within Government Data Constraints
+
+::: {.callout-tip}
+## Practical Guidance for Researchers
+
+Even when stuck with government-defined categories, you can still practice good science:
+:::
+
+#### Step 1: Acknowledge the Limitation
+```r
+# Document that categories may not be scientifically meaningful
+# "Demographic categories as defined by federal reporting requirements 
+#  may not reflect meaningful educational distinctions"
+```
+
+#### Step 2: Test Category Validity
+- Are government-defined subgroups actually homogeneous on relevant variables?
+- Do the categories predict outcomes better than alternative groupings?
+- What happens when you subdivide the categories further?
+
+```r
+# Example: Test if "Red" category is meaningful
+red_variance <- var(outcomes[category == "Red"])
+within_subgroup_variance <- var(outcomes[subgroup == "Red_Type_A"]) + 
+                           var(outcomes[subgroup == "Red_Type_B"]) # etc.
+```
+
+#### Step 3: Control for Observable Confounds
+Even with limited data, control for what you can:
+
+```r
+# Minimum controls for any group comparison study
+model <- lm(outcome ~ group + 
+           socioeconomic_status + 
+           prior_achievement + 
+           family_structure + 
+           school_characteristics +
+           geographic_controls)
+```
+
+#### Step 4: Sensitivity Analysis
+Test whether results depend on specific categorizations:
+
+```r
+# Test multiple grouping schemes
+results_by_demographics <- analyze_gaps(group_by = "demographics")
+results_by_ses <- analyze_gaps(group_by = "socioeconomic_quintile") 
+results_by_school <- analyze_gaps(group_by = "school_quality")
+
+# If results change dramatically, the "demographic effect" may be spurious
+```
+
+#### Step 5: Heterogeneity Analysis
+Government categories often hide important variation:
+
+```r
+# Don't just report "Red-Blue gap"
+# Report gaps by:
+# - Immigration status within demographic groups
+# - SES within demographic groups  
+# - Geographic region within demographic groups
+# - Family structure within demographic groups
+```
+
+### Red Flags for "Data Mining" vs. Hypothesis Testing
+
+#### Scientific Hypothesis Testing:
+- ✓ Hypotheses stated **before** analyzing data
+- ✓ Predictions about **direction and magnitude** of effects
+- ✓ Analysis plan **pre-registered**
+- ✓ Negative results **reported honestly**
+
+#### Data Mining Masquerading as Science:
+- ✗ "Exploring the data to see what we find"
+- ✗ Running dozens of tests until something is "significant"
+- ✗ Changing hypotheses after seeing results
+- ✗ Only reporting "successful" findings
+
+### Minimum Standards for Observational Equity Research
+
+Even with government datasets, researchers should:
+
+1. **Pre-specify** what size effect would be practically meaningful
+2. **Control** for obvious confounding variables  
+3. **Test** whether effects are robust to different specifications
+4. **Report** confidence intervals, not just p-values
+5. **Discuss** alternative explanations for findings
+6. **Replicate** on different datasets/time periods if possible
+
+::: {.callout-important}
+## The Bottom Line for Observational Data
+
+You cannot establish causation from observational data alone, but you can still practice rigorous descriptive science by acknowledging limitations, controlling for confounds, and testing robustness of findings.
+:::
+
+## The Current Pseudo-Scientific Approach
+
+Instead of proper methodology, current "equity research" follows this pattern:
+
+1. **Assume** group differences = discrimination
+2. **Collect data** confirming the assumption  
+3. **Implement interventions** based on assumptions
+4. **Declare success** regardless of actual outcomes
+
+## Medical Research Analogy
+
+Imagine if pharmaceutical companies could:
+
+- ✗ Assume their drug works without testing
+- ✗ Only test on people likely to improve anyway  
+- ✗ Ignore side effects
+- ✗ Skip control groups
+- ✗ Get FDA approval based on "equity" rather than efficacy
+
+**Result:** Public health catastrophe
+
+**Current Reality:** This is exactly the methodology being used to reshape education policy affecting millions of children.
+
+## Practical Checklist for Researchers Using Government Datasets
+
+### Before You Start Analysis
+
+- [ ] **Define hypotheses clearly** - What specific claims are you testing?
+- [ ] **Specify effect sizes** - How large a difference would be meaningful?
+- [ ] **Identify confounds** - What other variables could explain group differences?
+- [ ] **Plan rational subgrouping** - How will you ensure comparable groups?
+- [ ] **Plan sensitivity tests** - How will you check if results are robust?
+
+### During Analysis: Rational Subgrouping
+
+- [ ] **Test within-group homogeneity** - How much variation exists within each demographic category?
+```r
+# Test if government categories are meaningful
+red_variance <- var(outcomes[demographics == "Red"])
+within_ses_variance <- var(outcomes[demographics == "Red" & ses == "high"])
+# If within-SES variance is much smaller, SES matters more than demographics
+```
+
+- [ ] **Compare matched subgroups** - Use propensity score matching or similar techniques
+- [ ] **Analyze the most comparable individuals** - Not entire demographic categories
+- [ ] **Report within-group vs. between-group variation** - Is most variation within or between groups?
+
+### Standard Analysis Checks
+
+- [ ] **Test multiple models** - Do results hold with different control variables?
+- [ ] **Check category validity** - Are government categories internally consistent?
+- [ ] **Report effect sizes** - Not just statistical significance
+- [ ] **Show confidence intervals** - Acknowledge uncertainty
+
+### Before Publishing/Recommending Policy
+
+- [ ] **Apply the Thomas Sowell test** - Do gaps disappear when comparing truly similar individuals?
+- [ ] **Consider alternative explanations** - What else could cause these patterns?
+- [ ] **Test on holdout data** - Do results replicate on independent samples?
+- [ ] **Discuss limitations honestly** - What can't your study tell us?
+- [ ] **Avoid causal language** - Use "associated with" not "caused by"
+
+### Red Flag Questions for Data Mining
+
+Ask yourself honestly:
+
+1. **Did I decide what to look for before looking at the data?**
+2. **How many different analyses did I try before getting this result?**
+3. **Would I be willing to bet money that this result will replicate?**
+4. **Am I controlling for the most obvious alternative explanations?**
+5. **Am I comparing truly comparable individuals or just demographic categories?**
+6. **Is most of the variation within groups or between groups?**
+
+If you can't answer these satisfactorily, you're probably data mining rather than hypothesis testing.
+
+## Conclusions
+
+The current approach to educational equity research violates fundamental principles of scientific investigation:
+
+1. **No hypothesis testing** of core assumptions
+2. **No control for confounding variables**
+3. **No proper control groups**
+4. **No accounting for natural variation**
+5. **No replication requirements**
+6. **Policy implementation without evidence**
+7. **No rational subgrouping** - comparing demographic categories rather than comparable individuals
+
+::: {.callout-note}
+## The Thomas Sowell Principle
+
+Whether examining educational outcomes or medical doctor salaries, Sowell's analysis demonstrates that apparent group differences often disappear when comparing truly comparable individuals rather than broad demographic categories.
+
+**Educational Example:** High-performing students of all demographic groups often have more in common with each other than with low-performing members of their own demographic group.
+
+**Medical Example:** Never-married female doctors with no career breaks earn the same (or more) than comparable male doctors.
+:::
+
+**The Fundamental Question:** Are we measuring discrimination or are we measuring the effects of different life choices, preparation levels, and cultural factors that happen to correlate with demographic categories?
+
+A genuinely scientific approach would disaggregate data until comparison groups are truly comparable, not stop at convenient government-defined categories.

@@ -1,0 +1,37 @@
+---
+title: "Claude's Take on 'Woke' Research"
+format: html
+---
+
+
+
+Please take this text and create a new critique about their use of statistics to pursue the 'woke' notion of 'equity'.  I am sending the critique to the book's authors and I want to persuade them to change that aspect of their book.   I don't want the tone to be combative, scolding or angry but I do want it to be direct and convincing.  I think a series of bullet point paragraphs might keep it short.  the series should probably be organized around 'what exactly are their shoddy practices', 'why it is unscientific;, and 'why it is damaging'.  I tend to be verbose and a tone of combative argumentation creeps into my writing on topics I am passionate about.  I actually do want to persuade them to change.
+
+I need the output to be in quarto/rmarkdown format and syntax.
+
+
+Here's my text so far:
+
+MY GENERAL CRITIQUE OF EDUCATION RESEARCH
+Most educational "research" has become a crude form of confirmation bias that uses pseudo-scientific methodologies to validate predetermined beliefs, rather than discover or validate empirical facts. These pseudo-science methodologies undermine both scientific integrity and educational effectiveness, creating a system where ideology can trump evidence and advocacy masquerades as inquiry.
+In general, research questions are poorly formulated, if they are formulated at all.  Causal assumptions are built-in to unverified premises, so no need to test and verify them empirically.  Statistics are calculated only to quantify the effects of the untested causal assumptions.  The assumptions themselves are not verified.  Rational subgrouping is ignored, in favor of treating groups as if every individual in the group can be characterized by the mean calculated for the group.
+Advise for action is to treat groups differently; never mind that many, many individuals in each group are far more similar to individuals in other groups than to individuals in their designated group.  There is never a search for results that challenge the findings.  There is never a search to quantify the effects of the system on results versus the effects of the individual on results.
+Unfortunately, these practices are destructive and should be replaced.
+The solution requires acknowledging that too much current educational "research" serves ideological rather than scientific purposes. Serious education advocates within politics, academia, and the family must work to rebuild research practices around testable theory, hypothesis testing, replication requirements, and intellectual humility about what correlation calculations can actually tell us.
+The stakes are far too high and children's futures far too important to continue accepting pseudo-scientific advocacy as legitimate educational research.
+
+
+SPECIFIC CRITIQUE OF USING STATISTICS TO PURSUE 'EQUITY' (A WOKE IDEOLOGY)
+### A "Woke" Example
+Educational 'equity' research exemplifies this abandonment of the scientific method:
+-   Predetermined conclusion: Systemic racism causes achievement gaps
+-   Data mining: Finding group differences in outcomes as "evidence"
+-   Causal assumption: Differences 'prove' discrimination without testing the premise or alternatives
+-   Policy prescription: Calls for 'equity' interventions based on pseudo-scientific research
+-   Circular reasoning: Failure of interventions blamed on "insufficient implementation"
+Here is an example of an educational textbook designed to teach data 'scientists' how to examine data using pseudo-scientific methods, searching for evidence pointing to institutional racism. [@bovee2024data]
+The young, accomplished, and earnest authors deserve much praise for presenting a tour-de-force of R programming instruction. And, if that was as far as it went, my remarks would be limited to any perceived benefits of correlational studies to the practice of education. In fact, I would have little but praise.
+However, the text is being used to educate young budding data 'scientists' who can't know why what they are learning is wrong. See Chapter 9.  For example, you can watch this video: [Data Science in Education Using R Book Club Chapter 9: Walkthrough 3 (2021-03-24) (dsieur01)](https://www.youtube.com/watch?v=Z5KRaOgW0sk&list=PL3x6DOfs2NGgvd741DNAnn1MEitDJQP3c&index=7)
+
+
+### 

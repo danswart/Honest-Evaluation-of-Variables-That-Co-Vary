@@ -30,16 +30,6 @@ hr {
   margin: 2em 0;
 }
 
-.callout-tip, .callout-caution, .callout-important, .callout-warning {
-  display: block;
-  padding: 1em;
-  margin: 1em 0;
-  border-style: solid;
-  border-width: 4px;
-  border-radius: 10px;
-/*  background-color: #f8f9fa;  background colors set below for each callout */
-}
-
 
 
 .callout-tip {
