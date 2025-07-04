@@ -1,5 +1,5 @@
 ---
-title: "Scientific Analysis of Educational Equity Claims"
+title: "Most Education Research is ***NOT*** Science"
 subtitle: "When Ideology Masquerades as Scientific Inquiry"
 bibliography: manual-refs.bib
 format:
@@ -8,7 +8,7 @@ format:
       - text: |
          <script type="text/javascript" src="reference-backlinks.js"></script>
     css: 
-      - swart-20250630.css
+      - swart-20250701.css
     page-layout: full
     fig-width: 12
     fig-height: 10
@@ -66,59 +66,204 @@ theme_set(theme_minimal(base_size = 16) +
 set.seed(42)
 ```
 
-# Scientific Analysis of Educational Equity Claims
+
+# A Cautionary Tale About Scientific Analysis of Educational Claims
+
+::: {.my-quote}
+***"When you want to help people you tell them the truth. When you want to help yourself, you tell them what they want to hear."*** ~ Thomas Sowell
+:::
+
+::: {.my-quote}
+***"[For the social scientist researcher...] the justification for drawing causation from a correlation model is saying our theory has all the causality built in. We don't need to infer the causality from the data. We have the causality and it is well known; it's a given. All we need the statistical model for is quantifying the effects."*** — Galit Schmueli - statistician, describing the social scientists' approach (New England Symposium, 2010)
+:::
+
+
+## Data Mining vs. Scientific Research
+
+### Data Mining Alone (Not Scientific Research)
+
+- Pattern hunting: Looking through data without pre-specified hypotheses  
+- P-hacking: Testing multiple relationships until finding "significant" results  
+- No theoretical framework: Purely empirical pattern detection  
+- No replication: Findings may not generalize beyond the specific dataset  
+- Multiple comparisons problem: Testing hundreds of relationships increases false discoveries  
+
+
+### Data Mining as Part of Scientific Research
+
+- Replication: Validating findings on independent datasets  
+- Hypothesis generation: Using patterns to formulate testable hypotheses  
+- Exploratory analysis: Initial data exploration guided by theory  
+- Followed by confirmation: Testing generated hypotheses on new data  
+- Proper statistical controls: Adjusting for multiple comparisons  
+
+
+### The Scientific Method Requirements
+
+For research to be scientific, it must include:
+
+#### Scientific approach
+
+1. Theoretical framework
+2. Pre-specified hypotheses  
+3. Proper controls
+4. Replication
+5. Peer review
+6. Transparency
+
+#### Data mining approach
+
+1. Explore data patterns
+2. Test multiple relationships
+3. Report "significant" findings
+4. No independent validation
+5. Limited theoretical basis
+
+
+### Examples
+
+#### Data Mining Masquerading as Science
+
+#### This is NOT scientific research:
+
+education_data %>%  &nbsp;&nbsp; # Test many multiples of demographic comparisons  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; group_by(every_possible_subgroup) %>%  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; summarize(test_scores = t.test(score ~ treatment)) %>%  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Report only the "significant" ones  
+  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; filter(p_value < 0.05) %>%  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Claim these represent "discrimination"  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conclude_bias_exists()  
+  
+
+
+### Legitimate Scientific Use of Data Mining
+
+#### This CAN be scientific:
+
+#### Phase 1: Exploratory (data mining)
+
+potential_patterns <- education_data %>%  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; explore_patterns() %>%  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; generate_hypotheses()  
+
+#### Phase 2: Confirmatory (scientific testing)
+
+hypothesis_test <- new_education_data %>%  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test_specific_hypothesis(  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hypothesis = "SES predicts achievement better than demographics",  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; controls = c("family attitudes toward education", family_structure", "prior_achievement"),  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pre_registered = TRUE  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )  
+
+
+### Guidelines for Legitimate Use
+
+#### When Data Mining Can Be Scientific:
+
+- Hypothesis generation phase clearly separated from testing phase  
+- Pre-registration of analysis plans  
+- Multiple comparison corrections applied  
+- Replication on independent datasets  
+- Theoretical framework guiding interpretation  
+- Transparency about exploratory vs. confirmatory analyses  
+
+
+#### Red Flags for Non-Scientific Data Mining:
+
+- Testing many relationships without controlling for multiple comparisons  
+- Changing hypotheses after seeing results  
+- Only reporting "significant" findings  
+- No theoretical justification for analyses  
+- Claims of causation from correlational patterns  
+- No attempt at replication  
+
+
+
+
 
 ## Abstract
 
-An earnest discussion of the methodological deficiencies in current educational equity research, demonstrating how proper scientific investigation would approach claims about group differences in academic outcomes. The astonishing fact is that most of the important research information is never presented, or even asked for!
+An earnest discussion of poor research methods in current educational research, including 'equity' claims;  contrasts rigorous scientific methodologies with current practice when investigating group differences in academic results. The astonishing fact is that most of the important research questions are never presented, or even asked for.
 
-## The Problematic Claim
 
-> "For example, one way for school systems to support efforts towards equity in student outcomes is to frequently examine any differences in outcomes among student subgroups (Chapter 3)."
 
-This statement comes early in the book and contains an **unproven assumption** that group differences inherently indicate systemic bias requiring intervention.
 
-## Distinguishing Experimental vs. Observational Research
+
+
+
+## A Problematic Claim
+
+We begin with an example frim a textbook designed to teach data 'scientists' how to examine data using pseudo-scientific methods, searching for evidence demonstrating institutional racism:
+
+> "For example, one way for school systems to support efforts towards equity in student results is to frequently examine any differences in results among student subgroups (Chapter 3)." [@bovee2024data]
+
+This statement comes early in the book and is repeated elsewhere.  It starts with an **unproven assumption:** that group differences from population demographic percentages inherently indicate systemic bias requiring intervention.
+
+
+
+## Trouble from the Outset
+
 
 ::: {.callout-warning}
 ## The Government Data Problem
 
-Most social science researchers work with datasets containing government-specified subgroups (red, green, blue categories) rather than rationally selected variables for experimental validity. This creates systematic bias in research design from the outset.
+Government data is collected for the purpose of punishment and reward.  For funding based on numbers of students in various categories, as well as rating and ranking everyone and their uncles.  Comparing school districts with each other (for rating and ranking).  This data for enumeration studies (how many or how much, regardless of why categories differ).  It is not collected for research purposes.
+
+Research useful to education practitioners comes from analytic studies; studies that differentiate between the results that come from individuals in the system, and results that come from the system itself (common and special causes).  That type of study is absent from education research.
+
+Most social science researchers work with datasets generated by government, or other quasi-government institutions.  They us government-specified subgroups rather than rationally selected variables for experimental validity. This creates enormous systematic bias in research design from the outset.  Subgroups rarely have the screening variables needed to minimize variance withing group. 
+
 
 **Additional Complications:**
-- **Self-designation**: Individuals choose their own red/green/blue categories
-- **Multiple categories**: Many people belong to more than one subgroup
+
+- **Self-designation**: Individuals can choose their own categories; no outside verification of correct classification
+
+- **Multiple categories**: People can belong to more than one subgroup
+
 - **Assumed homogeneity**: Massive within-group differences are ignored
 :::
 
+
+::: {.callout-note}
+All exammples of subgrouping in this paper use the categories of 'red', 'green', and 'blue' - which should remove the political/emotional content that feeds much of this type of research.  It is the methodology that counts.
+:::
+
+
+## Distinguishing Experimental vs. Observational Research
+
+Nearly all education research is based on observational studies.  To be rigorous much greater care and planning is required.
+
+There are experimental studies taking place in education reserch.  The What Works Clearinghouse is the best source of finding such studies.  The requirements to be accepted for review are rigorous and require experimental design (either with experimental data, or observational data). 
+
+I have yet to run into anyone in the K-12 delivery system in Texas that has even heard of the website or its study review requirements.  Certainly, the claims regarding 'equity', 'diversity' or 'school board affects on student achievement' will never be found there.  Those types of 'studies' would not even qualify for review.
+
 ### Experimental Data: Ideal Scientific Approach
 
-When researchers can control variables and assign treatments randomly. (Or, when causal mechanisms can be simulated with observational data based on DAG analysis.)
+When researchers can control variables and assign treatments randomly. (Or, when causal mechanisms can be simulated with observational data based on  causal analysis (e.g., DAGs).
 
 ### Observational Data: Constrained but Can Still Be Scientific
 
-When working with existing datasets (most social science research), rigorous methodology becomes even more critical.
+When working with existing datasets (most social science research), rigorous methodology becomes even more important.
+
 
 ---
 
-## How Real Scientists Would Investigate This Claim
+## How Skilled Scientists Would Investigate This Claim
 
 ### Step 1: Question the Fundamental Premises
 
 **Scientific Approach:**
 
-- What credible evidence supports the assumption that group differences in outcomes indicate systemic bias? Appeals to authorities must be examined carefully.
-
+- What credible evidence supports the assumption that group differences in results indicate systemic bias? Appeals to authorities must be examined carefully.
 - Under what conditions would group differences be expected even in perfectly fair systems?
-
 - Are we conflating correlation with causation?
 
-**Current "Equity Research" Approach:**
+**Current "Equity" Research Practice:**
 
-- Treats premise as axiomatic
+- Treats premises as axiomatic
 - No testing of underlying assumptions
 - Direct jump to data collection
-- Data analysis is there only to measure the effects of the presumed causal covariance, not to verify empirically any causal assumptions made.
+- Since causation is within the premises, data analysis is only present to measure the effects of the presumed causal premises.   Empirical verification is unnecessary.
 
 ---
 
@@ -147,7 +292,7 @@ hypotheses_data <- data.frame(
 )
 
 DT::datatable(hypotheses_data, 
-              caption = "Competing Hypotheses for Group Differences in Academic Outcomes",
+              caption = "Competing Hypotheses for Group Differences in Academic results",
               options = list(pageLength = 10, scrollX = TRUE),
               rownames = FALSE) %>%
   DT::formatStyle(columns = colnames(hypotheses_data), fontSize = '14px')
@@ -547,7 +692,7 @@ DT::datatable(whi_summary,
 - **Younger women (50-60)**: HRT beneficial
 - **Older women (61-79)**: HRT harmful
 
-**Corrected Analysis:** Proper disaggregation by age revealed the truth.
+**Corrected Analysis:** Proper dis-aggregation by age revealed the truth.
 
 ### Statistical Consequences of Heterogeneous Groups
 
@@ -920,13 +1065,13 @@ pseudo_science_steps <- data.frame(
     "**Assume** group differences = discrimination",
     "**Collect data** confirming the assumption",
     "**Implement interventions** based on assumptions", 
-    "**Declare success** regardless of actual outcomes"
+    "**Declare success** regardless of actual results"
   ),
   Scientific_Approach = c(
     "**Test hypotheses** about possible causes",
     "**Control for confounds** and alternative explanations",
     "**Require evidence** before implementing interventions",
-    "**Measure actual outcomes** with proper controls"
+    "**Measure actual results** with proper controls"
   ),
   Validity = c("Invalid", "Invalid", "Invalid", "Invalid")
 )
@@ -957,7 +1102,7 @@ pharma_analogy <- data.frame(
   ),
   Educational_Equivalent = c(
     "Assume interventions work without testing",
-    "Only measure favorable outcomes",
+    "Only measure favorable results",
     "Ignore negative consequences for some students",
     "No comparison schools or baseline measurements",
     "Implement policies based on ideology rather than evidence"
@@ -1133,7 +1278,7 @@ DT::datatable(violations,
 ::: {.callout-note}
 ## The Thomas Sowell Principle
 
-Whether examining educational outcomes or medical doctor salaries, Sowell's analysis demonstrates that apparent group differences often disappear when comparing truly comparable individuals rather than broad demographic categories.
+Whether examining educational results or medical doctor salaries, Sowell's analysis demonstrates that apparent group differences often disappear when comparing truly comparable individuals rather than broad demographic categories.
 
 **Educational Example:** High-performing students of all demographic groups often have more in common with each other than with low-performing members of their own demographic group.
 
@@ -1142,4 +1287,4 @@ Whether examining educational outcomes or medical doctor salaries, Sowell's anal
 
 **The Fundamental Question:** Are we measuring discrimination or are we measuring the effects of different life choices, preparation levels, and cultural factors that happen to correlate with demographic categories?
 
-A genuinely scientific approach would disaggregate data until comparison groups are truly comparable, not stop at convenient government-defined categories.
+A genuinely scientific approach would dis-aggregate data until comparison groups are truly comparable, not stop at convenient government-defined categories.
