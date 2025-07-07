@@ -1,0 +1,185 @@
+---
+title: "Scientific Inquiry is Difficult, Data Surfing is Easy"
+subtitle: "Missing Skills and Habits Badly Compromize Most Education Research"
+bibliography: manual-refs.bib
+format:
+  html:
+    include-after-body: 
+      - text: |
+         <script type="text/javascript" src="reference-backlinks.js"></script>
+    css: 
+      - swart-20250709.css
+      # - this-doc-only.css
+    page-layout: full
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    df-print: paged
+    code-overflow: wrap
+    toc: true
+    citeproc: true
+    link-citations: true
+  typst:
+    fig-width: 12
+    fig-height: 10
+    fig-dpi: 300
+    margin:
+      x: 1in
+      y: 1in
+    toc: true
+    fontsize: 14pt
+    mainfont: "Latin Modern Roman"
+execute:
+  echo: false
+  message: false
+  warning: false
+  fig-width: 12
+  fig-height: 10
+---
+
+```{r}
+#| label: setup
+
+# load libraries
+library(tidyverse)
+
+# Set global theme for consistent plots
+theme_set(theme_minimal(base_size = 16) + 
+          theme(
+    plot.title = element_text(face = "bold", size = 24),    # adjust title size
+    plot.subtitle = element_text(face = "bold", size = 20), # adjust subtitle size
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"),
+    axis.text = element_text(face = "bold"),
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold"),
+    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
+    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
+    plot.margin = margin(20, 20, 20, 20, "pt")
+   )
+  )
+
+# Set seed for reproducibility
+set.seed(42)
+
+```
+
+::: callout-note
+## Author's Note
+
+I offer these remarks to open a discussion with R data scientists in education research and to stongly encourage them to develop the skills of formulating testable hypothesis and a culture of professional skepticism—the foundations of all scientific work. I hope to engage with others in the collaborative spirit of the R community. I intend to strengthen research that aims to benefit students.
+
+While drawing examples from *Data Science in Education Using R* [@bovee2024data], these remarks address systemic methodological issues across all of education research. The authors mirror common field practices rather than unique shortcomings. Examples from other research are included. Please take no offense where none is intended.
+
+Dan Swart, CPA (ret)\
+Trustee\
+Schertz-Cibolo-Universal City-ISD (TX)
+:::
+
+::: my-quote
+"Focus on teaching data SCIENCE, not CODING science." \~ Carl Howe, Data Science Education in 2022 [YT presentation at RStudio::conf 2020](https://www.youtube.com/watch?v=8peiyXIrvjY&list=WL&index=7) \| RStudio (2020) (emphasis my own)
+:::
+
+# Introduction
+
+When researchers in education start with predetermined conclusions about what problems exist and what solutions are needed, they cease to be scientists and become advocacy researchers. The sophisticated R packages, elegant visualizations, and complex modeling techniques become mere window dressing on fundamentally unscientific work.
+
+It is very common to find two foundational skills missing in education research:
+
+1.  practitioners have no training, spirit or habit of ***seeking empirical evidence to validate their assumptions***, and\
+2.  practitioners have no training, spirit or habit of ***properly formulating testable hypothesis***
+
+When these pieces are missing from the work one cannot honestly label the results as 'scientific', or 'data driven', or 'evidence based', or data 'science' at all. Without them researchers cannot even properly formulate research questions.
+
+That is why some data 'scientists' produce scientific analysis, but most should not call themselves a data 'scientist'. I see no 'science' in their work.
+
+This problem is serious because it creates a perverse incentive: it encourages and rewards those completely without demonstrated scientific capability to opine and advise and influence the attitudes and content in millions of classrooms worldwide. And, they are actively training others.
+
+Result: abandonment of scientific rigor in favor of activism dressed up in statistical clothing. Politically generated concepts like "equity," "achievement gaps," or "systemic racism" become the unexamined starting points for analysis. The motivation appears to be to give such 'research' a scientific gloss to convince those even less familiar with rigorous scientific methods. There are very few practitioners in the field of education who are equipped to independently evaluate the merits of such 'scientific' claims. The effect is to leave the impression that no one need look any deeper. Our intellectual 'betters' have already done that for us.
+
+## To Be Fair
+
+This situation is not a conspiracy to inject political ideology into research. Today's researchers are doing exactly what they were taught to do.
+
+## Thomas Sowell[^1]: A Model for Educational Investigation
+
+[^1]: Thomas Sowell has been actively researching, writing, and publishing for more than **53 years** (1971-2024), with his work spanning academic economics, social theory, education policy, and public commentary. At age 94, he remains one of the most prolific and influential public intellectuals of our time.
+
+(see for example, [@sowell1992inside], [@sowell2018discrimination], [@sowell2017education], [@sowell2004affirmative])
+
+Thomas Sowell's approach to evaluating social claims offers a masterclass in how education researchers should conduct their work. His methodology demonstrates several crucial principles that are conspicuously absent from much current education research:
+
+**Empirical First Principles**: Begin not with fashionable theories but with observable patterns in data across time and geography. He asks "What actually happened?" and "When did the patterns begin?" before asking "Why did it happen?"
+
+**Historical Context and Comparisons**: Rather than treating current educational challenges as unprecedented, he systematically examines how similar issues played out in different times, places, and cultural contexts.
+
+**Hypothesis Testing Over Confirmation**: Actively seek evidence that could disprove initial assumptions, rather than cherry-picking data that supports them.
+
+**Operational Definitions**: Before analyzing "educational quality" or "student success," he defines these terms in measurable, concrete ways that can be consistently applied across different contexts.
+
+**Causal Skepticism**: Distinguish between correlation and causation, and acknowledge when the evidence is insufficient to establish causal relationships.
+
+**Explanation of Results**: To assess theories and policies proclaimed as 'progress' he examines the results against claimed benefits and honestly reports the findings.
+
+**Search for Alternative Explanations**: Follow the principle - "If you don't understand the arguments against your position, you do not understand the topic."
+
+I am willing to bet that very few (if any) so called educators and education researchers have ever heard of Thomas Sowell. His thorough and incisive analysis often dismantles progressive ideology and, thus, his name will not be mentioned where social research is found or taught. There are many seasoned researchers like him (see for example, [@williams2013race], [@steele2009white], [@murray1994losing])
+
+## The Additional Curriculum Researchers in Education Really Need
+
+If we're serious about bringing scientific rigor to education research, here's what every researcher working in this field should learn. One need not be an expert in any area, but must be familiar with the hazards to valid research each represents.
+
+### **Foundations of Scientific Inquiry**
+
+-   **Philosophy of Science**: Understanding what makes inquiry scientific versus pseudo-scientific
+-   **Research Question Formulation**: How to transform vague concerns into testable hypotheses
+-   **Operational Definitions**: Converting abstract concepts into measurable variables
+-   **Assumption Recognition**: Identifying and questioning underlying assumptions in research frameworks
+
+### **Historical and Comparative Methods**
+
+-   **Educational History**: Understanding how current challenges fit into longer historical patterns
+-   **Comparative Analysis**: Systematic examination of how similar interventions or conditions played out across different contexts
+-   **Natural Experiments**: Identifying and analyzing situations where policy changes created quasi-experimental conditions
+
+### **Understanding How Research Can Get it Wrong**
+
+-   **Causal Identification Strategies**: Understanding use of Directed Acyclic Graphs DAGs. Limitations of basic regression, difference-in-differences, instrumental variables, regression discontinuity models.
+-   **Confounding Recognition**: Identifying and addressing unobserved variables that bias results
+-   **Mediation Analysis**: Understanding the mechanisms through which enacted policies or interventions work
+-   **Treatment Effect Heterogeneity**: Recognizing that interventions may work differently for different populations
+
+### **Data Quality and Measurement**
+
+-   **Measurement Theory**: Understanding how educational constructs can and cannot be reliably measured
+-   **Selection Bias**: Recognizing how data collection processes can skew findings
+-   **Missing Data Analysis**: Sophisticated approaches to handling incomplete information
+-   **External Validity**: Assessing whether findings generalize beyond the specific study context
+
+### **Institutional and Economic Analysis**
+
+-   **Incentive Analysis**: Understanding how institutional structures shape behavior of students, teachers, and administrators
+-   **Unintended Consequences**: Systematically considering how well-intentioned policies might create perverse outcomes
+-   **Cost-Benefit Analysis**: Properly accounting for opportunity costs and resource allocation
+-   **Implementation Fidelity**: Distinguishing between policy intentions and actual implementation
+
+### **Critical Evaluation Skills**
+
+-   **Literature Review Methodology**: Systematic approaches to evaluating existing research
+-   **Meta-Analysis**: Techniques for synthesizing findings across multiple studies
+-   **Publication Bias Recognition**: Understanding how research publication processes can distort the evidence base
+-   **Replication Standards**: Principles for reproducing and validating research findings
+
+## The Path Forward: From Advocacy to Inquiry
+
+The education data science community needs to undergo a fundamental philosophical shift. Instead of asking "How can we use data to support our preferred ideology?" the question should be "What do the data actually tell us about how educational systems work?"
+
+This means being willing to seek and report results that contradict popular narratives. It means acknowledging uncertainty when the evidence is mixed. It means prioritizing methodological rigor over political palatability. Most importantly, it means approaching education as a complex social system that deserves the same level of scientific skepticism and methodological sophistication that we apply to other challenging domains.
+
+The stakes are too high for anything less. When poorly grounded research influences policies affecting millions of students, the cost of methodological sloppiness is measured not just in wasted resources but in damaged lives and missed opportunities.
+
+## Conclusion: Science or Activism?
+
+The choice facing the education data science community is stark: continue down the path of dressed-up advocacy, or embrace the difficult but essential work of genuine scientific inquiry. The tools and techniques are available. The data exists. What's missing is the intellectual courage to question cherished assumptions and the methodological discipline to build conclusions on solid empirical foundations.
+
+Education deserves better than well-intentioned guesswork wrapped in statistical sophistication. It deserves the kind of rigorous, skeptical, evidence-based analysis that Thomas Sowell has demonstrated is possible when studying complex social phenomena. The question is whether the data science community is ready to embrace that challenge.
