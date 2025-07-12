@@ -78,6 +78,9 @@ set.seed(42)
 :::
 
 
+
+
+
 ## Data Mining vs. Scientific Research
 
 ### Data Mining Alone (Not Scientific Research)
@@ -694,6 +697,7 @@ DT::datatable(whi_summary,
 
 **Corrected Analysis:** Proper dis-aggregation by age revealed the truth.
 
+
 ### Statistical Consequences of Heterogeneous Groups
 
 #### 1. Unreliable Effect Sizes
@@ -705,6 +709,7 @@ Standard error calculations assume homogeneous groups.
 #### 3. Type I and Type II Error Inflation
 - **Type I**: Finding false differences due to arbitrary grouping
 - **Type II**: Missing real differences due to noise from heterogeneous groups
+
 
 ### The Homogeneity Test Requirement
 

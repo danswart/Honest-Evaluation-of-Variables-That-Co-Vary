@@ -1,6 +1,6 @@
 ---
 title: "Scientific Inquiry is Difficult, Data Surfing is Easy"
-subtitle: "Missing Skills and Habits Badly Compromize Most Education Research"
+subtitle: "Most Education Research is ***NOT*** Science"
 bibliography: manual-refs.bib
 format:
   html:
@@ -67,9 +67,11 @@ set.seed(42)
 ::: callout-note
 ## Author's Note
 
-I offer these remarks to open a discussion with R data scientists in education research and to stongly encourage them to develop the skills of formulating testable hypothesis and a culture of professional skepticism—the foundations of all scientific work. I hope to engage with others in the collaborative spirit of the R community. I intend to strengthen research that aims to benefit students.
+I offer these remarks to open a discussion with R data scientists in education research. The skill of formulating testable hypothesis and building a culture of professional skepticism should be taught alongside the coding skills needed for scientific work. In the collaborative spirit of the R community I hope to strengthen research that aims to benefit students .
 
-While drawing examples from *Data Science in Education Using R* [@bovee2024data], these remarks address systemic methodological issues across all of education research. The authors mirror common field practices rather than unique shortcomings. Examples from other research are included. Please take no offense where none is intended.
+While drawing examples from *Data Science in Education Using R* [@bovee2024data], my remarks address systemic methodological shortcomings across all of education research.
+
+Although the book is an R programming tutorial tour-de-force, the authors mirror common field practices that need revision. Examples from other research are included. Please take no offense where none is intended.
 
 Dan Swart, CPA (ret)\
 Trustee\
@@ -82,24 +84,434 @@ Schertz-Cibolo-Universal City-ISD (TX)
 
 # Introduction
 
-When researchers in education start with predetermined conclusions about what problems exist and what solutions are needed, they cease to be scientists and become advocacy researchers. The sophisticated R packages, elegant visualizations, and complex modeling techniques become mere window dressing on fundamentally unscientific work.
+Too often researchers in education start with predetermined conclusions about what problems exist and what solutions are needed. In so doing they cease to be scientists and become advocacy researchers. The primary tool of the advocacy researcher is data surfing for confirmatory evidence. The sophisticated R packages, elegant visualizations, and complex modeling techniques become mere window dressing on fundamentally unscientific work.
 
-It is very common to find two foundational skills missing in education research:
+Two foundational skills are usually missing in education research:
 
-1.  practitioners have no training, spirit or habit of ***seeking empirical evidence to validate their assumptions***, and\
-2.  practitioners have no training, spirit or habit of ***properly formulating testable hypothesis***
+1.  the spirit or habit of ***seeking empirical evidence to validate assumptions***, and\
+2.  the spirit or habit of ***properly formulating testable hypothesis***
 
-When these pieces are missing from the work one cannot honestly label the results as 'scientific', or 'data driven', or 'evidence based', or data 'science' at all. Without them researchers cannot even properly formulate research questions.
+When these are missing from the work one cannot honestly label the results as 'scientific', or 'data driven', or 'evidence based', or data 'science' at all. Without them researchers cannot even properly formulate research questions.
 
-That is why some data 'scientists' produce scientific analysis, but most should not call themselves a data 'scientist'. I see no 'science' in their work.
+That is why some data 'scientists' produce scientific results, but most should not call themselves a data 'scientist'. I see no 'science' in their work.
 
-This problem is serious because it creates a perverse incentive: it encourages and rewards those completely without demonstrated scientific capability to opine and advise and influence the attitudes and content in millions of classrooms worldwide. And, they are actively training others.
+The problem is serious because it creates a perverse incentive: it encourages and rewards those completely without demonstrated scientific capability to opine and advise and influence the attitudes and content in millions of classrooms worldwide. And, they are actively training others.
 
-Result: abandonment of scientific rigor in favor of activism dressed up in statistical clothing. Politically generated concepts like "equity," "achievement gaps," or "systemic racism" become the unexamined starting points for analysis. The motivation appears to be to give such 'research' a scientific gloss to convince those even less familiar with rigorous scientific methods. There are very few practitioners in the field of education who are equipped to independently evaluate the merits of such 'scientific' claims. The effect is to leave the impression that no one need look any deeper. Our intellectual 'betters' have already done that for us.
+The result: abandonment of scientific rigor in favor of activism dressed up in statistical clothing. Politically generated concepts like "equity," "achievement gaps," or "systemic racism" become the unexamined starting points for analysis. The motivation appears to be to give such 'research' a scientific gloss to convince those who are even less familiar with rigorous scientific methods.
+
+Very few practitioners in the field of education are equipped to independently evaluate the merits of such 'scientific' claims. The effect is to leave the impression that no one need look any deeper. Our intellectual 'betters' have already done that for us.
 
 ## To Be Fair
 
-This situation is not a conspiracy to inject political ideology into research. Today's researchers are doing exactly what they were taught to do.
+I completed my undergraduate work in psychology in 1974 (yes, back when dinosaurs roamed the earth!). Work I carried out then was published in the *American Journal of Psychology* a few years later. That research was a small replication study and would not stand a chance of being published today. We did not worry about replication of results because replication studies were commonplace.
+
+An added benefit was that I couldn't tell you the political party of even one of my professors. But, I did get a great education in foundational research techniques. There was no calls to "Do Good With Data", unless you meant that doing good research with data ***was*** doing good.
+
+I learned the writings of Karl Popper, some Philosophy of Science, and had a basic understanding of the Theory of Knowledge and the limits of statistical testing. It was a great time to learn about experimental psychology.
+
+In fairness, today's education researchers are doing exactly what they were taught to do, which is something very different than in 1974 and earlier. I see it as a form of cultural transmission and not a 'conspiracy' to inject political ideology into research. Lack of scientific rigor is simply the way most in education research were taught. It does, however, create a perfect breeding ground for political bias to emerge.
+
+The claims of 'researchers' that now find their way into K-12 education seem outrageous to me. More outrageous is that empirical evidence is neither offered, nor asked for. If there is no change, K-12 education will continue to decline. I now follow the simple rule we teach students in our district: "If you see something, say something".
+
+<br>
+
+## A ***GOOD*** Example of ***BAD*** Science
+
+There are several problematic claims in the book. This one teaches data 'scientists' how to examine data (using pseudo-scientific methods); searching for evidence demonstrating institutional racism:
+
+> "For example, one way for school systems to support efforts towards equity in student ['results']{style="color: red; font-style: italic; font-weight: bold;"} is to frequently examine any differences in ['results']{style="color: red; font-style: italic; font-weight: bold;"} among student subgroups (Chapter 3, empasis added)." [@bovee2024data]
+
+## Trouble from the Outset
+
+::: callout-warning
+## The Government Data Problem
+
+Government data is collected for the sole purpose of punishment (i.e., rating and ranking schools, districts and regions) and reward (e.g., government funding formulas based on estimated counts of students in various government-defined categories). It is by its very nature, political. The data is for estimating **how many** or **how much**, regardless of **why** various categories might contain the counts they do.
+
+It is not collected for scientific research purposes and certainly not for applying improvement science. This creates enormous systematic bias in research design. Government subgroups rarely contain the details needed to validly compare them on any usefule dimension (other than politically useful).
+:::
+
+So, let's jump right in!
+
+## Signal vs Noise
+
+::: callout-note
+### When Comparing Groups It is ***Your*** Responsibility to Minimize Within-Group Variation
+
+If you insist on comparing government data for group averages you must understand **HOW** the statistical tests you are progamming hope to separate signals from noise. All statistical tests for comparing groups are based on comparison of 'within-group' variation (the noise) with the 'between-group' variation (the signal).
+
+You as the 'researcher' have the ***responsibility*** to establish subgroups that differ only in the characteristic of interest. You need groups that are very much alike in characteristics that may also influence the results. That can be accomplished through randomization, or by stratifying with sufficient granularity to make the groups comparable.
+
+When within-group variation is large relative to the between-group variation signals are likely to be completely obscured by the noise. It takes considerable thought and work to construct rational subgroups, and to transparently admit the severe limitations of the data when it exists.
+:::
+
+For example, education researchers love to compare standardized scores of subgroups based solely on skin color, or other arbitrary categorization. Without further stratefication individuals within those subgroups can vary wildly in characteristics that also influence scores. This is within-group variation (noise). For example:
+
+```{r}
+DT::datatable(
+  data.frame(
+    `Elements That Might Vary Widely Within Any Student Subgroup <br> (within-group variation) <br>Making The Noise Within Subgroups Drown Any Signals <br>That Might Be Present Between Subgroups` = c("Socioeconomic status", "Family structure","Time spent on homework",
+                                 "Attendance rates","Language spoken at home",
+                                 "Prior educational preparation",
+                                 "Cultural attitudes toward education","Age","Sex",
+                                 "Home environments","Access to books", "Number of observations"),
+    check.names = FALSE
+  ),
+   rownames = FALSE,
+   options = list(
+    searching = FALSE,
+    ordering = FALSE,
+    paging = FALSE,
+    info = FALSE
+   ),
+  escape = FALSE
+)
+
+```
+
+<br>
+
+There are, undoubtedly, others.
+
+<br>
+
+### What this looks like graphically
+
+Researchers who simply take government designated subgroups 'as-is' implicitly treat the members of the subgroups as 'all alike', meaning low within-group variation. They act as if the distribution of individuals within and between the subgroups look like this:
+
+(To avoid the usual B--- S---, student subgroups are 'Red', 'Blue' and 'Green' students)
+
+![](img/student-achieve-distribs-small-within-group-variation.png)
+
+This assumption means that any individual in a subgroup is pretty much like any other member of the subgroup in all relevant characteristics. If you know the subgroup of the individual you will know the score they probably achieved.
+
+Under these conditions comparison of between-group variation to within-group variation is likely to reveal any signals, if there are any.
+
+But, what if the distributions look like this?
+
+![](img/student-achieve-distribs-large-within-group-variation.png)
+
+The group means remain the same, but the subgroups overlap so much that knowing the student subgroup tells you very little about what score they are likely to achieve.
+
+Under these conditions comparisons of between-group variation to within-group variation are highly unlikely to reveal any signals, if there are any.
+
+Tests of significance mean very little if you do not know the empirical within-group variation. Assumptions in this area are dangerous (see below).
+
+It is much more plausible that high-achieving green students are more like their high-achieving red and blue counterparts, than they are members of their own subgroup. Likewise, for low performers and middle performers.
+
+Isn't it more important to find out the common characteristics of high-achievers rather than sort students into 'victims' and 'oppressors'?
+
+But, that would mean abandoning the 'systemic racism' narrative.
+
+::: callout-caution
+## So is this just nit-picking?
+
+Tremendous irreparable lifelong harm came to millions of women because of insufficient disaggregation (and a massive level of hubris).
+
+### The Women's Health Initiative
+
+This billion-dollar study concluded (wrongly) that Hormone Replacement Therapy (HRT) was harmful to all women. Doctors around the globe immediately withdrew the therapy for all female patients. Although doctors had seen great benefits for their patients on HRT they were now terrified of losing their licenses.
+
+Unfortunately, when the truth finally came out years later, many women had 'aged out' of the beneficial range for HRT and there was no going back. The chance to accrue the life-long benefits of receiving HRT in their younger years was now gone and there was no way to get it back.
+
+Why?
+
+**WHI Study Design:**
+
+**Group category**: Women Ages 50-79 (treated as homogeneous when considerable within-group variance was present)
+
+**Treatment**: Hormone therapy vs. placebo
+
+**Error**: Treating a convenient category (women) as if all women are the same; critical within-group age variation was ignored. Add to that the astonishing professional hubris on the part of the lead researchers.
+
+**Women overall**: HRT appeared harmful (averaging beneficial and harmful effects)
+
+**Younger women (50-60)**: HRT beneficial
+
+**Older women (61-79)**: HRT harmful
+
+**Corrected Analysis:** Proper dis-aggregation by age revealed the truth.
+:::
+
+<br>
+
+Using synthetic data that mimics the study to illustrate the phenomena:
+
+```{r}
+# Recreate the original simulated data
+library(ggplot2)
+library(dplyr)
+
+set.seed(123)  # For reproducible results
+ages <- 50:79
+hrt_effect <- ifelse(ages <= 60,
+                    rnorm(length(ages[ages <= 60]), mean = 0.2, sd = 0.1),  # Beneficial for younger
+                    rnorm(length(ages[ages > 60]), mean = -0.3, sd = 0.1))  # Harmful for older
+
+whi_demo <- data.frame(
+  Age = ages,
+  HRT_Effect = hrt_effect,
+  Age_Group = ifelse(ages <= 60, "Younger Women (50-60)", "Older Women (61-79)")
+)
+
+# Create comprehensive ggplot2 visualizations showing Simpson's Paradox
+
+# Plot 1: The main Simpson's Paradox visualization
+p_paradox <- ggplot(whi_demo, aes(x = Age, y = HRT_Effect)) +
+  # Overall regression line (ignoring age groups) - this is what the original study saw
+  geom_smooth(method = "lm", se = TRUE, color = "black", linewidth = 1.5,
+              linetype = "solid", alpha = 0.3) +
+  # Points colored by age group
+  geom_point(aes(color = Age_Group), size = 3, alpha = 0.8) +
+  # Individual regression lines for each age group
+  geom_smooth(aes(color = Age_Group), method = "lm", se = FALSE, linewidth = 1) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray50", alpha = 0.7) +
+  scale_color_manual(values = c("#FF6B6B", "#74C0FC")) +
+  labs(title = "Simpson's Paradox in Women's Health Initiative",
+       subtitle = "Black line = Original study (age ignored) \nColored lines = True relationships within age groups",
+       x = "Age",
+       y = "HRT Effect (positive = beneficial, negative = harmful)",
+       color = "Age Group") +
+  annotate("text", x = 75, y = 0.1, label = "Original Study:\n'HRT is harmful'",
+           fontface = "bold", color = "black", size = 8) +
+  annotate("text", x = 55, y = 0.35, label = "Reality: Beneficial\nfor younger women",
+           fontface = "bold", color = "#FF6B6B", size = 8) +
+  annotate("text", x = 70, y = -0.45, label = "Reality: Harmful\nfor older women",
+           fontface = "bold", color = "#74C0FC", size = 8) +
+  theme_minimal(base_size = 28) +
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 28, face = "bold"),
+        plot.subtitle = element_text(size = 24),
+        axis.text = element_text(size = 20),
+        axis.title = element_text(size = 20, face = "bold"))
+
+print(p_paradox)
+
+
+# Calculate the overall regression when age is ignored
+overall_model <- lm(HRT_Effect ~ Age, data = whi_demo)
+overall_slope <- coef(overall_model)[2]
+overall_intercept <- coef(overall_model)[1]
+
+# Calculate regression within each age group
+younger_model <- lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age <= 60, ])
+older_model <- lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age > 60, ])
+
+# Summary table showing the paradox
+paradox_summary <- data.frame(
+  Analysis = c("Original Study (Age Ignored)", "Younger Women Only (50-60)", "Older Women Only (61-79)"),
+  Sample_Size = c(nrow(whi_demo),
+                  sum(whi_demo$Age <= 60),
+                  sum(whi_demo$Age > 60)),
+  Mean_Effect = c(round(mean(whi_demo$HRT_Effect), 3),
+                  round(mean(whi_demo$HRT_Effect[whi_demo$Age <= 60]), 3),
+                  round(mean(whi_demo$HRT_Effect[whi_demo$Age > 60]), 3)),
+  Slope = c(round(overall_slope, 4),
+            round(coef(younger_model)[2], 4),
+            round(coef(older_model)[2], 4)),
+  Conclusion = c("HRT appears harmful overall",
+                 "HRT beneficial for younger women",
+                 "HRT harmful for older women"),
+  stringsAsFactors = FALSE
+)
+
+# Calculate the overall regression when age is ignored
+overall_model <- lm(HRT_Effect ~ Age, data = whi_demo)
+overall_slope <- coef(overall_model)[2]
+overall_intercept <- coef(overall_model)[1]
+
+# Calculate regression within each age group
+younger_model <- lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age <= 60, ])
+older_model <- lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age > 60, ])
+
+# Summary table showing the paradox
+paradox_summary <- data.frame(
+  Analysis = c("Original Study (Age Ignored)", "Younger Women Only (50-60)", "Older Women Only (61-79)"),
+  Sample_Size = c(nrow(whi_demo), 
+                  sum(whi_demo$Age <= 60), 
+                  sum(whi_demo$Age > 60)),
+  Mean_Effect = c(round(mean(whi_demo$HRT_Effect), 3),
+                  round(mean(whi_demo$HRT_Effect[whi_demo$Age <= 60]), 3),
+                  round(mean(whi_demo$HRT_Effect[whi_demo$Age > 60]), 3)),
+  Slope = c(round(overall_slope, 4),
+            round(coef(younger_model)[2], 4),
+            round(coef(older_model)[2], 4)),
+  Conclusion = c("HRT appears harmful overall",
+                 "HRT beneficial for younger women",
+                 "HRT harmful for older women"),
+  stringsAsFactors = FALSE
+)
+
+# Create DT table for Simpson's Paradox Summary
+library(DT)
+
+# Main summary table
+DT::datatable(paradox_summary,
+              caption = "Simpson's Paradox Summary: How the Same Data Tells Different Stories",
+              options = list(
+                dom = 't',
+                columnDefs = list(list(className = 'dt-center', targets = 1:3))
+              ),
+              rownames = FALSE) %>%
+  DT::formatStyle('Mean_Effect',
+                  backgroundColor = DT::styleInterval(c(-0.1, 0.1), 
+                                                     c('#ffcccb', '#ffffcc', '#ccffcc')))
+
+# Additional explanation table
+explanation_data <- data.frame(
+  Key_Insight = c(
+    "Overall Slope (Age Ignored)",
+    "Interpretation",
+    "Sample Composition Issue",
+    "Why Paradox Occurs",
+    "Lesson Learned"
+  ),
+  Details = c(
+    paste("Slope =", round(overall_slope, 4), "- suggests HRT effect", 
+          ifelse(overall_slope > 0, "improves", "worsens"), "with age"),
+    "Misleading! Makes HRT appear harmful overall",
+    paste("More older women (", sum(whi_demo$Age > 60), ") than younger women (", 
+          sum(whi_demo$Age <= 60), ") in study"),
+    paste("Older women's poor outcomes (mean =", 
+          round(mean(whi_demo$HRT_Effect[whi_demo$Age > 60]), 3), 
+          ") dominate the overall trend"),
+    "Always disaggregate data by relevant subgroups before drawing conclusions!"
+  ),
+  stringsAsFactors = FALSE
+)
+
+DT::datatable(explanation_data,
+              caption = "Why Simpson's Paradox Occurred in the WHI Study",
+              options = list(
+                dom = 't',
+                columnDefs = list(list(width = '200px', targets = 0),
+                                 list(width = '400px', targets = 1))
+              ),
+              colnames = c('Key Insight', 'Details'),
+              rownames = FALSE) %>%
+  DT::formatStyle('Key_Insight',
+                  fontWeight = 'bold') %>%
+  DT::formatStyle('Details',
+                  color = DT::styleEqual('Always disaggregate data by relevant subgroups before drawing conclusions!',
+                                        '#d73027'))
+```
+
+<br>
+
+Do you see the exact parallel with comparing blue, green and red students as if they are all the same, and all the meaningful variation is between-groups, not within-groups?
+
+In your quest to disaggregate data, be honest and transparent about the limitations of interpretation when the disaggregation is significantly limited. None of that is as easy as data surfing for 'interesting' results.
+
+<br>
+
+## Another ***GOOD*** Example of ***BAD*** Science
+
+> "If aggregate data is disaggregated by subgroups or subpopulations, data scientists ['can reveal areas of inequity']{style="color: red; font-style: italic; font-weight: bold;"} for marginalized populations. Using a freely available district dataset, this chapter looks at the ['distribution of students in the district by race and socioeconomic status.']{style="color: red; font-style: italic; font-weight: bold;"} Subgroup analysis ['can point out the state of equity in a system']{style="color: red; font-style: italic; font-weight: bold;"} to inform how to improve the situation for more equitable opportunities for students. (Chapter 9, emphasis added)" [@bovee2024data]
+
+
+This may be one of the least 'scientific' statements one could utter. Such a position has serious implications for America.  Let's discuss why. 
+
+
+### Science is More Exacting Than Political Rhetoric
+
+
+In 1971 the Supreme Court gave us the 'disparate impact' notion that simple numerical differences imply discrimination. [@griggs1971] That is all fine and good for the political purposes of the Supreme Court, but scientists must apply a more stringent standard. For scientific analysis of so-called disparities, researchers should apply rigorous causal inference standards rather than the legal "disparate impact" approach.
+
+You need not look beyond the simple plausibility of such a demographic requirement.
+
+
+::: my-quote
+***"\[For the social scientist researcher...\] the justification for drawing causation from a correlation model is saying our theory has all the causality built in. We don't need to infer the causality from the data. We have the causality and it is well known; it's a given. All we need the statistical model for is quantifying the effects."*** — Galit Schmueli - statistician, describing the social scientists' approach (New England Symposium, 2010) [See her presentation on YT here](https://www.youtube.com/watch?v=vWH_HNfQVRI&list=WL&index=8&t=879s)
+:::
+
+
+### What Universe Do We Live In?
+
+A scientist must ask: "What empirical evidence supports the premise that group differences from population demographic percentages is prima facie evidence of systemic bias?"  Current approaches treat this as axiomatic - the premise is never tested for its truth value. A scientist would generate multiple competing hypotheses and see which are supported by the data.
+
+<br>
+
+::: callout-note
+## Fun Challenge
+
+I have a standing offer of \$100.00 US to anyone who can show, by empirical data, that there is a place anywhere on this planet where any institution of any sort, or voluntary activity of any sort, at any time since humans began living in groups, mirrors the percentages of any categorical subgrouping of the overall population of interest.
+:::
+
+Even very racially homogeneous populations such as Japan have many and varied differences amoung the citizens.
+
+If proponents cannot provide even one historical example of proportional representation occurring naturally, they should reconsider whether their premise reflects reality or political idealism.
+
+Consider the implications: under the 'disparate impact doctrine', organizations can face legal penalties without even one discriminatory act occurring. Group counts alone become sufficient evidence of wrongdoing. This reverses the fundamental principle that accusations require proof of actual misconduct.
+
+When policy allows punishment based on outcomes rather than demonstrated wrongdoing, it undermines constitutional protections that have served as bulwarks against arbitrary government power.
+
+Before restructuring institutions, generating social conflict, and imposing substantial costs on society, scientists should insist on evidence that the proposed changes are both achievable and beneficial.
+
+In scientific inquiry, extraordinary claims require extraordinary evidence — and the burden of proof rests with those proposing to overturn established systems.
+
+The question isn't whether counting differences exist, but whether the prescribed remedies are based on sound evidence rather than assumptions about how the world ***should*** work.
+
+
+
+
+> "From this broader view, choosing representative data is a choice, like others, that teachers can make. For example, instructors can choose data that ['directs attention to issues — equity-related issues']{style="color: red; font-style: italic; font-weight: bold;"} in education, for example — that she or he believes would be valuable for students to analyze." (Chapter 16, emphasis added) [@bovee2024data]
+
+
+
+The Fundamental Contradictions in "Choosing Representative Data"
+
+This quotation reveals several serious problems with contemporary approaches to data science education:
+
+1. "Representative Data" Cannot Be "Chosen" for Ideological Purposes
+The phrase "choosing representative data" is inherently contradictory. Representative data is determined by sampling methodology, not instructor preferences. If you're choosing data to support predetermined conclusions about "equity-related issues," it's no longer representative—it's cherry-picked.
+Analogy: This is like a medical researcher choosing only the patients who recovered to demonstrate a treatment's effectiveness, then calling it a "representative sample."
+
+2. Advocacy Masquerading as Education
+
+The quote explicitly advocates using data selection to promote specific political viewpoints. This transforms data science education from teaching analytical skills into ideological indoctrination.
+What students should learn: How to properly sample populations, identify bias, and let data guide conclusions
+What this approach teaches: How to manipulate data selection to support preferred narratives
+
+3. Undermines Scientific Methodology
+
+This approach violates core principles of empirical inquiry:
+
+Confirmation bias: Starting with conclusions and finding supporting data
+Selection bias: Systematically excluding inconvenient information
+Advocacy research: Using methodology to promote predetermined agendas
+
+
+4. Harmful to Student Development
+
+Students taught this approach will:
+
+Lack skills to conduct unbiased analysis
+Conflate statistical analysis with political advocacy
+Be unprepared for professional environments requiring objective analysis
+Mistrust data that challenges their preconceptions
+
+
+5. The Proper Alternative
+
+Instead of choosing data to promote "equity-related issues," instructors should:
+
+Teach proper sampling techniques
+
+Use diverse datasets that reflect real-world complexity
+
+Demonstrate how to identify and control for confounding variables
+
+Show students how to separate description from prescription
+
+Let students discover patterns themselves rather than guiding them toward predetermined conclusions
+
+
+Bottom Line
+
+This quotation represents everything wrong with politicizing data science education. It prioritizes ideological conformity over analytical competence, producing graduates who mistake advocacy for analysis.
+
+
+
 
 ## Thomas Sowell[^1]: A Model for Educational Investigation
 
@@ -107,27 +519,71 @@ This situation is not a conspiracy to inject political ideology into research. T
 
 (see for example, [@sowell1992inside], [@sowell2018discrimination], [@sowell2017education], [@sowell2004affirmative])
 
-Thomas Sowell's approach to evaluating social claims offers a masterclass in how education researchers should conduct their work. His methodology demonstrates several crucial principles that are conspicuously absent from much current education research:
+I argue that Thomas Sowell's approach to evaluating social claims offers a masterclass in how education researchers should conduct their work. His methodology demonstrates crucial principles that are conspicuously absent from much current education research:
 
-**Empirical First Principles**: Begin not with fashionable theories but with observable patterns in data across time and geography. He asks "What actually happened?" and "When did the patterns begin?" before asking "Why did it happen?"
+**Empirical First Principles**: Begin not with fashionable theories but with observable patterns in data across time and geography. Ask: "What actually happened?" and "When did the patterns begin?" before asking "Why did it happen?"
 
-**Historical Context and Comparisons**: Rather than treating current educational challenges as unprecedented, he systematically examines how similar issues played out in different times, places, and cultural contexts.
+**Historical Context and Comparisons**: Rather than treating current educational challenges as unprecedented, systematically examine how similar issues played out in different times, places, and cultural contexts.
 
-**Hypothesis Testing Over Confirmation**: Actively seek evidence that could disprove initial assumptions, rather than cherry-picking data that supports them.
+**The Non-Trivial Requirement of Empirical Confirmation of Assumptions**: Actively seek evidence that could disprove your initial assumptions, rather than cherry-picking data that supports them.
 
-**Operational Definitions**: Before analyzing "educational quality" or "student success," he defines these terms in measurable, concrete ways that can be consistently applied across different contexts.
+**Operational Definitions**: Before analyzing "educational quality" or "student success," define these terms in measurable, concrete ways that can be consistently applied across different contexts.
 
-**Causal Skepticism**: Distinguish between correlation and causation, and acknowledge when the evidence is insufficient to establish causal relationships.
+**Causal Skepticism**: Distinguish between correlation and causation, and acknowledge with unambiguous language when the evidence is insufficient to establish causal relationships.
 
-**Explanation of Results**: To assess theories and policies proclaimed as 'progress' he examines the results against claimed benefits and honestly reports the findings.
 
-**Search for Alternative Explanations**: Follow the principle - "If you don't understand the arguments against your position, you do not understand the topic."
+**Explanation of Results**: To assess theories and policies proclaimed as 'progress' first examine the results against claimed benefits and honestly report the findings.
 
-I am willing to bet that very few (if any) so called educators and education researchers have ever heard of Thomas Sowell. His thorough and incisive analysis often dismantles progressive ideology and, thus, his name will not be mentioned where social research is found or taught. There are many seasoned researchers like him (see for example, [@williams2013race], [@steele2009white], [@murray1994losing])
+**Search for Alternative Explanations**: Follow the principle - "If you don't understand the arguments against your position, you do not understand the position."
 
-## The Additional Curriculum Researchers in Education Really Need
+I seriously doubt that many (if any) of today's educators or education researchers have ever heard of Thomas Sowell. His thorough and incisive empirical analysis often dismantles progressive ideology and, thus, his name will not be mentioned where social research is found or taught. There are many seasoned researchers like him (see for example, [@williams2013race], [@steele2009white], [@murray1994losing])
 
-If we're serious about bringing scientific rigor to education research, here's what every researcher working in this field should learn. One need not be an expert in any area, but must be familiar with the hazards to valid research each represents.
+## How Skilled Scientists Would Investigate These Claims
+
+### Step 1: Question the Fundamental Premises
+
+**Scientific Approach:**
+
+-   What credible evidence supports the assumption tha:
+
+    1.  group differences in results (e.g., standardized scores) indicate systemic bias?
+
+    2.  Subgroup analysis ‘can point out the state of equity in a system’
+
+-   Under what conditions would group differences be expected even in perfectly fair systems?
+
+-   Are we conflating correlation with causation?
+
+**Current "Equity" Research Practice:**
+
+-   Treats premises as axiomatic
+-   No testing of underlying assumptions
+-   Direct jump to data collection
+-   Since causation is within the premises, data analysis is only present to measure the effects of the presumed causal premises. Empirical verification is unnecessary.
+
+------------------------------------------------------------------------
+
+### Science?
+
+First, a scientist would immediately ask: "What evidence supports the assumption that group differences from population demographic percentages is prima facie evidence of systemic bias?" The current approach treats this as axiomatic - the premise is never tested for its truth value. A scientist would generate multiple competing hypotheses and see which are supported by the data.
+
+::: callout-note
+## Fun Challenge
+
+I have a standing offer of \$100.00 US to anyone who can show, by empirical data, that there is a place anywhere on this planet where any institution of any sort, or voluntary activity of any sort, at any time since humans began living in groups, mirrors the percentages of any categorical subgrouping of the overall population of interest.
+:::
+
+Second, even a basic understanding of variation will tell you that all subgroups will always differ - without ever doing a study. Measure the sample or person or group on the next day - there will be differences for the same people from the day before. Change of temperature, lighting, sleep, or any other variable will create a different number.
+
+Third, consistency. Are you claiming that Asian students, who nearly always outperform all other subgroups is structurally preferred ahead of all other subgroups; or just the politically preferred subgroups?
+
+Fourth, what is the total cost to the system for "efforts toward equity" in money, time, energy, victimhood status, and the creation of deep division amoung the subgroups? Is the 'cure' worse than the disease?
+
+Fifth, the premise is statistically unsound. All inferential statistics comparing groups rely on the mathematical requirement that **within-group variance should be small relative to between-group variance**. Current equity research systematically violates this assumption, rendering the statistical results mathematically meaningless.
+
+## Hopefully, This Type of Additional Content Will Be Included in the Early Chapters of Your Next Edition
+
+If we're serious about bringing scientific rigor to education research, IMHO, every researcher working in this field should learn most or all of the following methods of research. One need not be an expert in any or all areas, but one should understand the hazards of proceeding without them.
 
 ### **Foundations of Scientific Inquiry**
 
@@ -135,6 +591,7 @@ If we're serious about bringing scientific rigor to education research, here's w
 -   **Research Question Formulation**: How to transform vague concerns into testable hypotheses
 -   **Operational Definitions**: Converting abstract concepts into measurable variables
 -   **Assumption Recognition**: Identifying and questioning underlying assumptions in research frameworks
+-   **Theory of Knowledge**: The philosophical study of what constitutes knowledge, how we acquire it, and what makes our beliefs justified or warranted.
 
 ### **Historical and Comparative Methods**
 
@@ -144,9 +601,12 @@ If we're serious about bringing scientific rigor to education research, here's w
 
 ### **Understanding How Research Can Get it Wrong**
 
--   **Causal Identification Strategies**: Understanding use of Directed Acyclic Graphs DAGs. Limitations of basic regression, difference-in-differences, instrumental variables, regression discontinuity models.
+-   **Causal Identification Strategies**: Understanding use of Directed Acyclic Graphs DAGs, the limitations of basic regression, difference-in-differences, instrumental variables, regression discontinuity models.
+
 -   **Confounding Recognition**: Identifying and addressing unobserved variables that bias results
+
 -   **Mediation Analysis**: Understanding the mechanisms through which enacted policies or interventions work
+
 -   **Treatment Effect Heterogeneity**: Recognizing that interventions may work differently for different populations
 
 ### **Data Quality and Measurement**
@@ -177,6 +637,10 @@ The education data science community needs to undergo a fundamental philosophica
 This means being willing to seek and report results that contradict popular narratives. It means acknowledging uncertainty when the evidence is mixed. It means prioritizing methodological rigor over political palatability. Most importantly, it means approaching education as a complex social system that deserves the same level of scientific skepticism and methodological sophistication that we apply to other challenging domains.
 
 The stakes are too high for anything less. When poorly grounded research influences policies affecting millions of students, the cost of methodological sloppiness is measured not just in wasted resources but in damaged lives and missed opportunities.
+
+This statement comes early in the book and is repeated elsewhere. It starts with an **unproven assumption:** that group differences from population demographic percentages is prima facie evidence of systemic bias requiring intervention.
+
+> "Equity resources O’Neil, C. (2016). Weapons of math destruction: How big data increases inequality and threatens democracy (1st ed.). Crown." We All Count: https://weallcount.com/ Data for Black Lives: http://d4bl.org/" (Chapter 18) [@bovee2024data]
 
 ## Conclusion: Science or Activism?
 
