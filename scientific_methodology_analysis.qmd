@@ -4,6 +4,7 @@ subtitle: "When Ideology Masquerades as Scientific Inquiry"
 bibliography: manual-refs.bib
 format:
   html:
+    code-copy: true
     include-after-body: 
       - text: |
          <script type="text/javascript" src="reference-backlinks.js"></script>

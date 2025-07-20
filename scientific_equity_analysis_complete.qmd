@@ -4,11 +4,12 @@ subtitle: "When Ideology Masquerades as Scientific Inquiry"
 bibliography: manual-refs.bib
 format:
   html:
+    code-copy: true
     include-after-body: 
       - text: |
          <script type="text/javascript" src="reference-backlinks.js"></script>
     css: 
-      - swart-20250701.css
+      - swart.css
     page-layout: full
     fig-width: 12
     fig-height: 10
@@ -32,8 +33,10 @@ execute:
   echo: false
   message: false
   warning: false
+  eval: true
   fig-width: 12
   fig-height: 10
+
 ---
 
 ```{r}
@@ -49,21 +52,23 @@ library(kableExtra)
 # Set global theme for consistent plots
 theme_set(theme_minimal(base_size = 16) + 
           theme(
-    plot.title = element_text(face = "bold", size = 24),
-    plot.subtitle = element_text(face = "bold", size = 20),
+    plot.title = element_text(face = "bold", size = 24),    # adjust title size
+    plot.subtitle = element_text(face = "bold", size = 20), # adjust subtitle size
     axis.title.x = element_text(face = "bold"),
     axis.title.y = element_text(face = "bold"),
-    axis.text = element_text(face = "bold"),
+    axis.text.x = element_text(face = "bold", angle = 45, hjust = 1),
     legend.position = "bottom",
     strip.text = element_text(face = "bold"),
-    panel.spacing.x = unit(1.5, "cm"),
-    panel.spacing.y = unit(1.5, "cm"),
+    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
+    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
     plot.margin = margin(20, 20, 20, 20, "pt")
-   )
-  )
+    )
+)
+
 
 # Set seed for reproducibility
-set.seed(42)
+set.seed(123)
+
 ```
 
 

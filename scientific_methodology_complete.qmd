@@ -4,12 +4,12 @@ subtitle: "When Ideology Masquerades as Scientific Inquiry"
 bibliography: manual-refs.bib
 format:
   html:
+    code-copy: true
     include-after-body: 
       - text: |
          <script type="text/javascript" src="reference-backlinks.js"></script>
     css: 
-      - swart-20250630.css
-      # - this-doc-only.css
+      - swart.css
     page-layout: full
     fig-width: 12
     fig-height: 10
@@ -33,8 +33,10 @@ execute:
   echo: false
   message: false
   warning: false
+  eval: true
   fig-width: 12
   fig-height: 10
+
 ---
 
 
@@ -43,6 +45,10 @@ execute:
 
 # load libraries
 library(tidyverse)
+library(DT)
+library(plotly)
+library(ggplot2)
+library(kableExtra)
 
 # Set global theme for consistent plots
 theme_set(theme_minimal(base_size = 16) + 
@@ -51,17 +57,18 @@ theme_set(theme_minimal(base_size = 16) +
     plot.subtitle = element_text(face = "bold", size = 20), # adjust subtitle size
     axis.title.x = element_text(face = "bold"),
     axis.title.y = element_text(face = "bold"),
-    axis.text = element_text(face = "bold"),
+    axis.text.x = element_text(face = "bold", angle = 45, hjust = 1),
     legend.position = "bottom",
     strip.text = element_text(face = "bold"),
     panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
     panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
     plot.margin = margin(20, 20, 20, 20, "pt")
-   )
-  )
+    )
+)
+
 
 # Set seed for reproducibility
-set.seed(42)
+set.seed(123)
 
 ```
 
@@ -301,7 +308,7 @@ Where:
 #### When the Assumption is Violated
 
 ```{r}
-#| label: variance-example
+#| label: variance-example1
 
 # Example: Current educational equity research
 red_students <- c(300, 850, 1200, 1540, 1580)  # SAT scores within "Red" category
@@ -361,7 +368,7 @@ When within-group variance is enormous (heterogeneous groups), the denominator i
 
 **Educational Research:**
 ```{r}
-#| label: heterogeneous-groups
+#| label: heterogeneous-groups1
 
 # "Red students" category includes:
 high_achieving_subgroup <- c(1400, 1450, 1500)  # High-achieving
@@ -757,7 +764,7 @@ Where:
 #### When the Assumption is Violated
 
 ```{r}
-#| label: variance-example
+#| label: variance-example2
 
 # Example: Current educational equity research
 red_students <- c(300, 850, 1200, 1540, 1580)  # SAT scores within "Red" category
@@ -817,7 +824,7 @@ When within-group variance is enormous (heterogeneous groups), the denominator i
 
 **Educational Research:**
 ```{r}
-#| label: heterogeneous-groups
+#| label: heterogeneous-groups2
 
 # "Red students" category includes:
 high_achieving_subgroup <- c(1400, 1450, 1500)  # High-achieving
@@ -971,34 +978,6 @@ execute:
 ---
 
 
-```{r}
-#| label: setup
-
-# load libraries
-library(tidyverse)
-
-# Set global theme for consistent plots
-theme_set(theme_minimal(base_size = 16) + 
-          theme(
-    plot.title = element_text(face = "bold", size = 24),    # adjust title size
-    plot.subtitle = element_text(face = "bold", size = 20), # adjust subtitle size
-    axis.title.x = element_text(face = "bold"),
-    axis.title.y = element_text(face = "bold"),
-    axis.text = element_text(face = "bold"),
-    legend.position = "bottom",
-    strip.text = element_text(face = "bold"),
-    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
-    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
-    plot.margin = margin(20, 20, 20, 20, "pt")
-   )
-  )
-
-# Set seed for reproducibility
-set.seed(42)
-
-```
-
-
 
 
 # Scientific Analysis of Educational Equity Claims
@@ -1234,7 +1213,7 @@ Where:
 #### When the Assumption is Violated
 
 ```{r}
-#| label: variance-example
+#| label: variance-example3
 
 # Example: Current educational equity research
 red_students <- c(300, 850, 1200, 1540, 1580)  # SAT scores within "Red" category
@@ -1294,7 +1273,7 @@ When within-group variance is enormous (heterogeneous groups), the denominator i
 
 **Educational Research:**
 ```{r}
-#| label: heterogeneous-groups
+#| label: heterogeneous-groups3
 
 # "Red students" category includes:
 high_achieving_subgroup <- c(1400, 1450, 1500)  # High-achieving
@@ -1448,32 +1427,6 @@ execute:
 ---
 
 
-```{r}
-#| label: setup
-
-# load libraries
-library(tidyverse)
-
-# Set global theme for consistent plots
-theme_set(theme_minimal(base_size = 16) + 
-          theme(
-    plot.title = element_text(face = "bold", size = 24),    # adjust title size
-    plot.subtitle = element_text(face = "bold", size = 20), # adjust subtitle size
-    axis.title.x = element_text(face = "bold"),
-    axis.title.y = element_text(face = "bold"),
-    axis.text = element_text(face = "bold"),
-    legend.position = "bottom",
-    strip.text = element_text(face = "bold"),
-    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
-    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
-    plot.margin = margin(20, 20, 20, 20, "pt")
-   )
-  )
-
-# Set seed for reproducibility
-set.seed(42)
-
-```
 
 
 
@@ -1711,7 +1664,7 @@ Where:
 #### When the Assumption is Violated
 
 ```{r}
-#| label: variance-example
+#| label: variance-example4
 
 # Example: Current educational equity research
 red_students <- c(300, 850, 1200, 1540, 1580)  # SAT scores within "Red" category
@@ -1771,7 +1724,7 @@ When within-group variance is enormous (heterogeneous groups), the denominator i
 
 **Educational Research:**
 ```{r}
-#| label: heterogeneous-groups
+#| label: heterogeneous-groups4
 
 # "Red students" category includes:
 high_achieving_subgroup <- c(1400, 1450, 1500)  # High-achieving
@@ -1925,33 +1878,6 @@ execute:
 ---
 
 
-```{r}
-#| label: setup
-
-# load libraries
-library(tidyverse)
-
-# Set global theme for consistent plots
-theme_set(theme_minimal(base_size = 16) + 
-          theme(
-    plot.title = element_text(face = "bold", size = 24),    # adjust title size
-    plot.subtitle = element_text(face = "bold", size = 20), # adjust subtitle size
-    axis.title.x = element_text(face = "bold"),
-    axis.title.y = element_text(face = "bold"),
-    axis.text = element_text(face = "bold"),
-    legend.position = "bottom",
-    strip.text = element_text(face = "bold"),
-    panel.spacing.x = unit(1.5, "cm"),  # Horizontal spacing only
-    panel.spacing.y = unit(1.5, "cm"),   # Vertical spacing only
-    plot.margin = margin(20, 20, 20, 20, "pt")
-   )
-  )
-
-# Set seed for reproducibility
-set.seed(42)
-
-```
-
 
 
 
@@ -2188,7 +2114,7 @@ Where:
 #### When the Assumption is Violated
 
 ```{r}
-#| label: variance-example
+#| label: variance-example5
 
 # Example: Current educational equity research
 red_students <- c(300, 850, 1200, 1540, 1580)  # SAT scores within "Red" category
@@ -2248,7 +2174,7 @@ When within-group variance is enormous (heterogeneous groups), the denominator i
 
 **Educational Research:**
 ```{r}
-#| label: heterogeneous-groups
+#| label: heterogeneous-groups5
 
 # "Red students" category includes:
 high_achieving_subgroup <- c(1400, 1450, 1500)  # High-achieving
