@@ -6,6 +6,7 @@ bibliography: manual-refs.bib
 format:
   html:
     code-copy: true
+    code-link: true
     include-after-body: 
       - text: |
          <script type="text/javascript" src="reference-backlinks.js"></script>
@@ -20,6 +21,8 @@ format:
     toc: true
     citeproc: true
     link-citations: true
+    linestretch: 1.0
+    
   typst:
     fig-width: 12
     fig-height: 10
@@ -29,7 +32,38 @@ format:
       y: 1in
     toc: true
     fontsize: 14pt
-    mainfont: "Latin Modern Roman"
+    mainfont: "Cabin"
+
+ 
+  revealjs:
+    slide-number: true
+    transition: fade
+    code-overflow: wrap
+    center: true
+    smaller: true
+    scrollable: true
+    chalkboard: true
+    multiplex: false
+    theme: solarized
+    reference-location: margin
+    logo: img/red-cross-640-435.png
+    footer: "Footer text"
+    code-block-height: 650px
+
+
+  # docx:
+  #   highlight-style: github
+  #   fig_caption: true
+  # 
+
+editor: source
+
+quarto:
+  render:
+    cache-refresh: true
+
+
+# for .qmd files
 execute:
   echo: false
   message: false
@@ -37,7 +71,17 @@ execute:
   eval: true
   fig-width: 12
   fig-height: 10
-  
+
+
+# for .rmd files
+knitr:
+  opts_chunk:
+    echo: false
+    error: false
+    warning: false
+    message: false
+    cache: false
+
 ---
 
 
@@ -45,8 +89,6 @@ execute:
 #| label: setup
 #| include: false
 
-
-knitr::opts_chunk$set(echo = TRUE)
 
 # Prevent scientific notation globally
 options(scipen = 999)
@@ -1160,18 +1202,18 @@ cat("- Individual advice: Would you make career decisions with this accuracy?\n"
 
 
 
-### When Good R² Doesn't Mean Useful Predictions
+### When Good R-Squared Doesn't Mean Useful Predictions
 
-**Example 1: High R² but Useless Predictions**
+**Example 1: High R-Squared but Useless Predictions**
 
 ```{r}
-# Simulate stock price prediction with HIGH R² but useless predictions
+# Simulate stock price prediction with HIGH R-squared but useless predictions
 set.seed(123)
 stock_data <- data.frame(
   fundamental_score = rnorm(100, 50, 10)
 )
 
-# Create STRONG relationship (high R²) but in a context where errors are too big
+# Create STRONG relationship (high R-squared) but in a context where errors are too big
 stock_data$price_change <- 10 * stock_data$fundamental_score - 500 + rnorm(100, 0, 50)
 
 stock_model <- lm(price_change ~ fundamental_score, data = stock_data)
@@ -1181,7 +1223,7 @@ stock_r2 <- summary(stock_model)$r.squared
 cat("STOCK PREDICTION MODEL:\n")
 cat("- R² =", round(stock_r2, 3), "\n")
 cat("- RSE = ±$", round(stock_rse, 1), "per share\n")
-cat("- Conclusion: High R² (", round(stock_r2, 3), ") but ±$", round(stock_rse, 1), "\n")
+cat("- Conclusion: High R-Squared (", round(stock_r2, 3), ") but ±$", round(stock_rse, 1), "\n")
 cat("  errors still make this useless for trading!\n\n")
 
 ```
@@ -1191,7 +1233,7 @@ cat("  errors still make this useless for trading!\n\n")
 
 ## The Key Insight
 
-**R² and absolute error size are partially independent:**
+**R-Squared and absolute error size are partially independent:**
 
 | Scenario | R² | Absolute Error | Practical Value |
 |:---------|:---|:---------------|:----------------|

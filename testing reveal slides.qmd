@@ -1,0 +1,102 @@
+---
+title: "Getting Started with Reveal.js in Quarto"
+subtitle: "A Simple Slideshow Demo"
+author: "Dan Swart"
+date: today
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    transition: slide
+    center: true
+    code-overflow: wrap
+    toc: true
+    chalkboard: true
+    logo: images/logo.png   # optional, comment out if no logo
+    footer: "Dan Swart | July 2025"
+editor: visual
+---
+
+## Welcome
+
+Welcome to this **Reveal.js** slideshow built with **Quarto**.
+
+- Fully responsive
+- Easy to use
+- Supports R, Python, and more
+
+???
+
+These are my speaker notes. You will only see them in presenter mode.
+
+---
+
+## Code Example
+
+```r
+# A simple R plot
+plot(cars, main = "Speed vs. Stopping Distance")
+
+```
+
+<br>
+<br>
+
+Two Columns
+
+:::: {.columns}
+::: {.column width="50%"}
+Column A
+
+    Bullet 1
+
+    Bullet 2
+:::
+
+::: {.column width="50%"}
+Column B
+
+    Bullet 3
+
+    Bullet 4
+:::
+::::
+
+<br>
+
+## Image Slide
+
+<br>
+
+## Custom Layout
+
+<br>
+
+## You can use markdown, HTML, or even custom layouts with CSS.
+
+    Try using fig-align, fig-width, etc.
+
+    Combine it with CSS themes for more styling.
+
+## Chalkboard Tools
+
+    Try drawing during the presentation!
+
+
+
+Click the chalkboard or notes icon in the lower-left corner.
+
+
+## Ending Slide
+
+Thank you for your attention!
+
+    Questions?
+
+    Feedback?
+
+Use left/right arrows to navigate.
+
+
+
+
