@@ -1,3 +1,6 @@
+# Current as of: 2025-08-25
+
+#####  NO INLINE COMMENTS!  #####
 
 # Bookdown files-if book rendered in cloud uncomment these
 /*.pdf
@@ -17,6 +20,7 @@ crc
 
 # User-specific files
 .Ruserdata
+*.tobedeleted
 
 # Example code in package build process
 *-Ex.R
@@ -33,10 +37,20 @@ crc
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
 .httr-oauth
 
-# knitr and R markdown default cache directories
-*_cache/      # knitr-style: document_cache/
-_cache/       # Some tools use exactly _cache/
-/cache/       # Root cache directory
+
+# Ignore R/knitr/Quarto cache directories
+*_cache/
+*_cache/**
+cache_data/
+cache_data/**
+*.Rhistory
+*.RData
+*.Rproj.user
+
+
+# Specific cache patterns
+**/*_cache/
+**/cache_data/
 
 # Temporary files created by R markdown
 *.utf8.md
@@ -47,6 +61,7 @@ _cache/       # Some tools use exactly _cache/
 
 # pkgdown sites
 docs/
+/doc/
 
 # translation temp files
 po/*~
@@ -60,6 +75,7 @@ inst/doc
 
 # Package metadata
 Meta/
+/Meta/
 
 # R profile (local settings)
 .Rprofile
@@ -95,10 +111,33 @@ Rplots.pdf
 Thumbs.db
 
 # Quarto
+.quarto
 /.quarto/
 _freeze/
 
 
+
 # Rendered output (be selective)
+
 *.html
-!vignettes/*.html  # Exception - keep vignette HTML
+!header.html
+!vignettes/*.html
+!giscus.html
+
+
+
+
+
+# ------------------------
+# Large data files (naming convention: large_*)
+# These are typically big temporary or downloaded datasets that should not be versioned
+large_*.rds
+large_*.RDS
+large_*.csv
+large_*.xlsx
+
+
+
+
+
+
