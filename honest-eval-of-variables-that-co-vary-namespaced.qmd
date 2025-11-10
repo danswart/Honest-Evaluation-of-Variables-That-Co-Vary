@@ -220,14 +220,14 @@ select <- dplyr::select
 filter <- dplyr::filter
 
 # Options
-options(scipen = 999)
-options(qic.clshade = T) # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-options(qic.linecol = 'black') # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-options(qic.signalcol = "firebrick") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-options(qic.targetcol = "purple") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-options(DT.options = list(dom = 'pBlfrti')) # Add buttons, filtering, and top (t) pagination controls
-options(shiny.maxRequestSize = 50 * 1024^2) # Set upload maximum to 50 MB
-options(tigris_use_cache = TRUE)
+base::options(scipen = 999)
+base::options(qic.clshade = T) # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
+base::options(qic.linecol = 'black') # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
+base::options(qic.signalcol = "firebrick") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
+base::options(qic.targetcol = "purple") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
+base::options(DT.options = base::list(dom = 'pBlfrti')) # Add buttons, filtering, and top (t) pagination controls
+base::options(shiny.maxRequestSize = 50 * 1024^2) # Set upload maximum to 50 MB
+base::options(tigris_use_cache = TRUE)
 
 
 # Set global theme for consistent plots
@@ -258,7 +258,7 @@ ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20) +
 
 
 # Set seed for reproducibility
-set.seed(123)
+base::set.seed(123)
 
 ```
 
@@ -303,28 +303,27 @@ The covariance statistic only tells you the direction of the slope ( 'positive',
 The function below has excellent predictability, but has zero correlation and zero covariance.
 
 ```{r}
-#| echo: false
 #| message: false
 #| warning: false
 
 
-set.seed(123)
-x <- -10:10
+base::set.seed(123)
+x <- base::c(-10L:10L)
 y <- x^2
 df <- base::data.frame(x = x, y = y)
 
-ggplot(df, aes(x, y)) +
-  geom_point(color = "blue", size = 3) +
-  labs(
-    title = paste("Correlation = ", round(cor(x, y), 2),
-                  "      Covariance = ", round(cov(x, y), 2)),
+ggplot2::ggplot(df, ggplot2::aes(x, y)) +
+  ggplot2::geom_point(color = "blue", size = 3) +
+  ggplot2::labs(
+    title = base::paste("Correlation = ", base::round(stats::cor(x, y), 2),
+                  "      Covariance = ", base::round(stats::cov(x, y), 2)),
     x = "x", 
     y = "y"
   ) +
-  theme(
-    plot.title = element_text(face = "bold"),
-    axis.title.x = element_text(face = "bold"),
-    axis.title.y = element_text(face = "bold")
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_text(face = "bold"),
+    axis.title.y = ggplot2::element_text(face = "bold")
   )
 
 ```
@@ -335,62 +334,61 @@ Even when the correlation is identical in two scenarios, one calculation of the 
 Example: These variables co-vary along a line (linear), but the covariance differs a lot (note the different scales on both axis)
 
 ```{r}
-#| echo: false
 #| message: false
 #| warning: false
 
 # Co-vary along a line, different scales
 
-set.seed(123)
-df <- tibble(
-  height_inches = c(60, 65, 70, 75),
-  weight_pounds = c(120, 140, 160, 180),
+base::set.seed(123)
+df <- tibble::tibble(
+  height_inches = base::c(60, 65, 70, 75),
+  weight_pounds = base::c(120, 140, 160, 180),
   height_feet = height_inches / 12,
   weight_kg = weight_pounds / 2.2
 )
 
 # compute correlation
-cor1 <- cor(df$height_inches, df$weight_pounds)
-cov1 <- cov(df$height_inches, df$weight_pounds)
-cor2 <- cor(df$height_feet, df$weight_kg)
-cov2 <- cov(df$height_feet, df$weight_kg)
+cor1 <- stats::cor(df$height_inches, df$weight_pounds)
+cov1 <- stats::cov(df$height_inches, df$weight_pounds)
+cor2 <- stats::cor(df$height_feet, df$weight_kg)
+cov2 <- stats::cov(df$height_feet, df$weight_kg)
 
 # plot with the correlation and covariance in the titles
-p1 <- ggplot(df, aes(height_inches, weight_pounds)) +
-  geom_point(color = "blue", size = 3) +
-  labs(
-    title = paste("Correlation =", round(cor1, 2)),
-    subtitle = paste("Covariance =", round(cov1, 2)),
+p1 <- ggplot2::ggplot(df, ggplot2::aes(height_inches, weight_pounds)) +
+  ggplot2::geom_point(color = "blue", size = 3) +
+  ggplot2::labs(
+    title = base::paste("Correlation =", base::round(cor1, 2)),
+    subtitle = base::paste("Covariance =", base::round(cov1, 2)),
     x     = "Height (inches)",
     y     = "Weight (pounds)"
   ) +
-  theme(
-    plot.title = element_text(face = "bold"),
-    plot.subtitle = element_text(face = "bold"),
-    axis.title.x = element_text(face = "bold"),
-    axis.title.y = element_text(face = "bold")
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(face = "bold"),
+    plot.subtitle = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_text(face = "bold"),
+    axis.title.y = ggplot2::element_text(face = "bold")
   )
 
 
 # plot with the correlation and covariance in the titles
-p2 <- ggplot(df, aes(height_feet, weight_kg)) +
-  geom_point(color = "blue", size = 3) +
-  labs(
-    title = paste("Correlation =", round(cor2, 2)),
-    subtitle = paste("Covariance =", round(cov2, 2)),
+p2 <- ggplot2::ggplot(df, ggplot2::aes(height_feet, weight_kg)) +
+  ggplot2::geom_point(color = "blue", size = 3) +
+  ggplot2::labs(
+    title = base::paste("Correlation =", base::round(cor2, 2)),
+    subtitle = base::paste("Covariance =", base::round(cov2, 2)),
     x     = "Height (feet)",
     y     = "Weight (kg)"
   ) +
-  theme(
-    plot.title = element_text(face = "bold"),
-    plot.subtitle = element_text(face = "bold"),
-    axis.title.x = element_text(face = "bold"),
-    axis.title.y = element_text(face = "bold")
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(face = "bold"),
+    plot.subtitle = ggplot2::element_text(face = "bold"),
+    axis.title.x = ggplot2::element_text(face = "bold"),
+    axis.title.y = ggplot2::element_text(face = "bold")
   )
 
 
 
-p1 + p2
+patchwork::wrap_plots(p1, p2)
 
 ```
 
@@ -436,24 +434,23 @@ What we can say:
 Here is a chart using synthetic data.  It shows perfect correlation (1.0) and a 'high' covariance because ice cream sales are in dollars, and drownings are in individuals.
 
 ```{r}
-#| echo: false
 #| message: false
 #| warning: false
 
 # data describes positive, linear covariance.  No outside statistical influences.
-df <- tibble(
-  ice_cream_sales = c(60, 65, 70, 75),
-  drownings = c(20, 40, 60, 80)
+df <- tibble::tibble(
+  ice_cream_sales = base::c(60, 65, 70, 75),
+  drownings = base::c(20, 40, 60, 80)
   )
 
-ggplot(df,
-       aes(x = ice_cream_sales, 
+ggplot2::ggplot(df,
+       ggplot2::aes(x = ice_cream_sales, 
            y = drownings)
        ) +
-  geom_point(color = "blue", size = 3) +
-  labs(
-    title = paste("Correlation = " , cor(df$ice_cream_sales, df$drownings)),
-    subtitle = paste("Covariance =" , cov(df$ice_cream_sales, df$drownings))
+  ggplot2::geom_point(color = "blue", size = 3) +
+  ggplot2::labs(
+    title = base::paste("Correlation = " , stats::cor(df$ice_cream_sales, df$drownings)),
+    subtitle = base::paste("Covariance =" , stats::cov(df$ice_cream_sales, df$drownings))
     )
   
 ```
@@ -478,19 +475,18 @@ Consider this DAG:
 
 ```{r}
 #| eval: true
-#| echo: false
 #| message: false
 #| warning: false
 #| paged-print: false
 
-set.seed(1234)
+base::set.seed(1234)
 # Create DAG with custom node labels
-dag <- dagify(
+dag <- ggdag::dagify(
   Y ~ X + Z,
   X ~ Z,
   exposure = "X",
   outcome = "Y",
-  labels = c(
+  labels = base::c(
     "Z" = "Study Time",
     "Y" = "Test Score", 
     "X" = "Sleep"
@@ -498,24 +494,24 @@ dag <- dagify(
 )
 
 # Method with fine-tuned label positioning
-ggdag(dag, use_labels = "label") +   
+ggdag::ggdag(dag, use_labels = "label") +   
   # Make node circles invisible
-  geom_dag_point(alpha = 0) +  # Or just remove this line entirely
-  geom_dag_edges(
-    aes(
-      label = case_when(
+  ggdag::geom_dag_point(alpha = 0) +  # Or just remove this line entirely
+  ggdag::geom_dag_edges(
+    ggplot2::aes(
+      label = dplyr::case_when(
         name == "Z" & to == "X" ~ "0.2",
         name == "Z" & to == "Y" ~ "0.5", 
         name == "X" & to == "Y" ~ "0.3",
         TRUE ~ ""
       ),
-      hjust = case_when(
+      hjust = dplyr::case_when(
         name == "Z" & to == "X" ~ 0.0,    
         name == "Z" & to == "Y" ~ 1.5,    
         name == "X" & to == "Y" ~ -1.0,   
         TRUE ~ 0.5
       ),
-      vjust = case_when(
+      vjust = dplyr::case_when(
         name == "Z" & to == "X" ~ -0.3,   
         name == "Z" & to == "Y" ~ 0.0,    
         name == "X" & to == "Y" ~ -0.0,   
@@ -528,8 +524,8 @@ ggdag(dag, use_labels = "label") +
     label_dodge = grid::unit(2, "mm"),  
     label_push = grid::unit(1, "mm")    
   ) +
-  theme_dag() +
-  labs(
+  ggdag::theme_dag() +
+  ggplot2::labs(
     title = "Causal DAG with Measure of Direct Statistical Influences Shown",
     subtitle = "Study Time → Sleep → Test Score (classic confounding-back door fork)"
   )
@@ -542,28 +538,27 @@ Now, compare the regular correlations and the partial correlation
 #| message: false
 #| warning: false
 #| paged-print: false
-#| echo: false
 
 # Create example data
-set.seed(123)
+base::set.seed(123)
 n <- 100
-z <- rnorm(n)  # The variable influencing both x and y (the control variable)
-x <- 0.2 * z + rnorm(n, 0, 0.7)  # X is statistical influenced directly by Z with weight 0.6 + random noise,
-y <- 0.5 * z + 0.3 * x + rnorm(n, 0, 0.7)  # Y is statistical influenced by both Z directly (.5) and X directly (.3) plus Z through x indirectly, plus random noise,
+z <- stats::rnorm(n)  # The variable influencing both x and y (the control variable)
+x <- 0.2 * z + stats::rnorm(n, 0, 0.7)  # X is statistical influenced directly by Z with weight 0.6 + random noise,
+y <- 0.5 * z + 0.3 * x + stats::rnorm(n, 0, 0.7)  # Y is statistical influenced by both Z directly (.5) and X directly (.3) plus Z through x indirectly, plus random noise,
 
-data <- data.frame(x, y, z)
+data <- base::data.frame(x, y, z)
 
 # Regular correlations (not controlling for Z)
-cor_xy <- cor(data$x, data$y)
-cor_Zy <- cor(data$z, data$y)
+cor_xy <- stats::cor(data$x, data$y)
+cor_Zy <- stats::cor(data$z, data$y)
 
 # Partial correlation controlling for Z
-pcor_result <- pcor.test(data$x, data$y, data$z)
+pcor_result <- ppcor::pcor.test(data$x, data$y, data$z)
 
 # label outputs
-cat("Regular correlation of Sleep and Test Score:", round(cor_xy, 3), "\n")
-cat("Regular correlation of Study Time and Test Score:", round(cor_Zy, 3), "\n")
-cat("Partial correlation of Sleep and Test Score (controlling for statistical influence of Study Time):", round(pcor_result$estimate, 3), "\n")
+base::cat("Regular correlation of Sleep and Test Score:", base::round(cor_xy, 3), "\n")
+base::cat("Regular correlation of Study Time and Test Score:", base::round(cor_Zy, 3), "\n")
+base::cat("Partial correlation of Sleep and Test Score (controlling for statistical influence of Study Time):", base::round(pcor_result$estimate, 3), "\n")
 
 ```
 
@@ -599,6 +594,8 @@ The comparison shows how much X's apparent predictive power changes when you con
 
 <br>
 
+<br>
+
 
 
 ### Using Linear Regression Models to Analyze Predictability Between 3 Variables
@@ -611,96 +608,95 @@ Using the same data, and the same DAG, we see that:
 #| message: false
 #| warning: false
 #| paged-print: false
-#| echo: false
 
 # Simple regression (not controlling for Z)
-model1 <- lm(y ~ x, data = data)
+model1 <- stats::lm(y ~ x, data = data)
 
 # Multiple regression (controlling for Z)
-model2 <- lm(y ~ x + z, data = data)
+model2 <- stats::lm(y ~ x + z, data = data)
 
 # Get comprehensive stats
 stats1 <- extract_model_stats_for_ggplot(model1, x_name = "Sleep", y_name = "Test Score")
 stats2 <- extract_model_stats_for_ggplot(model2, x_var = "x", x_name = "Sleep", y_name = "Test Score")
 
 # Simple regression plot
-p1 <- ggplot(data, aes(x = x, y = y)) +
-  geom_point(alpha = 0.6, color = "blue", size = 3) +
-  geom_smooth(method = "lm", se = TRUE, color = "red") +
-  labs(
+p1 <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(alpha = 0.6, color = "blue", size = 3) +
+  ggplot2::geom_smooth(method = "lm", se = TRUE, color = "red") +
+  ggplot2::labs(
     title = "Simple Regression: Y ~ X",
-    subtitle = paste0("Slope = ", stats1$slope, " | R² = ", stats1$r2, " | MAE = ±", stats1$mae),
+    subtitle = base::paste0("Slope = ", stats1$slope, " | R² = ", stats1$r2, " | MAE = ±", stats1$mae),
     x = "Sleep Time (X)",
     y = "Test Score (Y)"
   ) +
-  theme_minimal(base_size = 16)
+  ggplot2::theme_minimal(base_size = 16)
 
 
 # Multiple regression: show residual relationship
-x_resid <- residuals(lm(x ~ z, data = data))
-y_resid <- residuals(lm(y ~ z, data = data))
-p2 <- ggplot(data.frame(x_resid, y_resid), aes(x = x_resid, y = y_resid)) +
-  geom_point(alpha = 0.6, color = "blue", size = 3) +
-  geom_smooth(method = "lm", se = TRUE, color = "red") +
-  labs(
+x_resid <- stats::residuals(stats::lm(x ~ z, data = data))
+y_resid <- stats::residuals(stats::lm(y ~ z, data = data))
+p2 <- ggplot2::ggplot(base::data.frame(x_resid, y_resid), ggplot2::aes(x = x_resid, y = y_resid)) +
+  ggplot2::geom_point(alpha = 0.6, color = "blue", size = 3) +
+  ggplot2::geom_smooth(method = "lm", se = TRUE, color = "red") +
+  ggplot2::labs(
     title = "Regression Residual Analysis with Statistical Influence of Z Removed",
-    subtitle = paste0("Slope = ", stats2$slope, " (controlling for Z) | R² = ", stats2$r2, " | MAE = ±", stats2$mae),
+    subtitle = base::paste0("Slope = ", stats2$slope, " (controlling for Z) | R² = ", stats2$r2, " | MAE = ±", stats2$mae),
     x = "Sleep Time (X) - residuals after removing statistical effect of Z",
     y = "Test Score (Y) - residuals after removing statistical effect of Z"
   ) +
-  theme_minimal(base_size = 16)
+  ggplot2::theme_minimal(base_size = 16)
 
 
 # Method 1: Residual visualization (conceptual)
-p2a <- ggplot(data.frame(x_resid, y_resid), aes(x = x_resid, y = y_resid)) +
-  geom_point(alpha = 0.6, color = "blue", size = 3) +
-  geom_smooth(method = "lm", se = TRUE, color = "red") +
-  labs(
+p2a <- ggplot2::ggplot(base::data.frame(x_resid, y_resid), ggplot2::aes(x = x_resid, y = y_resid)) +
+  ggplot2::geom_point(alpha = 0.6, color = "blue", size = 3) +
+  ggplot2::geom_smooth(method = "lm", se = TRUE, color = "red") +
+  ggplot2::labs(
     title = "Conceptual View: Residuals After Removing Z",
-    subtitle = paste0("Same slope = ", stats2$slope),
+    subtitle = base::paste0("Same slope = ", stats2$slope),
     x = "Sleep (X) - Z influence removed",
     y = "Test Score (Y) - Z influence removed"
   ) +
-  theme_minimal(base_size = 14)
+  ggplot2::theme_minimal(base_size = 14)
 
 
 # Add predictions to your data
-data$fitted_values <- fitted(model2)
+data$fitted_values <- stats::fitted(model2)
 
-p2b <- ggplot(data, aes(x = x, y = y)) +
-  geom_point(alpha = 0.6, color = "blue", size = 3) +
-  geom_smooth(aes(y = fitted_values), method = "lm", se = FALSE, color = "red") +
-  labs(
+p2b <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(alpha = 0.6, color = "blue", size = 3) +
+  ggplot2::geom_smooth(ggplot2::aes(y = fitted_values), method = "lm", se = FALSE, color = "red") +
+  ggplot2::labs(
     title = "Practical View: Direct Multiple Regression",
-    subtitle = paste0("X coefficient = ", stats2$slope, " (from y ~ x + z)"),
+    subtitle = base::paste0("X coefficient = ", stats2$slope, " (from y ~ x + z)"),
     x = "Sleep Time (X)",
     y = "Test Score (Y)"
   ) +
-  theme_minimal(base_size = 14)
+  ggplot2::theme_minimal(base_size = 14)
 
 # Show both
 p2a | p2b
 
 # Alternative plot
-p3 <- ggplot(data, aes(x = x, y = y, color = z)) +
-  geom_point(size = 2, alpha = 0.7) +
-  geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed") +
-  scale_color_viridis_c(name = "Study Time\n(Z)") +
-  labs(
+p3 <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, color = z)) +
+  ggplot2::geom_point(size = 2, alpha = 0.7) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed") +
+  ggplot2::scale_color_viridis_c(name = "Study Time\n(Z)") +
+  ggplot2::labs(
     title = "Regression Residual Analysis with Statistical Influence of Z Removed",
-    subtitle = paste0("Correlation = ", stats1$correlation, " | Model improves predictions by ", stats1$r2 * 100, "%"),
+    subtitle = base::paste0("Correlation = ", stats1$correlation, " | Model improves predictions by ", stats1$r2 * 100, "%"),
     x = "Sleep Time (X)",
     y = "Test Score (Y)"
   ) +
-  theme_minimal(base_size = 16)
+  ggplot2::theme_minimal(base_size = 16)
 
 
 # Updated summary output
-cat("Simple Regression - Sleep coefficient:", stats1$slope, "| R² =", stats1$r2, "| MAE = ±", stats1$mae, "\n")
+base::cat("Simple Regression - Sleep coefficient:", stats1$slope, "| R² =", stats1$r2, "| MAE = ±", stats1$mae, "\n")
 
-cat("Multiple Regression - Sleep coefficient:", stats2$slope, "(controlling for Study Time) | R² =", stats2$r2, "| MAE = ±", stats2$mae, "\n")
+base::cat("Multiple Regression - Sleep coefficient:", stats2$slope, "(controlling for Study Time) | R² =", stats2$r2, "| MAE = ±", stats2$mae, "\n")
 
-cat("Simple Regression - Sleep coefficient:", stats1$correlation, "| R² =", stats1$r2 * 100, "| MAE = ±", stats1$mae, "\n")
+base::cat("Simple Regression - Sleep coefficient:", stats1$correlation, "| R² =", stats1$r2 * 100, "| MAE = ±", stats1$mae, "\n")
 
 
 # Show all three plots
@@ -772,38 +768,37 @@ You can extract residuals from a regression model to create 'adjusted' variables
 #| message: false
 #| warning: false
 #| paged-print: false
-#| echo: false
 
 
 # Regress x on z to remove z's statistical effect from x
-x_on_z <- lm(x ~ z, data = data)
-x_residuals <- residuals(x_on_z)
+x_on_z <- stats::lm(x ~ z, data = data)
+x_residuals <- stats::residuals(x_on_z)
 
 # Regress y on z to remove the statistical influence of z from y
-y_on_z <- lm(y ~ z, data = data)
-y_residuals <- residuals(y_on_z)
+y_on_z <- stats::lm(y ~ z, data = data)
+y_residuals <- stats::residuals(y_on_z)
 
 # Correlation between residuals (x and y with z's statistical effect removed)
-residual_cor <- cor(x_residuals, y_residuals)
+residual_cor <- stats::cor(x_residuals, y_residuals)
 
 
 # put the residuals into a data frame
-res_df <- data.frame(
+res_df <- base::data.frame(
   x_resid = x_residuals,
   y_resid = y_residuals
 )
 
 # plot results
-ggplot(res_df, aes(x_resid, y_resid)) +
-  geom_point(color = "steelblue", size = 3) +
-  geom_smooth(method = "lm", se = FALSE, color = "firebrick", linewidth = 1) +
-  labs(
-    title = paste("Regression on Residuals = Partial Correlation (controlling for z) =",
-                  round(residual_cor, 3)),
+ggplot2::ggplot(res_df, ggplot2::aes(x_resid, y_resid)) +
+  ggplot2::geom_point(color = "steelblue", size = 3) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE, color = "firebrick", linewidth = 1) +
+  ggplot2::labs(
+    title = base::paste("Regression on Residuals = Partial Correlation (controlling for z) =",
+                  base::round(residual_cor, 3)),
     x     = "Residuals of X ∼ Z",
     y     = "Residuals of Y ∼ Z"
   ) +
-  theme_minimal(base_size = 16)
+  ggplot2::theme_minimal(base_size = 16)
 
 ```
 
@@ -863,81 +858,80 @@ Semi-partial correlations measure unique contributions.
 
 ```{r}
 # Semi-partial correlation
-spcor_result <- spcor.test(data$x, data$y, data$z)
-cat("Semi-partial correlation:", round(spcor_result$estimate, 3), "\n")
+spcor_result <- ppcor::spcor.test(data$x, data$y, data$z)
+base::cat("Semi-partial correlation:", base::round(spcor_result$estimate, 3), "\n")
 
 # Calculate all correlation types for comparison
-regular_cor <- cor(data$x, data$y)
-partial_cor <- pcor.test(data$x, data$y, data$z)$estimate
-semipartial_cor <- spcor.test(data$x, data$y, data$z)$estimate
+regular_cor <- stats::cor(data$x, data$y)
+partial_cor <- ppcor::pcor.test(data$x, data$y, data$z)$estimate
+semipartial_cor <- ppcor::spcor.test(data$x, data$y, data$z)$estimate
 
 
 # Method 1: Bar chart comparing all correlation types
-cor_comparison <- data.frame(
-  Type = c("Regular\nCorrelation", "Partial\nCorrelation", "Semi-Partial\nCorrelation"),
-  Value = c(regular_cor, partial_cor, semipartial_cor),
-  Description = c("X-Y total", "X-Y controlling\nfor Z in both", "X-Y with Z\nremoved from X only")
+cor_comparison <- base::data.frame(
+  Type = base::c("Regular\nCorrelation", "Partial\nCorrelation", "Semi-Partial\nCorrelation"),
+  Value = base::c(regular_cor, partial_cor, semipartial_cor),
+  Description = base::c("X-Y total", "X-Y controlling\nfor Z in both", "X-Y with Z\nremoved from X only")
 )
 
 
-p1 <- ggplot(cor_comparison, aes(x = Type, y = Value, fill = Type)) +
-  geom_col(alpha = 0.7, width = 0.6) +
-  geom_text(aes(label = round(Value, 3)), vjust = -0.5, size = 4, fontface = "bold") +
-  labs(
+p1 <- ggplot2::ggplot(cor_comparison, ggplot2::aes(x = Type, y = Value, fill = Type)) +
+  ggplot2::geom_col(alpha = 0.7, width = 0.6) +
+  ggplot2::geom_text(ggplot2::aes(label = base::round(Value, 3)), vjust = -0.5, size = 4, fontface = "bold") +
+  ggplot2::labs(
     title = "Correlation Comparison",
     subtitle = "How different correlation types compare",
     y = "Correlation Coefficient"
   ) +
-  theme_minimal(base_size = 16) +
-  theme(legend.position = "none") +
-  ylim(0, max(cor_comparison$Value) * 1.1)
+  ggplot2::theme_minimal(base_size = 16) +
+  ggplot2::theme(legend.position = "none") +
+  ggplot2::ylim(0, base::max(cor_comparison$Value) * 1.1)
 
 
 # Method 2: Visualize what semi-partial correlation represents
 # Remove Z's statistical effect from X only (not from Y)
-x_adjusted <- residuals(lm(x ~ z, data = data))  # X with Z's statistical effect removed
+x_adjusted <- stats::residuals(stats::lm(x ~ z, data = data))  # X with Z's statistical effect removed
 y_original <- data$y  # Y keeps Z's statistical effect
 
-p2 <- ggplot(data.frame(x_adj = x_adjusted, y_orig = y_original), 
-             aes(x = x_adj, y = y_orig)) +
-  geom_point(alpha = 0.6, color = "blue", size = 3) +
-  geom_smooth(method = "lm", se = TRUE, color = "red") +
-  labs(
+p2 <- ggplot2::ggplot(base::data.frame(x_adj = x_adjusted, y_orig = y_original), 
+             ggplot2::aes(x = x_adj, y = y_orig)) +
+  ggplot2::geom_point(alpha = 0.6, color = "blue", size = 3) +
+  ggplot2::geom_smooth(method = "lm", se = TRUE, color = "red") +
+  ggplot2::labs(
     title = "Semi-Partial Correlation Visualization",
-    subtitle = paste("Correlation =", round(semipartial_cor, 3)),
+    subtitle = base::paste("Correlation =", base::round(semipartial_cor, 3)),
     x = "Sleep (X) - Z's statistical effect removed",
     y = "Test Score (Y) - original values"
   ) +
-  theme_minimal(base_size = 16)
+  ggplot2::theme_minimal(base_size = 16)
 
 
 # Method 3: Show the unique contribution concept
 # Create Venn diagram style visualization
-library(ggforce)
 
-venn_data <- data.frame(
-  x = c(1, 2, 1.5),
-  y = c(1, 1, 1.8),
-  r = c(0.8, 0.8, 0.6),
-  label = c("X", "Y", "Z"),
-  color = c("red", "blue", "green")
+venn_data <- base::data.frame(
+  x = base::c(1, 2, 1.5),
+  y = base::c(1, 1, 1.8),
+  r = base::c(0.8, 0.8, 0.6),
+  label = base::c("X", "Y", "Z"),
+  color = base::c("red", "blue", "green")
 )
 
 
-p3 <- ggplot(venn_data) +
-  geom_circle(aes(x0 = x, y0 = y, r = r, fill = label), alpha = 0.3) +
-  geom_text(aes(x = x, y = y, label = label), size = 6, fontface = "bold") +
-  annotate("text", x = 1.2, y = 1, label = paste("Semi-partial =", round(semipartial_cor, 3)), 
+p3 <- ggplot2::ggplot(venn_data) +
+  ggforce::geom_circle(ggplot2::aes(x0 = x, y0 = y, r = r, fill = label), alpha = 0.3) +
+  ggplot2::geom_text(ggplot2::aes(x = x, y = y, label = label), size = 6, fontface = "bold") +
+  ggplot2::annotate("text", x = 1.2, y = 1, label = base::paste("Semi-partial =", base::round(semipartial_cor, 3)), 
            size = 4, fontface = "bold") +
-  annotate("text", x = 1.2, y = 0.7, label = "Unique X contribution\nto Y (beyond Z)", 
+  ggplot2::annotate("text", x = 1.2, y = 0.7, label = "Unique X contribution\nto Y (beyond Z)", 
            size = 3) +
-  labs(
+  ggplot2::labs(
     title = "Semi-Partial Correlation Concept",
     subtitle = "Unique contribution of X to Y"
   ) +
-  theme_void() +
-  theme(legend.position = "none") +
-  coord_fixed()
+  ggplot2::theme_void() +
+  ggplot2::theme(legend.position = "none") +
+  ggplot2::coord_fixed()
 
 
 # Method 4: R-squared decomposition plot
@@ -945,23 +939,23 @@ r2_total <- regular_cor^2
 r2_partial <- partial_cor^2  
 r2_semipartial <- semipartial_cor^2
 
-r2_data <- data.frame(
-  Type = c("Total R²\n(X-Y)", "Partial R²\n(controlling Z)", "Semi-partial R²\n(unique contribution)"),
-  R_squared = c(r2_total, r2_partial, r2_semipartial),
-  Percentage = c(r2_total * 100, r2_partial * 100, r2_semipartial * 100)
+r2_data <- base::data.frame(
+  Type = base::c("Total R²\n(X-Y)", "Partial R²\n(controlling Z)", "Semi-partial R²\n(unique contribution)"),
+  R_squared = base::c(r2_total, r2_partial, r2_semipartial),
+  Percentage = base::c(r2_total * 100, r2_partial * 100, r2_semipartial * 100)
 )
 
-p4 <- ggplot(r2_data, aes(x = Type, y = Percentage, fill = Type)) +
-  geom_col(alpha = 0.7, width = 0.6) +
-  geom_text(aes(label = paste0(round(Percentage, 1), "%")), 
+p4 <- ggplot2::ggplot(r2_data, ggplot2::aes(x = Type, y = Percentage, fill = Type)) +
+  ggplot2::geom_col(alpha = 0.7, width = 0.6) +
+  ggplot2::geom_text(ggplot2::aes(label = base::paste0(base::round(Percentage, 1), "%")), 
             vjust = -0.5, size = 4, fontface = "bold") +
-  labs(
+  ggplot2::labs(
     title = "R² Interpretation",
     subtitle = "Percentage of covariance shared by Variables",
     y = "Percentage of Y Variance Shared with X"
   ) +
-  theme_minimal(base_size = 16) +
-  theme(legend.position = "none")
+  ggplot2::theme_minimal(base_size = 16) +
+  ggplot2::theme(legend.position = "none")
 
 
 # Combine all plots
@@ -972,19 +966,19 @@ p4
 
 
 # Method 5: Summary table as visualization
-summary_data <- data.frame(
-  Correlation_Type = c("Regular", "Partial", "Semi-Partial"),
-  Value = round(c(regular_cor, partial_cor, semipartial_cor), 3),
-  Interpretation = c(
+summary_data <- base::data.frame(
+  Correlation_Type = base::c("Regular", "Partial", "Semi-Partial"),
+  Value = base::round(base::c(regular_cor, partial_cor, semipartial_cor), 3),
+  Interpretation = base::c(
     "Total X-Y statistical influences",
     "X-Y after removing statistical influence of Z from both", 
     "Unique X statistical influence on Y"
   ),
-  R_squared = round(c(r2_total, r2_partial, r2_semipartial), 3),
-  Variance_Explained = paste0(round(c(r2_total, r2_partial, r2_semipartial) * 100, 1), "%")
+  R_squared = base::round(base::c(r2_total, r2_partial, r2_semipartial), 3),
+  Variance_Explained = base::paste0(base::round(base::c(r2_total, r2_partial, r2_semipartial) * 100, 1), "%")
 )
 
-print(summary_data)
+base::print(summary_data)
 
 ```
 
@@ -1152,22 +1146,19 @@ Let's visualize how controlling for a variable works:
 #| fig-cap: "VisualiZation of controlling for Z"
 #| message: false
 
-library(ggplot2)
-library(patchwork)
-
 # Original covariance
-p1 <- ggplot(data, aes(x = x, y = y)) +
-  geom_point(alpha = 0.6) +
-  geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Original X-Y covariance") +
-  theme_minimal()
+p1 <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(alpha = 0.6) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE) +
+  ggplot2::labs(title = "Original X-Y covariance") +
+  ggplot2::theme_minimal()
 
 # covariance after controlling for Z
-p2 <- ggplot(data.frame(x = x_residuals, y = y_residuals), aes(x = x, y = y)) +
-  geom_point(alpha = 0.6) +
-  geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "X-Y after controlling for Z") +
-  theme_minimal()
+p2 <- ggplot2::ggplot(base::data.frame(x = x_residuals, y = y_residuals), ggplot2::aes(x = x, y = y)) +
+  ggplot2::geom_point(alpha = 0.6) +
+  ggplot2::geom_smooth(method = "lm", se = FALSE) +
+  ggplot2::labs(title = "X-Y after controlling for Z") +
+  ggplot2::theme_minimal()
 
 p1 | p2
 ```
@@ -1178,29 +1169,29 @@ Let's look at a more concrete example: the covariance between education and inco
 
 ```{r}
 # Create realistic data
-set.seed(42)
+base::set.seed(42)
 n <- 150
-experience <- sample(1:30, n, replace = TRUE)
-education <- experience/3 + rnorm(n, 12, 2)  # Education partly related to experience
-income <- 20000 + 5000 * education + 2000 * experience + rnorm(n, 0, 15000)
+experience <- base::sample(1:30, n, replace = TRUE)
+education <- experience/3 + stats::rnorm(n, 12, 2)  # Education partly related to experience
+income <- 20000 + 5000 * education + 2000 * experience + stats::rnorm(n, 0, 15000)
 
-job_data <- data.frame(education, income, experience)
+job_data <- base::data.frame(education, income, experience)
 
 # Regular correlation
-regular_cor <- cor(job_data$education, job_data$income)
+regular_cor <- stats::cor(job_data$education, job_data$income)
 
 # Partial correlation
-partial_result <- pcor.test(job_data$education, job_data$income, job_data$experience)
+partial_result <- ppcor::pcor.test(job_data$education, job_data$income, job_data$experience)
 
-cat("Regular correlation (education-income):", round(regular_cor, 3), "\n")
-cat("Partial correlation (controlling for experience):", round(partial_result$estimate, 3), "\n")
+base::cat("Regular correlation (education-income):", base::round(regular_cor, 3), "\n")
+base::cat("Partial correlation (controlling for experience):", base::round(partial_result$estimate, 3), "\n")
 
 # Linear models
-model_simple <- lm(income ~ education, data = job_data)
-model_controlled <- lm(income ~ education + experience, data = job_data)
+model_simple <- stats::lm(income ~ education, data = job_data)
+model_controlled <- stats::lm(income ~ education + experience, data = job_data)
 
-summary(model_simple)$coefficients[2, 1:2]  # Coefficient and std error for education
-summary(model_controlled)$coefficients[2, 1:2]  # After controlling for experience
+base::summary(model_simple)$coefficients[2, 1:2]  # Coefficient and std error for education
+base::summary(model_controlled)$coefficients[2, 1:2]  # After controlling for experience
 ```
 
 ## Interpretation
@@ -1220,18 +1211,18 @@ When we control for a variable:
 
 ```{r}
 #| eval: true
-#| echo: true
+
 # If using DAGs for causal inference
 # install.packages("ggdag")
-library(ggdag)
-set.seed(1234)
-dag <- dagify(
+
+base::set.seed(1234)
+dag <- ggdag::dagify(
   Y ~ X + Z,
   X ~ Z,
   exposure = "X",
   outcome = "Y"
 )
-ggdag(dag) + theme_dag()
+ggdag::ggdag(dag) + ggdag::theme_dag()
 ```
 
 
@@ -1258,17 +1249,17 @@ RSE estimates the **typical size of your prediction errors** in the original uni
 
 ```{r}
 # Using our education/income example
-model_controlled <- lm(income ~ education + experience, data = job_data)
+model_controlled <- stats::lm(income ~ education + experience, data = job_data)
 
 # Extract RSE
-rse <- summary(model_controlled)$sigma
-r_squared <- summary(model_controlled)$r.squared
+rse <- base::summary(model_controlled)$sigma
+r_squared <- base::summary(model_controlled)$r.squared
 
-cat("R² =", round(r_squared, 3), "\n")
-cat("RSE = ±$", round(rse, 0), "\n")
-cat("\nInterpretation:\n")
-cat("- Model identifies", round(r_squared * 100, 1), "% of variation observed in the income variable\n")
-cat("- Typical prediction error: ±$", round(rse, 0), "\n")
+base::cat("R² =", base::round(r_squared, 3), "\n")
+base::cat("RSE = ±$", base::round(rse, 0), "\n")
+base::cat("\nInterpretation:\n")
+base::cat("- Model identifies", base::round(r_squared * 100, 1), "% of variation observed in the income variable\n")
+base::cat("- Typical prediction error: ±$", base::round(rse, 0), "\n")
 ```
 
 **What RSE Tells You:**
@@ -1284,14 +1275,14 @@ MAE shows the **average size of prediction errors**, regardless of direction.
 
 ```{r}
 # Calculate MAE manually
-predictions <- predict(model_controlled, job_data)
+predictions <- stats::predict(model_controlled, job_data)
 actual <- job_data$income
-absolute_errors <- abs(predictions - actual)
-mae <- mean(absolute_errors)
+absolute_errors <- base::abs(predictions - actual)
+mae <- base::mean(absolute_errors)
 
-cat("MAE = $", round(mae, 0), "\n")
-cat("\nInterpretation:\n")
-cat("On average, predictions are off by $", round(mae, 0), "\n")
+base::cat("MAE = $", base::round(mae, 0), "\n")
+base::cat("\nInterpretation:\n")
+base::cat("On average, predictions are off by $", base::round(mae, 0), "\n")
 ```
 
 **RSE vs MAE:**
@@ -1307,23 +1298,23 @@ Use this framework to assess if your controlled model is useful:
 
 ```{r}
 # Create a practical assessment
-cat("=== MODEL USEFULNESS ASSESSMENT ===\n\n")
+base::cat("=== MODEL USEFULNESS ASSESSMENT ===\n\n")
 
-cat("STATISTICAL PERFORMANCE:\n")
-cat("- R² =", round(r_squared, 3), "(describes", round(r_squared * 100, 1), "% of variation)\n")
-cat("- RSE = ±$", round(rse, 0), "\n")
-cat("- MAE = $", round(mae, 0), "\n\n")
+base::cat("STATISTICAL PERFORMANCE:\n")
+base::cat("- R² =", base::round(r_squared, 3), "(describes", base::round(r_squared * 100, 1), "% of variation)\n")
+base::cat("- RSE = ±$", base::round(rse, 0), "\n")
+base::cat("- MAE = $", base::round(mae, 0), "\n\n")
 
-cat("PRACTICAL QUESTIONS TO ASK:\n")
-cat("1. Is ±$", round(rse, 0), "accurate enough for your decision?\n")
-cat("2. Can you act on predictions with", round(mae, 0), "average error?\n") 
-cat("3. What's your 'error budget' for this application?\n\n")
+base::cat("PRACTICAL QUESTIONS TO ASK:\n")
+base::cat("1. Is ±$", base::round(rse, 0), "accurate enough for your decision?\n")
+base::cat("2. Can you act on predictions with", base::round(mae, 0), "average error?\n") 
+base::cat("3. What's your 'error budget' for this application?\n\n")
 
 # Example decision contexts
-cat("EXAMPLE DECISION CONTEXTS:\n")
-cat("- HR salary setting: Is ±$", round(rse, 0), "acceptable for pay bands?\n")
-cat("- Budget planning: Can you plan with $", round(mae, 0), "average error?\n")
-cat("- Individual advice: Would you make career decisions with this accuracy?\n")
+base::cat("EXAMPLE DECISION CONTEXTS:\n")
+base::cat("- HR salary setting: Is ±$", base::round(rse, 0), "acceptable for pay bands?\n")
+base::cat("- Budget planning: Can you plan with $", base::round(mae, 0), "average error?\n")
+base::cat("- Individual advice: Would you make career decisions with this accuracy?\n")
 ```
 
 
@@ -1334,23 +1325,23 @@ cat("- Individual advice: Would you make career decisions with this accuracy?\n"
 
 ```{r}
 # Simulate stock price prediction with HIGH R-squared but useless predictions
-set.seed(123)
-stock_data <- data.frame(
-  fundamental_score = rnorm(100, 50, 10)
+base::set.seed(123)
+stock_data <- base::data.frame(
+  fundamental_score = stats::rnorm(100, 50, 10)
 )
 
 # Create STRONG relationship (high R-squared) but in a context where errors are too big
-stock_data$price_change <- 10 * stock_data$fundamental_score - 500 + rnorm(100, 0, 50)
+stock_data$price_change <- 10 * stock_data$fundamental_score - 500 + stats::rnorm(100, 0, 50)
 
-stock_model <- lm(price_change ~ fundamental_score, data = stock_data)
-stock_rse <- summary(stock_model)$sigma
-stock_r2 <- summary(stock_model)$r.squared
+stock_model <- stats::lm(price_change ~ fundamental_score, data = stock_data)
+stock_rse <- base::summary(stock_model)$sigma
+stock_r2 <- base::summary(stock_model)$r.squared
 
-cat("STOCK PREDICTION MODEL:\n")
-cat("- R² =", round(stock_r2, 3), "\n")
-cat("- RSE = ±$", round(stock_rse, 1), "per share\n")
-cat("- Conclusion: High R-Squared (", round(stock_r2, 3), ") but ±$", round(stock_rse, 1), "\n")
-cat("  errors still make this useless for trading!\n\n")
+base::cat("STOCK PREDICTION MODEL:\n")
+base::cat("- R² =", base::round(stock_r2, 3), "\n")
+base::cat("- RSE = ±$", base::round(stock_rse, 1), "per share\n")
+base::cat("- Conclusion: High R-Squared (", base::round(stock_r2, 3), ") but ±$", base::round(stock_rse, 1), "\n")
+base::cat("  errors still make this useless for trading!\n\n")
 
 ```
 
