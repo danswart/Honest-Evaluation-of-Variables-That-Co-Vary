@@ -2,23 +2,54 @@
 title: "Scientific Inquiry is Difficult, Data Surfing is Easy"
 subtitle: "Most Education Research is ***NOT*** Science"
 bibliography: manual-refs.bib
+date: today
+date-format: long
+# bibliography: manual-refs.bib
 format:
   html:
-    code-copy: true
-    include-after-body: 
+    resources:
+      - reference-backlinks.js
+    include-after-body:    
       - text: |
-         <script type="text/javascript" src="reference-backlinks.js"></script>
-    css: 
+          # <script type="text/javascript" src="reference-backlinks.js"></script>
+    default: true         
+    code-copy: true
+    code-link: true        # This adds individual buttons
+    code-fold: true        # Hide code by default, show on click
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-block-bg: "#FAEBD7"
+    code-block-border-left: "#31BAE9"
+    embed-resources: true
+    include-in-header:
+      - text: 
+          <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
+      - header.html
+    css:
       - swart.css
+      - tachyons.min.css
+      - r-colors.css
+    fontsize: 18pt
+    lightbox: true
     page-layout: full
     fig-width: 12
     fig-height: 10
     fig-dpi: 300
+    html-math-method: katex
     df-print: paged
-    code-overflow: wrap
     toc: true
+    toc-float: true
     citeproc: true
     link-citations: true
+    linestretch: 1.0
+    
+    
+    
   typst:
     fig-width: 12
     fig-height: 10
@@ -27,8 +58,41 @@ format:
       x: 1in
       y: 1in
     toc: true
-    fontsize: 14pt
-    mainfont: "Latin Modern Roman"
+    fontsize: 16pt
+    mainfont: "Cabin"
+  
+    
+  revealjs:
+    slide-number: true
+    transition: fade
+    code-overflow: wrap
+    center: true
+    smaller: true
+    scrollable: true
+    chalkboard: true
+    multiplex: false
+    theme: solarized
+    reference-location: margin
+    logo: img/red-cross-640-435.png
+    footer: "Footer text"
+    code-block-height: 650px
+
+
+
+  # docx:
+  #   highlight-style: github
+  #   fig_caption: true
+
+
+
+editor: source
+
+quarto:
+  render:
+    cache-refresh: true
+
+
+# for .qmd filesd
 execute:
   echo: false
   message: false
@@ -36,11 +100,29 @@ execute:
   eval: true
   fig-width: 12
   fig-height: 10
+
+
+# for .rmd files
+knitr:
+  opts_chunk:
+    echo: false
+    error: false
+    warning: false
+    message: false
+    cache: false
+
+
 ---
 
 ```{r}
 #| label: setup
 #| include: false
+
+
+# install.packages(c("mapview", "survey", "srvyr", "arcgislayers"))
+
+# census_api_key("95496766c51541ee6f402c1e1a8658581285b759", install = TRUE, overwrite = TRUE)
+
 
 
 
@@ -75,7 +157,6 @@ flextable::set_flextable_defaults(
   )
 
 
-
 # Set global theme for consistent plots
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20) + 
                    ggplot2::theme(plot.title = ggplot2::element_text(face = "bold",
@@ -103,12 +184,11 @@ ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20) +
                                                                  "pt")))
 
 
-
-
 # Set seed for reproducibility
 set.seed(123)
 
 ```
+
 
 
 ::: callout-note
@@ -195,47 +275,42 @@ When within-group variation is large relative to the between-group variation sig
 For example, education researchers love to compare standardized scores of subgroups based solely on skin color, or other arbitrary categorization. Without further stratefication individuals within those subgroups can vary wildly in characteristics that also influence scores. This is within-group variation (noise). For example:
 
 ```{r}
-# load libraries
-library(tidyverse)
-library(DT)
-library(plotly)
-library(ggplot2)
-library(kableExtra)
-library(tibble)
-library(patchwork)
-library(ppcor)
-library(ggdag)
-library(ggplot2)
-library(corrplot)
-library(ggcorrplot)
-library(car)
-library(WRS2)
-library(boot)
-library(BayesFactor)
-library(pwr)
-library(qgraph)
-library(scales)
 
+# Create the data frame
 
-
-DT::datatable(
+tbl <- flextable::flextable(
   data.frame(
-    `Elements That Might Vary Widely Within Any Student Subgroup <br> (within-group variation) <br>Making The Noise Within Subgroups Drown Any Signals <br>That Might Be Present Between Subgroups` = c("Socioeconomic status", "Family structure","Time spent on homework",
-                                 "Attendance rates","Language spoken at home",
-                                 "Prior educational preparation",
-                                 "Cultural attitudes toward education","Age","Sex",
-                                 "Home environments","Access to books", "Number of observations"),
+    `Elements That Might Vary Widely Within Any Student Subgroup <br> (within-group variation) <br>Making The Noise Within Subgroups Drown Any Signals <br>That Might Be Present Between Subgroups` = c(
+      "Socioeconomic status",
+      "Family structure",
+      "Time spent on homework",
+      "Attendance rates",
+      "Language spoken at home",
+      "Prior educational preparation",
+      "Cultural attitudes toward education",
+      "Age",
+      "Sex",
+      "Home environments",
+      "Access to books",
+      "Number of observations"
+    ),
     check.names = FALSE
-  ),
-   rownames = FALSE,
-   options = list(
-    searching = FALSE,
-    ordering = FALSE,
-    paging = FALSE,
-    info = FALSE
-   ),
-  escape = FALSE
+  )
 )
+
+# Interpret the <br> as line breaks:
+tbl <- flextable::set_header_labels(
+  tbl,
+  `Elements That Might Vary Widely Within Any Student Subgroup <br> (within-group variation) <br>Making The Noise Within Subgroups Drown Any Signals <br>That Might Be Present Between Subgroups` =
+    "Elements That Might Vary Widely Within Any Student Subgroup\n(within-group variation)\nMaking The Noise Within Subgroups Drown Any Signals\nThat Might Be Present Between Subgroups"
+)
+
+# Optional formatting
+tbl <- flextable::align(tbl, align = "left", part = "all")
+tbl <- flextable::bold(tbl, part = "header")
+tbl <- flextable::autofit(tbl)
+
+tbl
 
 ```
 
@@ -309,161 +384,163 @@ Using synthetic data that mimics the study to illustrate the phenomena:
 
 ```{r}
 # Recreate the original simulated data
-library(ggplot2)
-library(dplyr)
+# library(ggplot2)
+# library(dplyr)
 
-set.seed(123)  # For reproducible results
+base::set.seed(123)  # For reproducible results
 ages <- 50:79
-hrt_effect <- ifelse(ages <= 60,
-                    rnorm(length(ages[ages <= 60]), mean = 0.2, sd = 0.1),  # Beneficial for younger
-                    rnorm(length(ages[ages > 60]), mean = -0.3, sd = 0.1))  # Harmful for older
+hrt_effect <- base::ifelse(ages <= 60,
+                    stats::rnorm(base::length(ages[ages <= 60]), mean = 0.2, sd = 0.1),  # Beneficial for younger
+                    stats::rnorm(base::length(ages[ages > 60]), mean = -0.3, sd = 0.1))  # Harmful for older
 
-whi_demo <- data.frame(
+whi_demo <- base::data.frame(
   Age = ages,
   HRT_Effect = hrt_effect,
-  Age_Group = ifelse(ages <= 60, "Younger Women (50-60)", "Older Women (61-79)")
+  Age_Group = base::ifelse(ages <= 60, "Younger Women (50-60)", "Older Women (61-79)")
 )
 
 # Create comprehensive ggplot2 visualizations showing Simpson's Paradox
 
 # Plot 1: The main Simpson's Paradox visualization
-p_paradox <- ggplot(whi_demo, aes(x = Age, y = HRT_Effect)) +
+p_paradox <- ggplot2::ggplot(whi_demo, ggplot2::aes(x = Age, y = HRT_Effect)) +
   # Overall regression line (ignoring age groups) - this is what the original study saw
-  geom_smooth(method = "lm", se = TRUE, color = "black", linewidth = 1.5,
+  ggplot2::geom_smooth(method = "lm", se = TRUE, color = "black", linewidth = 1.5,
               linetype = "solid", alpha = 0.3) +
   # Points colored by age group
-  geom_point(aes(color = Age_Group), size = 3, alpha = 0.8) +
+  ggplot2::geom_point(ggplot2::aes(color = Age_Group), size = 3, alpha = 0.8) +
   # Individual regression lines for each age group
-  geom_smooth(aes(color = Age_Group), method = "lm", se = FALSE, linewidth = 1) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "gray50", alpha = 0.7) +
-  scale_color_manual(values = c("#FF6B6B", "#74C0FC")) +
-  labs(title = "Simpson's Paradox in Women's Health Initiative",
+  ggplot2::geom_smooth(ggplot2::aes(color = Age_Group), method = "lm", se = FALSE, linewidth = 1) +
+  ggplot2::geom_hline(yintercept = 0, linetype = "dashed", color = "gray50", alpha = 0.7) +
+  ggplot2::scale_color_manual(values = base::c("#FF6B6B", "#74C0FC")) +
+  ggplot2::labs(title = "Simpson's Paradox in Women's Health Initiative",
        subtitle = "Black line = Original study (age ignored) \nColored lines = True relationships within age groups",
        x = "Age",
        y = "HRT Effect (positive = beneficial, negative = harmful)",
        color = "Age Group") +
-  annotate("text", x = 75, y = 0.1, label = "Original Study:\n'HRT is harmful'",
+  ggplot2::annotate("text", x = 75, y = 0.1, label = "Original Study:\n'HRT is harmful'",
            fontface = "bold", color = "black", size = 8) +
-  annotate("text", x = 55, y = 0.35, label = "Reality: Beneficial\nfor younger women",
+  ggplot2::annotate("text", x = 55, y = 0.35, label = "Reality: Beneficial\nfor younger women",
            fontface = "bold", color = "#FF6B6B", size = 8) +
-  annotate("text", x = 70, y = -0.45, label = "Reality: Harmful\nfor older women",
+  ggplot2::annotate("text", x = 70, y = -0.45, label = "Reality: Harmful\nfor older women",
            fontface = "bold", color = "#74C0FC", size = 8) +
-  theme_minimal(base_size = 28) +
-  theme(legend.position = "bottom",
-        plot.title = element_text(size = 28, face = "bold"),
-        plot.subtitle = element_text(size = 24),
-        axis.text = element_text(size = 20),
-        axis.title = element_text(size = 20, face = "bold"))
+  ggplot2::theme_minimal(base_size = 28) +
+  ggplot2::theme(legend.position = "bottom",
+        plot.title = ggplot2::element_text(size = 28, face = "bold"),
+        plot.subtitle = ggplot2::element_text(size = 24),
+        axis.text = ggplot2::element_text(size = 20),
+        axis.title = ggplot2::element_text(size = 20, face = "bold"))
 
-print(p_paradox)
+base::print(p_paradox)
 
 
 # Calculate the overall regression when age is ignored
-overall_model <- lm(HRT_Effect ~ Age, data = whi_demo)
-overall_slope <- coef(overall_model)[2]
-overall_intercept <- coef(overall_model)[1]
+overall_model <- stats::lm(HRT_Effect ~ Age, data = whi_demo)
+overall_slope <- stats::coef(overall_model)[2]
+overall_intercept <- stats::coef(overall_model)[1]
 
 # Calculate regression within each age group
-younger_model <- lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age <= 60, ])
-older_model <- lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age > 60, ])
+younger_model <- stats::lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age <= 60, ])
+older_model <- stats::lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age > 60, ])
 
 # Summary table showing the paradox
-paradox_summary <- data.frame(
-  Analysis = c("Original Study (Age Ignored)", "Younger Women Only (50-60)", "Older Women Only (61-79)"),
-  Sample_Size = c(nrow(whi_demo),
-                  sum(whi_demo$Age <= 60),
-                  sum(whi_demo$Age > 60)),
-  Mean_Effect = c(round(mean(whi_demo$HRT_Effect), 3),
-                  round(mean(whi_demo$HRT_Effect[whi_demo$Age <= 60]), 3),
-                  round(mean(whi_demo$HRT_Effect[whi_demo$Age > 60]), 3)),
-  Slope = c(round(overall_slope, 4),
-            round(coef(younger_model)[2], 4),
-            round(coef(older_model)[2], 4)),
-  Conclusion = c("HRT appears harmful overall",
+paradox_summary <- base::data.frame(
+  Analysis = base::c("Original Study (Age Ignored)", "Younger Women Only (50-60)", "Older Women Only (61-79)"),
+  Sample_Size = base::c(base::nrow(whi_demo),
+                  base::sum(whi_demo$Age <= 60),
+                  base::sum(whi_demo$Age > 60)),
+  Mean_Effect = base::c(base::round(base::mean(whi_demo$HRT_Effect), 3),
+                  base::round(base::mean(whi_demo$HRT_Effect[whi_demo$Age <= 60]), 3),
+                  base::round(base::mean(whi_demo$HRT_Effect[whi_demo$Age > 60]), 3)),
+  Slope = base::c(base::round(overall_slope, 4),
+            base::round(stats::coef(younger_model)[2], 4),
+            base::round(stats::coef(older_model)[2], 4)),
+  Conclusion = base::c("HRT appears harmful overall",
                  "HRT beneficial for younger women",
                  "HRT harmful for older women"),
   stringsAsFactors = FALSE
 )
 
 # Calculate the overall regression when age is ignored
-overall_model <- lm(HRT_Effect ~ Age, data = whi_demo)
-overall_slope <- coef(overall_model)[2]
-overall_intercept <- coef(overall_model)[1]
+overall_model <- stats::lm(HRT_Effect ~ Age, data = whi_demo)
+overall_slope <- stats::coef(overall_model)[2]
+overall_intercept <- stats::coef(overall_model)[1]
 
 # Calculate regression within each age group
-younger_model <- lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age <= 60, ])
-older_model <- lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age > 60, ])
+younger_model <- stats::lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age <= 60, ])
+older_model <- stats::lm(HRT_Effect ~ Age, data = whi_demo[whi_demo$Age > 60, ])
 
 # Summary table showing the paradox
-paradox_summary <- data.frame(
-  Analysis = c("Original Study (Age Ignored)", "Younger Women Only (50-60)", "Older Women Only (61-79)"),
-  Sample_Size = c(nrow(whi_demo), 
-                  sum(whi_demo$Age <= 60), 
-                  sum(whi_demo$Age > 60)),
-  Mean_Effect = c(round(mean(whi_demo$HRT_Effect), 3),
-                  round(mean(whi_demo$HRT_Effect[whi_demo$Age <= 60]), 3),
-                  round(mean(whi_demo$HRT_Effect[whi_demo$Age > 60]), 3)),
-  Slope = c(round(overall_slope, 4),
-            round(coef(younger_model)[2], 4),
-            round(coef(older_model)[2], 4)),
-  Conclusion = c("HRT appears harmful overall",
+paradox_summary <- base::data.frame(
+  Analysis = base::c("Original Study (Age Ignored)", "Younger Women Only (50-60)", "Older Women Only (61-79)"),
+  Sample_Size = base::c(base::nrow(whi_demo), 
+                  base::sum(whi_demo$Age <= 60), 
+                  base::sum(whi_demo$Age > 60)),
+  Mean_Effect = base::c(base::round(base::mean(whi_demo$HRT_Effect), 3),
+                  base::round(base::mean(whi_demo$HRT_Effect[whi_demo$Age <= 60]), 3),
+                  base::round(base::mean(whi_demo$HRT_Effect[whi_demo$Age > 60]), 3)),
+  Slope = base::c(base::round(overall_slope, 4),
+            base::round(stats::coef(younger_model)[2], 4),
+            base::round(stats::coef(older_model)[2], 4)),
+  Conclusion = base::c("HRT appears harmful overall",
                  "HRT beneficial for younger women",
                  "HRT harmful for older women"),
   stringsAsFactors = FALSE
 )
 
-# Create DT table for Simpson's Paradox Summary
-library(DT)
+# Create table for Simpson's Paradox Summary
 
-# Main summary table
-DT::datatable(paradox_summary,
-              caption = "Simpson's Paradox Summary: How the Same Data Tells Different Stories",
-              options = list(
-                dom = 't',
-                columnDefs = list(list(className = 'dt-center', targets = 1:3))
-              ),
-              rownames = FALSE) %>%
-  DT::formatStyle('Mean_Effect',
-                  backgroundColor = DT::styleInterval(c(-0.1, 0.1), 
-                                                     c('#ffcccb', '#ffffcc', '#ccffcc')))
+# ---- Main summary table ----
 
-# Additional explanation table
-explanation_data <- data.frame(
-  Key_Insight = c(
-    "Overall Slope (Age Ignored)",
-    "Interpretation",
-    "Sample Composition Issue",
-    "Why Paradox Occurs",
-    "Lesson Learned"
-  ),
-  Details = c(
-    paste("Slope =", round(overall_slope, 4), "- suggests HRT effect", 
-          ifelse(overall_slope > 0, "improves", "worsens"), "with age"),
-    "Misleading! Makes HRT appear harmful overall",
-    paste("More older women (", sum(whi_demo$Age > 60), ") than younger women (", 
-          sum(whi_demo$Age <= 60), ") in study"),
-    paste("Older women's poor outcomes (mean =", 
-          round(mean(whi_demo$HRT_Effect[whi_demo$Age > 60]), 3), 
-          ") dominate the overall trend"),
-    "Always disaggregate data by relevant subgroups before drawing conclusions!"
-  ),
-  stringsAsFactors = FALSE
+# Create the flextable from your data frame
+ft_paradox_summary <- flextable::flextable(paradox_summary)
+
+# Add a descriptive caption and align text
+ft_paradox_summary <- ft_paradox_summary |>
+  flextable::set_caption(
+    caption = "Simpson's Paradox Summary: How a $1B Study Got it Wrong"
+  ) |>
+  flextable::align(align = "center", part = "all") |>
+  flextable::autofit()
+
+# --- Apply conditional background shading to Mean_Effect column ---
+
+# 1. Red (negative effects less than -0.1)
+ft_paradox_summary <- flextable::bg(
+  ft_paradox_summary,
+  i = paradox_summary$Mean_Effect < -0.1,
+  j = "Mean_Effect",
+  bg = "#ffcccb"   # light red
 )
 
-DT::datatable(explanation_data,
-              caption = "Why Simpson's Paradox Occurred in the WHI Study",
-              options = list(
-                dom = 't',
-                columnDefs = list(list(width = '200px', targets = 0),
-                                 list(width = '400px', targets = 1))
-              ),
-              colnames = c('Key Insight', 'Details'),
-              rownames = FALSE) %>%
-  DT::formatStyle('Key_Insight',
-                  fontWeight = 'bold') %>%
-  DT::formatStyle('Details',
-                  color = DT::styleEqual('Always disaggregate data by relevant subgroups before drawing conclusions!',
-                                        '#d73027'))
+# 2. Yellow (near zero effects between -0.1 and 0.1)
+ft_paradox_summary <- flextable::bg(
+  ft_paradox_summary,
+  i = paradox_summary$Mean_Effect >= -0.1 & paradox_summary$Mean_Effect <= 0.1,
+  j = "Mean_Effect",
+  bg = "#ffffcc"   # light yellow
+)
+
+# 3. Green (positive effects greater than 0.1)
+ft_paradox_summary <- flextable::bg(
+  ft_paradox_summary,
+  i = paradox_summary$Mean_Effect > 0.1,
+  j = "Mean_Effect",
+  bg = "#ccffcc"   # light green
+)
+
+# Set all text in that column to black for readability
+ft_paradox_summary <- flextable::color(
+  ft_paradox_summary,
+  j = "Mean_Effect",
+  color = "black"
+)
+
+# Final auto-fit for clean sizing
+ft_paradox_summary <- flextable::autofit(ft_paradox_summary)
+
+# Display the table
+ft_paradox_summary
+
 ```
 
 <br>
@@ -618,7 +695,7 @@ I seriously doubt that many (if any) of today's educators or education researche
 
     1.  group differences in results (e.g., standardized scores) indicate systemic bias?
 
-    2.  Subgroup analysis ‘can point out the state of equity in a system’
+    2.  Subgroup analysis 'can point out the state of equity in a system'
 
 -   Under what conditions would group differences be expected even in perfectly fair systems?
 
@@ -710,7 +787,7 @@ The stakes are too high for anything less. When poorly grounded research influen
 
 This statement comes early in the book and is repeated elsewhere. It starts with an **unproven assumption:** that group differences from population demographic percentages is prima facie evidence of systemic bias requiring intervention.
 
-> "Equity resources O’Neil, C. (2016). Weapons of math destruction: How big data increases inequality and threatens democracy (1st ed.). Crown." We All Count: https://weallcount.com/ Data for Black Lives: http://d4bl.org/" (Chapter 18) [@bovee2024data]
+> "Equity resources O'Neil, C. (2016). Weapons of math destruction: How big data increases inequality and threatens democracy (1st ed.). Crown." We All Count: https://weallcount.com/ Data for Black Lives: http://d4bl.org/" (Chapter 18) [@bovee2024data]
 
 ## Conclusion: Science or Activism?
 
