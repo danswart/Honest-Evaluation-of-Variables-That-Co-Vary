@@ -276,7 +276,7 @@ For example, education researchers love to compare standardized scores of subgro
 
 ```{r}
 
-# Create the data frame
+# Create the data frame.  It creates a list object.
 
 tbl <- flextable::flextable(
   data.frame(
@@ -298,7 +298,8 @@ tbl <- flextable::flextable(
   )
 )
 
-# Interpret the <br> as line breaks:
+# Convert the <br> to \n line breaks
+
 tbl <- flextable::set_header_labels(
   tbl,
   `Elements That Might Vary Widely Within Any Student Subgroup <br> (within-group variation) <br>Making The Noise Within Subgroups Drown Any Signals <br>That Might Be Present Between Subgroups` =
@@ -383,9 +384,7 @@ Why?
 Using synthetic data that mimics the study to illustrate the phenomena:
 
 ```{r}
-# Recreate the original simulated data
-# library(ggplot2)
-# library(dplyr)
+# Recreate the original study with simulated data
 
 base::set.seed(123)  # For reproducible results
 ages <- 50:79
@@ -497,7 +496,7 @@ ft_paradox_summary <- flextable::flextable(paradox_summary)
 # Add a descriptive caption and align text
 ft_paradox_summary <- ft_paradox_summary |>
   flextable::set_caption(
-    caption = "Simpson's Paradox Summary: How a $1B Study Got it Wrong"
+    caption = "Simpson's Paradox Summary Table: How a $1B Study Got it Wrong"
   ) |>
   flextable::align(align = "center", part = "all") |>
   flextable::autofit()
@@ -509,7 +508,7 @@ ft_paradox_summary <- flextable::bg(
   ft_paradox_summary,
   i = paradox_summary$Mean_Effect < -0.1,
   j = "Mean_Effect",
-  bg = "#ffcccb"   # light red
+  bg = "#FFC0C0"  # Slightly darker ⭐ RECOMMENDED
 )
 
 # 2. Yellow (near zero effects between -0.1 and 0.1)
