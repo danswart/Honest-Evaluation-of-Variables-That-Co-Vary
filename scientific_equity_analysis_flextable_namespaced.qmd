@@ -64,6 +64,7 @@ format:
     fontsize: 16pt
     mainfont: "Cabin"
   
+
     
   revealjs:
     slide-number: true
@@ -249,7 +250,7 @@ ggplot2::theme_set(
 
   
 # Set seed for reproducibility
-set.seed(123)
+base::set.seed(123)
 
 ```
 
@@ -317,15 +318,11 @@ For research to be scientific, it must include:
 
 #### This is NOT scientific research:
 
-education_data ->  
-
-* Test many multiples of demographic comparisons  
-* Group by every possible subgroup and compare to 'population' percentages
-* Summarize and apply tests of significance to all of them  
-* Report only the "significant" ones  
-* Claim these represent "discrimination"  
-* Conclude "bias exists"  
-  
+education_data |>
+  dplyr::group_by(every_possible_subgroup) |>
+  dplyr::summarize(test_scores = stats::t.test(score ~ treatment)) |>
+  dplyr::filter(p_value < 0.05) |>
+  conclude_bias_exists()
 
 
 ### Legitimate Scientific Use of Data Mining
@@ -334,24 +331,18 @@ education_data ->
 
 #### Phase 1: Exploratory (data mining)
 
-Analyze for potential_patterns:
-
-  education_data ->  
-  explore_patterns ->  
-  generate_hypotheses for testing
-
+potential_patterns <- education_data |>
+  explore_patterns() |>
+  generate_hypotheses()
 
 #### Phase 2: Confirmatory (scientific testing)
 
-test_specific_hypothesis:
-
-  hypothesis = "SES predicts achievement better than demographics", 
-  include controls 
-    family attitudes toward education
-    family_structure
-    prior_achievement
-    etc.
-  
+hypothesis_test <- new_education_data |>
+  test_specific_hypothesis(
+    hypothesis = "SES predicts achievement better than demographics",
+    controls = base::c("family attitudes toward education", "family_structure", "prior_achievement"),
+    pre_registered = TRUE
+  )
 
 
 ### Guidelines for Legitimate Use
@@ -378,11 +369,9 @@ test_specific_hypothesis:
 
 
 
-
 ## Abstract
 
 An earnest discussion of poor research methods in current educational research, including 'equity' claims;  contrasts rigorous scientific methodologies with current practice when investigating group differences in academic results. The astonishing fact is that most of the important research questions are never presented, or even asked for.
-
 
 
 
@@ -489,11 +478,10 @@ hypotheses_data <- base::data.frame(
   Testable = base::c("Yes", "Yes", "Yes", "Yes")
 )
 
-DT::datatable(hypotheses_data, 
-              caption = "Competing Hypotheses for Group Differences in Academic results",
-              options = list(pageLength = 10, scrollX = TRUE),
-              rownames = FALSE) |>
-  DT::formatStyle(columns = base::colnames(hypotheses_data), fontSize = '14px')
+flextable::flextable(hypotheses_data) |>
+  flextable::set_caption(caption = "Competing Hypotheses for Group Differences in Academic results") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 ---
@@ -520,13 +508,12 @@ confounding_vars <- base::data.frame(
   Impact_on_Validity = base::c("High", "High", "Medium", "Medium", "High", "High", "High", "Medium", "High")
 )
 
-DT::datatable(confounding_vars,
-              caption = "Critical Confounding Variables Often Ignored in Equity Research",
-              options = list(pageLength = 10, scrollX = TRUE),
-              rownames = FALSE) |>
-  DT::formatStyle("Impact_on_Validity", 
-                  backgroundColor = DT::styleEqual(base::c("High", "Medium"), 
-                                                   base::c("#ffcccc", "#ffffcc")))
+flextable::flextable(confounding_vars) |>
+  flextable::set_caption(caption = "Critical Confounding Variables Often Ignored in Equity Research") |>
+  flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = "#ffcccc") |>
+  flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = "#ffffcc") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 **Questions to Address:**
@@ -592,9 +579,9 @@ p1 <- ggplot2::ggplot(demo_data, ggplot2::aes(x = Score, fill = Group)) +
        subtitle = "Groups differ despite NO systematic treatment differences",
        x = "Test Score",
        y = "Density") +
-  ggplot2::geom_vline(data = demo_data 
-                      |> dplyr::group_by(Group) 
-                      |> dplyr::summarise(mean_score = base::mean(Score)),
+  ggplot2::geom_vline(data = demo_data |> 
+                        dplyr::group_by(Group) |> 
+                        dplyr::summarise(mean_score = base::mean(Score)),
              ggplot2::aes(xintercept = mean_score), linetype = "dashed", color = "black", size = 1)
 
 base::print(p1)
@@ -609,10 +596,10 @@ summary_stats <- demo_data |>
     .groups = 'drop'
   )
 
-DT::datatable(summary_stats,
-              caption = "Group Differences That Exist Due to Random Chance Alone",
-              options = list(dom = 't'),
-              rownames = FALSE)
+flextable::flextable(summary_stats) |>
+  flextable::set_caption(caption = "Group Differences That Exist Due to Random Chance Alone") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 
 ```
 
@@ -656,11 +643,11 @@ methodology_matrix <- base::data.frame(
                         "✓ **Enhanced Methods** - Need robustness checks")
 )
 
-DT::datatable(methodology_matrix,
-              caption = "Methodological Requirements by Study Type",
-              options = list(dom = 't', scrollX = TRUE),
-              rownames = FALSE,
-              escape = FALSE)
+flextable::flextable(methodology_matrix) |>
+  flextable::set_caption(caption = "Methodological Requirements by Study Type") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla() |>
+  ftExtra::colformat_md()
 
 ```
 
@@ -724,11 +711,11 @@ variance_comparison <- base::data.frame(
                     "Statistical analysis becomes invalid")
 )
 
-DT::datatable(variance_comparison,
-              caption = "Variance Decomposition: Why Group Comparisons Are Invalid",
-              options = list(dom = 't'),
-              rownames = FALSE) |>
-  DT::formatRound(columns = 'Value', digits = 1)
+flextable::flextable(variance_comparison) |>
+  flextable::set_caption(caption = "Variance Decomposition: Why Group Comparisons Are Invalid") |>
+  flextable::colformat_double(j = "Value", digits = 1) |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 
 # Visualize the problem
 demo_data_detailed <- base::data.frame(
@@ -820,13 +807,13 @@ variance_breakdown <- base::data.frame(
                base::round(stats::var(disadvantaged_subgroup), 1))
 )
 
-DT::datatable(variance_breakdown,
-              caption = "Why Disaggregation Matters: Variance Within 'Red' Category",
-              options = list(dom = 't'),
-              rownames = FALSE) |>
-  DT::formatStyle("Variance", 
-                  backgroundColor = DT::styleInterval(base::c(10000, 50000), 
-                                                      base::c("#90EE90", "#FFFF99", "#FFB6C1")))
+flextable::flextable(variance_breakdown) |>
+  flextable::set_caption(caption = "Why Disaggregation Matters: Variance Within 'Red' Category") |>
+  flextable::bg(i = ~ Variance > 50000, j = "Variance", bg = "#FFB6C1") |>
+  flextable::bg(i = ~ Variance > 10000 & Variance <= 50000, j = "Variance", bg = "#FFFF99") |>
+  flextable::bg(i = ~ Variance <= 10000, j = "Variance", bg = "#90EE90") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 
 ```
 
@@ -846,14 +833,14 @@ A perfect medical example of the same mathematical errors:
 
 # Simulated HRT effect by age (based on actual WHI findings)
 ages <- 50:79
-hrt_effect <- ifelse(ages <= 60, 
+hrt_effect <- base::ifelse(ages <= 60, 
                     stats::rnorm(base::length(ages[ages <= 60]), mean = 0.2, sd = 0.1),  # Beneficial for younger
                     stats::rnorm(base::length(ages[ages > 60]), mean = -0.3, sd = 0.1))  # Harmful for older
 
 whi_demo <- base::data.frame(
   Age = ages,
   HRT_Effect = hrt_effect,
-  Age_Group = ifelse(ages <= 60, "Younger Women (50-60)", "Older Women (61-79)")
+  Age_Group = base::ifelse(ages <= 60, "Younger Women (50-60)", "Older Women (61-79)")
 )
 
 p4 <- ggplot2::ggplot(whi_demo, ggplot2::aes(x = Age, y = HRT_Effect, color = Age_Group)) +
@@ -877,14 +864,14 @@ whi_summary <- whi_demo |>
   dplyr::summarize(
     Mean_Effect = base::round(base::mean(HRT_Effect), 3),
     N_Ages = dplyr::n(),
-    Conclusion = ifelse(base::mean(HRT_Effect) > 0, "HRT Beneficial", "HRT Harmful"),
+    Conclusion = base::ifelse(base::mean(HRT_Effect) > 0, "HRT Beneficial", "HRT Harmful"),
     .groups = 'drop'
   )
 
-DT::datatable(whi_summary,
-              caption = "HRT Effects by Age Group: Importance of Disaggregation",
-              options = list(dom = 't'),
-              rownames = FALSE)
+flextable::flextable(whi_summary) |>
+  flextable::set_caption(caption = "HRT Effects by Age Group: Importance of Disaggregation") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 
 ```
 
@@ -923,13 +910,12 @@ homogeneity_results <- base::data.frame(
   Valid_Comparison = base::c("No", "No", "No", "Yes", "Yes")
 )
 
-DT::datatable(homogeneity_results,
-              caption = "Homogeneity Tests: Most Demographic Comparisons Are Invalid",
-              options = list(dom = 't'),
-              rownames = FALSE) |>
-  DT::formatStyle("Valid_Comparison", 
-                  backgroundColor = DT::styleEqual(base::c("Yes", "No"), 
-                                                   base::c("#90EE90", "#FFB6C1")))
+flextable::flextable(homogeneity_results) |>
+  flextable::set_caption(caption = "Homogeneity Tests: Most Demographic Comparisons Are Invalid") |>
+  flextable::bg(i = ~ Valid_Comparison == "Yes", j = "Valid_Comparison", bg = "#90EE90") |>
+  flextable::bg(i = ~ Valid_Comparison == "No", j = "Valid_Comparison", bg = "#FFB6C1") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 Before any group comparison, researchers should test for equal variances. If p < 0.05, groups are not homogeneous and comparison is statistically invalid.
@@ -960,7 +946,7 @@ ses_effect <- dplyr::case_when(
   student_data$ses_level == "Low" ~ -150
 )
 
-family_effect <- ifelse(student_data$family_structure == "Two-parent", 50, -30)
+family_effect <- base::ifelse(student_data$family_structure == "Two-parent", 50, -30)
 education_effect <- dplyr::case_when(
   student_data$parent_education == "College+" ~ 100,
   student_data$parent_education == "High School" ~ 0,
@@ -1002,11 +988,11 @@ variance_decomp <- base::data.frame(
                 base::round(100 - pct_between_demo - pct_within_demo, 1))
 )
 
-DT::datatable(variance_decomp,
-              caption = "Typical Variance Decomposition in Educational Data",
-              options = list(dom = 't'),
-              rownames = FALSE) |>
-  DT::formatRound(columns = 'Variance', digits = 0)
+flextable::flextable(variance_decomp) |>
+  flextable::set_caption(caption = "Typical Variance Decomposition in Educational Data") |>
+  flextable::colformat_double(j = "Variance", digits = 0) |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 
 # Visualization - histogram with faceting
 p5 <- ggplot2::ggplot(student_data, ggplot2::aes(x = test_score, fill = ses_level)) +
@@ -1071,10 +1057,10 @@ within_group_demo <- base::data.frame(
   )
 )
 
-DT::datatable(within_group_demo,
-              caption = "Hidden Heterogeneity Within Government-Defined Categories",
-              options = list(pageLength = 12, scrollX = TRUE),
-              rownames = FALSE)
+flextable::flextable(within_group_demo) |>
+  flextable::set_caption(caption = "Hidden Heterogeneity Within Government-Defined Categories") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 #### The Thomas Sowell Principle: Disaggregate Until Comparable
@@ -1092,20 +1078,20 @@ base::set.seed(101)
 # Create detailed doctor data
 n_doctors <- 1000
 doctor_data <- base::data.frame(
-  gender = sample(base::c("Male", "Female"), n_doctors, replace = TRUE, prob = base::c(0.6, 0.4)),
-  specialty = sample(base::c("Surgery", "Family Medicine", "Pediatrics", "Radiology"), 
+  gender = base::sample(base::c("Male", "Female"), n_doctors, replace = TRUE, prob = base::c(0.6, 0.4)),
+  specialty = base::sample(base::c("Surgery", "Family Medicine", "Pediatrics", "Radiology"), 
                     n_doctors, replace = TRUE, prob = base::c(0.2, 0.3, 0.25, 0.25)),
-  years_experience = sample(1:30, n_doctors, replace = TRUE),
-  marital_status = sample(base::c("Married", "Single"), n_doctors, replace = TRUE, prob = base::c(0.7, 0.3)),
-  children = sample(0:3, n_doctors, replace = TRUE, prob = base::c(0.3, 0.3, 0.25, 0.15)),
-  career_breaks = sample(0:5, n_doctors, replace = TRUE, prob = base::c(0.6, 0.2, 0.1, 0.05, 0.03, 0.02))
+  years_experience = base::sample(1:30, n_doctors, replace = TRUE),
+  marital_status = base::sample(base::c("Married", "Single"), n_doctors, replace = TRUE, prob = base::c(0.7, 0.3)),
+  children = base::sample(0:3, n_doctors, replace = TRUE, prob = base::c(0.3, 0.3, 0.25, 0.15)),
+  career_breaks = base::sample(0:5, n_doctors, replace = TRUE, prob = base::c(0.6, 0.2, 0.1, 0.05, 0.03, 0.02))
 )
 
 # Career breaks more common for women with children
 female_with_children <- doctor_data$gender == "Female" & doctor_data$children > 0
 doctor_data$career_breaks[female_with_children] <- 
   doctor_data$career_breaks[female_with_children] + 
-  rpois(base::sum(female_with_children), 1)
+  stats::rpois(base::sum(female_with_children), 1)
 
 # Base salary calculation
 base_salary <- 200000
@@ -1147,15 +1133,15 @@ comparable_comparison <- comparable_doctors |>
 # Combine results
 sowell_demo <- dplyr::bind_rows(overall_comparison, comparable_comparison)
 
-DT::datatable(sowell_demo,
-              caption = "The Thomas Sowell Principle: Disaggregate Until Comparable",
-              options = list(dom = 't'),
-              rownames = FALSE) |>
-  DT::formatCurrency(columns = 'Mean_Salary', currency = "$", digits = 0)
+flextable::flextable(sowell_demo) |>
+  flextable::set_caption(caption = "The Thomas Sowell Principle: Disaggregate Until Comparable") |>
+  flextable::colformat_num(j = "Mean_Salary", prefix = "$", big.mark = ",", digits = 0) |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 
 # Visualization
 p6 <- doctor_data |>
-  dplyr::mutate(comparable_group = ifelse(children == 0 & career_breaks == 0 & marital_status == "Single", 
+  dplyr::mutate(comparable_group = base::ifelse(children == 0 & career_breaks == 0 & marital_status == "Single", 
                                   "Comparable", "All Doctors")) |>
   dplyr::group_by(gender, comparable_group) |>
   dplyr::summarise(mean_salary = base::mean(salary), .groups = 'drop') |>
@@ -1207,25 +1193,25 @@ high_performers <- student_data |>
     N = dplyr::n(),
     .groups = 'drop'
   ) |>
-  dplyr::arrange(base::c(Mean_Score))
+  dplyr::arrange(dplyr::desc(Mean_Score))
 
-DT::datatable(high_performers,
-              caption = "High Performers: More Similarity Across Demographics Than Within",
-              options = list(pageLength = 10),
-              rownames = FALSE)
+flextable::flextable(high_performers) |>
+  flextable::set_caption(caption = "High Performers: More Similarity Across Demographics Than Within") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 
 # Show correlation matrix
 correlation_data <- student_data |>
   dplyr::select(test_score, ses_level, family_structure, parent_education, demographic_group) |>
   dplyr::mutate(
     ses_numeric = dplyr::case_when(ses_level == "High" ~ 3, ses_level == "Medium" ~ 2, ses_level == "Low" ~ 1),
-    family_numeric = ifelse(family_structure == "Two-parent", 1, 0),
+    family_numeric = base::ifelse(family_structure == "Two-parent", 1, 0),
     education_numeric = dplyr::case_when(parent_education == "College+" ~ 3, 
                                  parent_education == "High School" ~ 2, 
                                  parent_education == "< High School" ~ 1),
-    demo_red = ifelse(demographic_group == "Red", 1, 0),
-    demo_green = ifelse(demographic_group == "Green", 1, 0),
-    demo_blue = ifelse(demographic_group == "Blue", 1, 0)
+    demo_red = base::ifelse(demographic_group == "Red", 1, 0),
+    demo_green = base::ifelse(demographic_group == "Green", 1, 0),
+    demo_blue = base::ifelse(demographic_group == "Blue", 1, 0)
   ) |>
   dplyr::select(test_score, ses_numeric, family_numeric, education_numeric, demo_red, demo_green, demo_blue)
 
@@ -1238,13 +1224,13 @@ correlation_table <- base::data.frame(
   Importance = base::c("High", "Medium", "High", "Low", "Low", "Low")
 )
 
-DT::datatable(correlation_table,
-              caption = "What Actually Predicts Academic Success",
-              options = list(dom = 't'),
-              rownames = FALSE) |>
-  DT::formatStyle("Importance", 
-                  backgroundColor = DT::styleEqual(base::c("High", "Medium", "Low"), 
-                                                   base::c("#90EE90", "#FFFF99", "#FFB6C1")))
+flextable::flextable(correlation_table) |>
+  flextable::set_caption(caption = "What Actually Predicts Academic Success") |>
+  flextable::bg(i = ~ Importance == "High", j = "Importance", bg = "#90EE90") |>
+  flextable::bg(i = ~ Importance == "Medium", j = "Importance", bg = "#FFFF99") |>
+  flextable::bg(i = ~ Importance == "Low", j = "Importance", bg = "#FFB6C1") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 **This suggests the real variables of interest are:**
@@ -1280,13 +1266,12 @@ pseudo_science_steps <- base::data.frame(
   Validity = base::c("Invalid", "Invalid", "Invalid", "Invalid")
 )
 
-DT::datatable(pseudo_science_steps,
-              caption = "Current vs. Scientific Approaches to Educational Equity",
-              options = list(dom = 't', scrollX = TRUE),
-              rownames = FALSE,
-              escape = FALSE) |>
-  DT::formatStyle("Validity", 
-                  backgroundColor = DT::styleEqual("Invalid", "#FFB6C1"))
+flextable::flextable(pseudo_science_steps) |>
+  flextable::set_caption(caption = "Current vs. Scientific Approaches to Educational Equity") |>
+  flextable::bg(i = ~ Validity == "Invalid", j = "Validity", bg = "#FFB6C1") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla() |>
+  ftExtra::colformat_md()
 ```
 
 ## Medical Research Analogy
@@ -1320,10 +1305,10 @@ pharma_analogy <- base::data.frame(
   )
 )
 
-DT::datatable(pharma_analogy,
-              caption = "Medical Research Standards vs. Educational Equity Research",
-              options = list(pageLength = 10, scrollX = TRUE),
-              rownames = FALSE)
+flextable::flextable(pharma_analogy) |>
+  flextable::set_caption(caption = "Medical Research Standards vs. Educational Equity Research") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 **Result:** Public health catastrophe
@@ -1355,10 +1340,10 @@ checklist_before <- base::data.frame(
   Status = base::rep("Required", 5)
 )
 
-DT::datatable(checklist_before,
-              caption = "Pre-Analysis Requirements",
-              options = list(pageLength = 10, scrollX = TRUE),
-              rownames = FALSE)
+flextable::flextable(checklist_before) |>
+  flextable::set_caption(caption = "Pre-Analysis Requirements") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 ### During Analysis: Rational Subgrouping
@@ -1387,10 +1372,10 @@ analysis_requirements <- base::data.frame(
   )
 )
 
-DT::datatable(analysis_requirements,
-              caption = "Analysis Requirements for Valid Group Comparisons",
-              options = list(pageLength = 10, scrollX = TRUE),
-              rownames = FALSE)
+flextable::flextable(analysis_requirements) |>
+  flextable::set_caption(caption = "Analysis Requirements for Valid Group Comparisons") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 ### Standard Analysis Checks
@@ -1426,12 +1411,12 @@ red_flags <- base::data.frame(
   Warning_Sign = base::c("No", "Many", "No", "No", "Just demographics", "Within groups")
 )
 
-DT::datatable(red_flags,
-              caption = "Red Flags for Data Mining vs. Hypothesis Testing",
-              options = list(pageLength = 10, scrollX = TRUE),
-              rownames = FALSE) |>
-  DT::formatStyle("Warning_Sign", backgroundColor = "#FFB6C1") |>
-  DT::formatStyle("Good_Answer", backgroundColor = "#90EE90")
+flextable::flextable(red_flags) |>
+  flextable::set_caption(caption = "Red Flags for Data Mining vs. Hypothesis Testing") |>
+  flextable::bg(j = "Warning_Sign", bg = "#FFB6C1") |>
+  flextable::bg(j = "Good_Answer", bg = "#90EE90") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 If you can't answer these satisfactorily, you're probably data mining rather than hypothesis testing.
@@ -1473,10 +1458,10 @@ violations <- base::data.frame(
   )
 )
 
-DT::datatable(violations,
-              caption = "Violations of Scientific Method in Current Equity Research",
-              options = list(pageLength = 10, scrollX = TRUE),
-              rownames = FALSE)
+flextable::flextable(violations) |>
+  flextable::set_caption(caption = "Violations of Scientific Method in Current Equity Research") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
 ```
 
 ::: {.callout-note}

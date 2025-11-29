@@ -61,9 +61,10 @@ format:
       x: 1in
       y: 1in
     toc: true
-    fontsize: 14pt
+    fontsize: 16pt
     mainfont: "Cabin"
   
+
     
   revealjs:
     slide-number: true
@@ -121,98 +122,14 @@ knitr:
 ```{r}
 #| label: setup
 #| include: false
-# R version 4.4.3 (2025-02-28)
-# Platform: x86_64-apple-darwin20
-# Running under: macOS Sequoia 15.6.1
-# Rstudio 2025.9.2.418 (Cucumberleaf Sunflower)
-# 
+
 
 # install.packages(c("mapview", "survey", "srvyr", "arcgislayers"))
 
 # census_api_key("95496766c51541ee6f402c1e1a8658581285b759", install = TRUE, overwrite = TRUE)
 
 
-# # load libraries
-
-# library(BayesFactor) # Computation of Bayes Factors for Common Designs
-# library(boot) # Bootstrap Functions
-# library(broom) # Convert Statistical Objects into Tidy Tibbles
-# library(colorspace) # A Toolbox for Manipulating and Assessing Colors and Palettes
-# library(camcorder) # Record Your Plot History
-# library(car) # Companion to Applied Regression
-# library(causaldata) # Example Data Sets for Causal Inference Textbooks
-# library(corrplot) # Visualization of a Correlation Matrix
-# library(cowplot) # Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-# library(dagitty) # Graphical Analysis of Structural Causal Models  
-# library(DiagrammeR) # Graph/Network Visualization 
-# library(dlookr) # Tools for Data Diagnosis, Exploration, Transformation 
-# library(dplyr) # A Grammar of Data Manipulation
-# library(DT) # A Wrapper of the JavaScript Library 'DataTables'
-# library(dutchmasters) # Color Palettes based on Famous Paintings 
-# library(flexdashboard) # R Markdown Format for Flexible Dashboards
-# library(flextable) # Functions for Tabular Reporting  
-# library(forcats) # Tools for Working with Categorical Variables (Factors)
-# library(gganimate) # A Grammar of Animated Graphics
-# library(ggcorrplot) # Visualization of a Correlation Matrix using 'ggplot2'
-# library(ggdag) # Analyze and Create Elegant Directed Acyclic Graphs      
-# library(ggforce) # Accelerating 'ggplot2' 
-# library(gghighlight) # Highlight Lines and Points in 'ggplot2' 
-# library(ggplot2) # Create Elegant Data Visualizations Using the Grammar of Graphics
-# library(ggokabeito) # 'Okabe-Ito' Scales for 'ggplot2' and 'ggraph'
-# library(ggpubr) # 'ggplot2' Based Publication Ready Plots
-# library(ggrepel) # Automatically Position Non-Overlapping Text Labels with 'ggplot2'
-# library(ggtext) # Improved Text Rendering Support for 'ggplot2' 
-# library(ggthemes) # Extra Themes, Scales and Geoms for 'ggplot2'
-# library(glue) # Interpreted String Literals    
-# library(grid) # The Grid Graphics Package
-# library(gt) # Easily Create Presentation-Ready Display Tables
-# library(gtExtras) # Extending 'gt' for Beautiful HTML Tables
-# library(halfmoon) # Techniques to Build Better Balance
-# library(haven) # Import and Export 'SPSS', 'Stata' and 'SAS' Files
-# library(here) # A Simpler Way to Find Your Files
-# library(htmltools) # Tools for HTML
-# library(htmlwidgets) # HTML Widgets for R
-# library(janitor) # Simple Tools for Examining and Cleaning Dirty Data 
-# library(kableExtra) # Construct Complex Table with 'kable' and Pipe Syntax
-# library(knitr) # A General-Purpose Package for Dynamic Report Generation in R   
-# library(lavaan) # Latent Variable Analysis     
-# library(lubridate) # Make Dealing with Dates a Little Easier
-# library(monochromeR) # Easily Create, View and Use Monochrome Color Palettes 
-# library(paletteer) # Comprehensive Collection of Color Palettes 
-# library(patchwork) # The Composer of Plots
-# library(plotly) # Create Interactive Web Graphics via 'plotly.js'
-# library(ppcor) # Partial and Semi-Partial (Part) Correlation
-# library(propensity) # A Toolkit for Calculating and Working with Propensity Scores
-# library(prettycode) # Pretty Print R Code in the Terminal
-# library(PSW) # Propensity Score Weighting Methods for Dichotomous Treatments
-# library(purrr) # Functional Programming Tools
-# library(pwr) # Basic Functions for Power Analysis
-# library(qgraph) # Graph Plotting Methods, Psychometric Data Visualization and Graphical Model Estimation
-# library(qicharts2) # Quality Improvement Charts
-# library(RColorBrewer) # ColorBrewer Palettes 
-# library(readr) # Read Rectangular Text Data
-# library(readxl) # Read Excel Files
-# library(rethinking) # Statistical Rethinking book package
-# library(rlang) # Functions for Base Types and Core R and 'Tidyverse' Features
-# library(rsample) # General Resampling Infrastructure
-# library(scales) # Scale Functions for Visualization
-# library(shiny) # Web Application Framework for R
-# library(shinyobjects) # Access Reactive Data Interactively   
-# library(skimr) # Compact and Flexible Summaries of Data
-# library(stringr) # Simple, Consistent Wrappers for Common String Operations
-# library(tibble) # Simple Data Frames
-# library(tidycensus) # Load US Census Boundary and Attribute Data as 'tidyverse' and 'sf'-Ready Data Frames
-# library(tidylog) # Logging for 'dplyr' and 'tidyr' Functions
-# library(tidyr) # Tidy Messy Data
-# library(tidytext) # Text Mining using 'dplyr', 'ggplot2', and Other Tidy Tools 
-# library(tsibble) # Tidy Temporal Data Frames and Tools        
-# library(viridis) # Colorblind-Friendly Color Maps for R 
-# library(visdat) # Preliminary Visualization of Data
-# library(vroom) # Read and Write Rectangular Text Data Quickly    
-# library(wesanderson) # A Wes Anderson Palette Generator 
-# library(writexl) # Export Data Frames to Excel 'xlsx' Format 
-# library(WRS2) # A Collection of Robust Statistical Methods
-
+# # load libraries - NOT NEEDED
 
 
 # Force dplyr's select to take precedence
@@ -220,43 +137,127 @@ select <- dplyr::select
 filter <- dplyr::filter
 
 # Options
-base::options(scipen = 999)
-base::options(qic.clshade = T) # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-base::options(qic.linecol = 'black') # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-base::options(qic.signalcol = "firebrick") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-base::options(qic.targetcol = "purple") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
-base::options(DT.options = base::list(dom = 'pBlfrti')) # Add buttons, filtering, and top (t) pagination controls
-base::options(shiny.maxRequestSize = 50 * 1024^2) # Set upload maximum to 50 MB
-base::options(tigris_use_cache = TRUE)
+options(scipen = 999)
+options(qic.clshade = T) # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
+options(qic.linecol = 'black') # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
+options(qic.signalcol = "firebrick") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
+options(qic.targetcol = "purple") # NO LONGER NEEDED; CHARTS ALL PREPARED WITH GGPLOT2 ONLY
+options(DT.options = list(dom = 'pBlfrti')) # Add buttons, filtering, and top (t) pagination controls
+options(shiny.maxRequestSize = 50 * 1024^2) # Set upload maximum to 50 MB
+options(tigris_use_cache = TRUE)
+
+
+flextable::set_flextable_defaults(
+  font.size = 14, 
+  font.family = "Cabin",
+  font.color = "black",
+  table.layout = "fixed",
+  border.color = "darkgray",
+  padding.top = 3, padding.bottom = 3,
+  padding.left = 4, padding.right = 4,
+  line_spacing = 1.3,
+  digits = 2,
+  decimal.mark = ",",
+  big.mark = " ",
+  na_str = "<na>"
+  # flextable::theme_alafoli()	|>  # BLAH
+  # flextable::theme_apa()  # THIS IS NICE
+  # flextable::theme_booktabs() |>  # NICE, MORE COMPACT
+  # flextable::theme_box() |>   # OK, INCLUDES CELL BORDERS
+  # flextable::theme_tron() |>  # 'DARK MODE' BLUE TEXT
+  # flextable::theme_tron_legacy() |>   # 'DARK MODE' YELLOW TEXT
+  # flextable::theme_vader() |>    # 'DARK MODE' WHITE TEXT
+  # flextable::theme_vanilla() |>   # NOT SPECIAL
+  # flextable::theme_zebra()	|>
+  )
 
 
 # Set global theme for consistent plots
-ggplot2::theme_set(ggplot2::theme_minimal(base_size = 20) + 
-                   ggplot2::theme(plot.title = ggplot2::element_text(face = "bold",
-                                                                      size = 26),
-                                  plot.subtitle = ggplot2::element_text(face = "bold",
-                                                                         size = 24),
-                                  axis.title.x = ggplot2::element_text(face = "bold",
-                                                                        size = 22),
-                                  axis.title.y = ggplot2::element_text(face = "bold",
-                                                                        size = 22),
-                                  axis.text.x = ggplot2::element_text(face = "bold",
-                                                                       size = 22,
-                                                                       angle = 45,
-                                                                       hjust = 1),
-                                  legend.position = "bottom",
-                                  strip.text = ggplot2::element_text(face = "bold"),
-                                  panel.spacing.x = grid::unit(1.5,
-                                                                "cm"),
-                                  panel.spacing.y = grid::unit(1.5,
-                                                                "cm"),
-                                  plot.margin = ggplot2::margin(20,
-                                                                 20,
-                                                                 20,
-                                                                 20,
-                                                                 "pt")))
+ggplot2::theme_set(
+  ggplot2::theme_minimal(base_size = 20) +
+    ggplot2::theme(
+      plot.title.position = "plot",
+      plot.title = ggtext::element_textbox_simple(
+        family = "Cabin",
+        face = "bold",
+        color = "darkgreen",
+        size = 22,
+        fill = "yellow",
+        lineheight = 1.2,
+        padding = ggplot2::margin(5.5, 5.5, 0.0, 5.5),
+        margin = ggplot2::margin(0, 0, 5.5, 0)
+      ),
+      plot.subtitle = ggtext::element_textbox_simple(
+        family = "Cabin",
+        color = "darkgreen",
+        face = "bold",
+        size = 20,
+        fill = "yellow",
+        lineheight = 1.2,
+        padding = ggplot2::margin(5.5, 5.5, 5.5, 5.5),
+        margin = ggplot2::margin(10.5, 0, 5.5, 0)
+      ),
+      plot.caption = ggtext::element_markdown(
+        family = "Cabin",
+        size = 16,
+        hjust = 1,
+        color = "darkblue",
+        face = "italic",
+        fill = "yellow",
+        lineheight = 1.0
+      ),
+      axis.text.x = ggtext::element_markdown(
+        family = "Cabin",
+        face = "bold",
+        color = "blue",
+        size = 16,
+        angle = 45,
+        hjust = 1
+      ),
+        # ggplot2::element_blank(),
+      axis.title.x = ggtext::element_markdown(
+        family = "Cabin",
+        face = "bold",
+        color = "blue",
+        size = 16),
+        # ggplot2::element_blank(),
+      axis.text.y = ggtext::element_markdown(
+        family = "Cabin",
+        face = "bold",
+        color = "blue",
+        size = 16,
+        angle = 45,
+        hjust = 1
+      ),
+        # ggplot2::element_blank(),
+      axis.title.y = ggtext::element_markdown(
+        family = "Cabin",
+        face = "bold",
+        color = "blue",
+        size = 16),
+        # ggplot2::element_blank(),
+      strip.text = ggtext::element_markdown(
+        family = "Cabin",
+        color = "black",
+        size = ggplot2::rel(1.1),
+        face = "italic",
+        margin = ggplot2::margin(2, 0, 0.5, 0, "lines")
+      ),
+      axis.text = ggtext::element_markdown(
+        family = "Cabin",
+        color = "black"),
+      panel.background = ggplot2::element_rect(fill = "white", color = NA),
+      plot.background = ggplot2::element_rect(fill = "white", color = NA),
+      legend.position = "none",
+      panel.spacing.x = grid::unit(1.5, "cm"),
+      panel.spacing.y = grid::unit(1.5, "cm"),
+      plot.margin = ggplot2::margin(20, 20, 20, 20, "pt")
+    )
+)
 
 
+
+  
 # Set seed for reproducibility
 base::set.seed(123)
 
@@ -308,6 +309,7 @@ The function below has excellent predictability, but has zero correlation and ze
 
 
 base::set.seed(123)
+
 x <- base::c(-10L:10L)
 y <- x^2
 df <- base::data.frame(x = x, y = y)
@@ -319,12 +321,7 @@ ggplot2::ggplot(df, ggplot2::aes(x, y)) +
                   "      Covariance = ", base::round(stats::cov(x, y), 2)),
     x = "x", 
     y = "y"
-  ) +
-  ggplot2::theme(
-    plot.title = ggplot2::element_text(face = "bold"),
-    axis.title.x = ggplot2::element_text(face = "bold"),
-    axis.title.y = ggplot2::element_text(face = "bold")
-  )
+  ) 
 
 ```
 <br>
@@ -354,44 +351,37 @@ cor2 <- stats::cor(df$height_feet, df$weight_kg)
 cov2 <- stats::cov(df$height_feet, df$weight_kg)
 
 # plot with the correlation and covariance in the titles
-p1 <- ggplot2::ggplot(df, ggplot2::aes(height_inches, weight_pounds)) +
-  ggplot2::geom_point(color = "blue", size = 3) +
+p1 <- ggplot2::ggplot(df, 
+                      ggplot2::aes(height_inches, 
+                                   weight_pounds
+                                   )
+                      ) +
+  ggplot2::geom_line(color = "blue", size = 1) +
+  ggplot2::geom_point() +
   ggplot2::labs(
     title = base::paste("Correlation =", base::round(cor1, 2)),
     subtitle = base::paste("Covariance =", base::round(cov1, 2)),
     x     = "Height (inches)",
     y     = "Weight (pounds)"
-  ) +
-  ggplot2::theme(
-    plot.title = ggplot2::element_text(face = "bold"),
-    plot.subtitle = ggplot2::element_text(face = "bold"),
-    axis.title.x = ggplot2::element_text(face = "bold"),
-    axis.title.y = ggplot2::element_text(face = "bold")
-  )
+  ) 
 
 
 # plot with the correlation and covariance in the titles
 p2 <- ggplot2::ggplot(df, ggplot2::aes(height_feet, weight_kg)) +
-  ggplot2::geom_point(color = "blue", size = 3) +
+  ggplot2::geom_line(color = "firebrick", size = 1) +
+    ggplot2::geom_point() +
   ggplot2::labs(
     title = base::paste("Correlation =", base::round(cor2, 2)),
     subtitle = base::paste("Covariance =", base::round(cov2, 2)),
     x     = "Height (feet)",
     y     = "Weight (kg)"
-  ) +
-  ggplot2::theme(
-    plot.title = ggplot2::element_text(face = "bold"),
-    plot.subtitle = ggplot2::element_text(face = "bold"),
-    axis.title.x = ggplot2::element_text(face = "bold"),
-    axis.title.y = ggplot2::element_text(face = "bold")
-  )
+  ) 
 
 
 
 patchwork::wrap_plots(p1, p2)
 
 ```
-
 
 
 
@@ -447,6 +437,7 @@ ggplot2::ggplot(df,
        ggplot2::aes(x = ice_cream_sales, 
            y = drownings)
        ) +
+  ggplot2::geom_line() +
   ggplot2::geom_point(color = "blue", size = 3) +
   ggplot2::labs(
     title = base::paste("Correlation = " , stats::cor(df$ice_cream_sales, df$drownings)),
@@ -480,6 +471,7 @@ Consider this DAG:
 #| paged-print: false
 
 base::set.seed(1234)
+
 # Create DAG with custom node labels
 dag <- ggdag::dagify(
   Y ~ X + Z,
@@ -539,26 +531,47 @@ Now, compare the regular correlations and the partial correlation
 #| warning: false
 #| paged-print: false
 
-# Create example data
-base::set.seed(123)
-n <- 100
-z <- stats::rnorm(n)  # The variable influencing both x and y (the control variable)
-x <- 0.2 * z + stats::rnorm(n, 0, 0.7)  # X is statistical influenced directly by Z with weight 0.6 + random noise,
-y <- 0.5 * z + 0.3 * x + stats::rnorm(n, 0, 0.7)  # Y is statistical influenced by both Z directly (.5) and X directly (.3) plus Z through x indirectly, plus random noise,
+# Create example data and stats
 
+base::set.seed(123)
+
+n <- 100
+z <- stats::rnorm(n)
+x <- 0.2 * z + stats::rnorm(n, 0, 0.7)
+y <- 0.5 * z + 0.3 * x + stats::rnorm(n, 0, 0.7)
 data <- base::data.frame(x, y, z)
 
-# Regular correlations (not controlling for Z)
 cor_xy <- stats::cor(data$x, data$y)
-cor_Zy <- stats::cor(data$z, data$y)
-
-# Partial correlation controlling for Z
+cor_zy <- stats::cor(data$z, data$y)
 pcor_result <- ppcor::pcor.test(data$x, data$y, data$z)
 
-# label outputs
-base::cat("Regular correlation of Sleep and Test Score:", base::round(cor_xy, 3), "\n")
-base::cat("Regular correlation of Study Time and Test Score:", base::round(cor_Zy, 3), "\n")
-base::cat("Partial correlation of Sleep and Test Score (controlling for statistical influence of Study Time):", base::round(pcor_result$estimate, 3), "\n")
+# create dataframe
+correlation_results <- base::data.frame(
+  Measure = base::c(
+    "Regular correlation (X-Y)",
+    "Regular correlation (Z-Y)", 
+    "Partial correlation (X-Y | Z)"
+  ),
+  Estimate = base::round(base::c(cor_xy, cor_zy, pcor_result$estimate), 3),
+  P_Value = base::c(
+    stats::cor.test(data$x, data$y)$p.value,
+    stats::cor.test(data$z, data$y)$p.value,
+    pcor_result$p.value
+  ) |> base::round(4),
+  Interpretation = base::c(
+    "Total Sleep and Test Score covariance",
+    "Total Study Time and Test Score covariance",
+    "Sleep and Test Score\n(controlling for statistical influence of Study Time)"
+  )
+)
+
+flextable::flextable(correlation_results) |>
+  flextable::set_caption(caption = "Correlation Analysis Results") |>
+  flextable::align(j = base::c("Estimate", "P_Value"), align = "center", part = "body") |>
+  flextable::colformat_double(j = "P_Value", digits = 4) |>
+  # flextable::theme_apa() |>  # THIS IS NICE
+  flextable::theme_booktabs() |>  # ALSO NICE, MORE COMPACT
+  flextable::autofit()   # COMPACT, NOT NOT EYE-CATCHING
 
 ```
 
@@ -609,11 +622,19 @@ Using the same data, and the same DAG, we see that:
 #| warning: false
 #| paged-print: false
 
-# Simple regression (not controlling for Z)
-model1 <- stats::lm(y ~ x, data = data)
+base::set.seed(123)
+
+n <- 100
+z <- stats::rnorm(n)
+x <- 0.2 * z + stats::rnorm(n, 0, 0.7)
+y <- 0.5 * z + 0.3 * x + stats::rnorm(n, 0, 0.7)
+data <- base::data.frame(x, y, z)
+
+# Simple regression (not controlling for Z (study time))
+model1 <- stats::lm(y ~ x, data = data)   # Test Scores(y) v Sleep Time(x)
 
 # Multiple regression (controlling for Z)
-model2 <- stats::lm(y ~ x + z, data = data)
+model2 <- stats::lm(y ~ x + z, data = data) # Test Scores(y) v Sleep Time(x) controlling for Z (Study Time)
 
 # Get comprehensive stats
 stats1 <- extract_model_stats_for_ggplot(model1, x_name = "Sleep", y_name = "Test Score")
@@ -628,13 +649,15 @@ p1 <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y)) +
     subtitle = base::paste0("Slope = ", stats1$slope, " | R² = ", stats1$r2, " | MAE = ±", stats1$mae),
     x = "Sleep Time (X)",
     y = "Test Score (Y)"
-  ) +
-  ggplot2::theme_minimal(base_size = 16)
+  ) 
+  # ggplot2::theme_minimal(base_size = 16)
 
 
 # Multiple regression: show residual relationship
 x_resid <- stats::residuals(stats::lm(x ~ z, data = data))
 y_resid <- stats::residuals(stats::lm(y ~ z, data = data))
+
+
 p2 <- ggplot2::ggplot(base::data.frame(x_resid, y_resid), ggplot2::aes(x = x_resid, y = y_resid)) +
   ggplot2::geom_point(alpha = 0.6, color = "blue", size = 3) +
   ggplot2::geom_smooth(method = "lm", se = TRUE, color = "red") +
@@ -643,8 +666,8 @@ p2 <- ggplot2::ggplot(base::data.frame(x_resid, y_resid), ggplot2::aes(x = x_res
     subtitle = base::paste0("Slope = ", stats2$slope, " (controlling for Z) | R² = ", stats2$r2, " | MAE = ±", stats2$mae),
     x = "Sleep Time (X) - residuals after removing statistical effect of Z",
     y = "Test Score (Y) - residuals after removing statistical effect of Z"
-  ) +
-  ggplot2::theme_minimal(base_size = 16)
+  ) 
+  # ggplot2::theme_minimal(base_size = 16)
 
 
 # Method 1: Residual visualization (conceptual)
@@ -655,9 +678,9 @@ p2a <- ggplot2::ggplot(base::data.frame(x_resid, y_resid), ggplot2::aes(x = x_re
     title = "Conceptual View: Residuals After Removing Z",
     subtitle = base::paste0("Same slope = ", stats2$slope),
     x = "Sleep (X) - Z influence removed",
-    y = "Test Score (Y) - Z influence removed"
-  ) +
-  ggplot2::theme_minimal(base_size = 14)
+    y = "Test Score (Y) - With Z influence removed from X"
+  ) 
+  # ggplot2::theme_minimal(base_size = 14)
 
 
 # Add predictions to your data
@@ -671,42 +694,77 @@ p2b <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y)) +
     subtitle = base::paste0("X coefficient = ", stats2$slope, " (from y ~ x + z)"),
     x = "Sleep Time (X)",
     y = "Test Score (Y)"
-  ) +
-  ggplot2::theme_minimal(base_size = 14)
+  ) 
+  # ggplot2::theme_minimal(base_size = 14)
 
 # Show both
-p2a | p2b
+patchwork::wrap_plots(p2a | p2b)
+```
 
-# Alternative plot
+
+
+```{r}
+
+# removing the influence of Z (study time)
 p3 <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, color = z)) +
   ggplot2::geom_point(size = 2, alpha = 0.7) +
   ggplot2::geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed") +
   ggplot2::scale_color_viridis_c(name = "Study Time\n(Z)") +
   ggplot2::labs(
     title = "Regression Residual Analysis with Statistical Influence of Z Removed",
-    subtitle = base::paste0("Correlation = ", stats1$correlation, " | Model improves predictions by ", stats1$r2 * 100, "%"),
+    subtitle = base::paste0("Correlation = ", stats1$correlation, " | Model improves predictions by ", stats1$r2, "%"),
     x = "Sleep Time (X)",
     y = "Test Score (Y)"
-  ) +
-  ggplot2::theme_minimal(base_size = 16)
+  ) 
+  # ggplot2::theme_minimal(base_size = 16)
 
 
-# Updated summary output
-base::cat("Simple Regression - Sleep coefficient:", stats1$slope, "| R² =", stats1$r2, "| MAE = ±", stats1$mae, "\n")
+# Build data.frame
+regression_summary <- base::data.frame(
+  Model = base::c(
+    "Simple Regression (Y ~ X)",
+    "Multiple Regression (Y ~ X + Z)",
+    "Simple Regression (correlation)"
+  ),
+  Sleep_Coefficient = base::round(base::c(
+    stats1$slope,
+    stats2$slope,
+    stats1$correlation
+  ), 3),
+  R_Squared = base::round(base::c(
+    stats1$r2,
+    stats2$r2,
+    stats1$r2
+  ), 3),
+  MAE = base::round(base::c(
+    stats1$mae,
+    stats2$mae,
+    stats1$mae
+  ), 3)
+)
 
-base::cat("Multiple Regression - Sleep coefficient:", stats2$slope, "(controlling for Study Time) | R² =", stats2$r2, "| MAE = ±", stats2$mae, "\n")
+# Display with flextable
+flextable::flextable(regression_summary) |>
+  flextable::set_caption(caption = "Regression Model Comparison") |>
+  flextable::align(j = c("Sleep_Coefficient", "R_Squared", "MAE"), align = "center", part = "body") |>
+  flextable::set_header_labels(
+    Sleep_Coefficient = "Sleep Coefficient",
+    R_Squared = "R²",
+    MAE = "MAE (±)"
+  ) |>
+  flextable::autofit()
 
-base::cat("Simple Regression - Sleep coefficient:", stats1$correlation, "| R² =", stats1$r2 * 100, "| MAE = ±", stats1$mae, "\n")
 
 
 # Show all three plots
-p1 
-p2
-p3
+base::print(p1)
+base::print(p2)
+base::print(p3)
+
 
 ```
 
-The coefficient for X in model2 represents the covariance between X and Y AFTER removing the statistical statistical influence of Z (controlling for Z).
+The coefficient for X in model2 represents the covariance between X and Y AFTER removing the statistical influence of Z (controlling for Z).
 
 We specifically want the coefficient for X because it tells us:\
 "How much does Y change for each unit increase in X, when Z is held constant?"\
@@ -760,9 +818,9 @@ For this particular scenario of controlling for a third variable, both approache
 
 
 
-### Residuals Method
+### Residuals Method of Controlling a Confounder
 
-You can extract residuals from a regression model to create 'adjusted' variables.
+Study Time may be a confounder affecting both Sleep Time and Test Score.  Use the 'residuals' method to adjust BOTH variables to remove the effects of the confounder.  THEN, use the 'adjusted' variables in a correlational analysis.
 
 ```{r}
 #| message: false
@@ -778,7 +836,7 @@ x_residuals <- stats::residuals(x_on_z)
 y_on_z <- stats::lm(y ~ z, data = data)
 y_residuals <- stats::residuals(y_on_z)
 
-# Correlation between residuals (x and y with z's statistical effect removed)
+# Correlation between 'adjusted' variables gives (x and y with z's statistical effect (the confounder) removed)
 residual_cor <- stats::cor(x_residuals, y_residuals)
 
 
@@ -793,12 +851,12 @@ ggplot2::ggplot(res_df, ggplot2::aes(x_resid, y_resid)) +
   ggplot2::geom_point(color = "steelblue", size = 3) +
   ggplot2::geom_smooth(method = "lm", se = FALSE, color = "firebrick", linewidth = 1) +
   ggplot2::labs(
-    title = base::paste("Regression on Residuals = Partial Correlation (controlling for z) =",
+    title = base::paste("Regression on Residuals = Partial Correlation <br>(controlling for a possible confounder (z))<br> r = ",
                   base::round(residual_cor, 3)),
-    x     = "Residuals of X ∼ Z",
-    y     = "Residuals of Y ∼ Z"
-  ) +
-  ggplot2::theme_minimal(base_size = 16)
+    x     = "Residuals of X ~ Z",
+    y     = "Residuals of Y ~ Z"
+  ) 
+  # ggplot2::theme_minimal(base_size = 16)
 
 ```
 
@@ -824,15 +882,26 @@ In mathematical terms:
 
 ***Comparing All Three Methods***
 
-For controlling for Z in the X-Y covariance:
+```{r}
+#| label: tbl-methods
+#| tbl-cap: "Comparison of Methods for Controlling Variables"
 
-| Method | Result | Interpretation |
-|:------------------|:-----------------:|:---------------------------------|
-| Partial correlation | 0.315 | Direct calculation of X-Y covariance after removing Z's statistical influence |
-| Multiple regression | 0.324 | Coefficient of X when the statistical influence of Z is held constant |
-| Residual correlation | 0.315 | Correlation between the parts of X and Y that do not co-vary with Z |
+methods_comparison <- base::data.frame(
+  Method = base::c("Partial correlation", "Multiple regression", "Residual correlation"),
+  Result = base::c("0.315", "0.324", "0.315"),
+  Interpretation = base::c(
+    "Direct calculation of X-Y covariance after removing Z's statistical influence",
+    "Coefficient of X when the statistical influence of Z is held constant",
+    "Correlation between the parts of X and Y that do not co-vary with Z"
+  )
+)
 
-: Comparison of Methods for Controlling Variables {#tbl-methods .striped .hover}
+flextable::flextable(methods_comparison) |>
+  flextable::set_caption(caption = "Comparison of Methods for Controlling Variables") |>
+  flextable::align(j = "Result", align = "center", part = "body") |>
+  flextable::autofit() |>
+  flextable::theme_zebra()
+```
 
 The slight difference in the regression coefficient (0.324) compared to the other methods (0.315) is due to scaling differences as mentioned before. If you were to standardize all variables before regression, the coefficient would match exactly.
 
@@ -883,8 +952,8 @@ p1 <- ggplot2::ggplot(cor_comparison, ggplot2::aes(x = Type, y = Value, fill = T
     subtitle = "How different correlation types compare",
     y = "Correlation Coefficient"
   ) +
-  ggplot2::theme_minimal(base_size = 16) +
-  ggplot2::theme(legend.position = "none") +
+  # ggplot2::theme_minimal(base_size = 16) +
+  #ggplot2::theme(legend.position = "none") +
   ggplot2::ylim(0, base::max(cor_comparison$Value) * 1.1)
 
 
@@ -902,8 +971,8 @@ p2 <- ggplot2::ggplot(base::data.frame(x_adj = x_adjusted, y_orig = y_original),
     subtitle = base::paste("Correlation =", base::round(semipartial_cor, 3)),
     x = "Sleep (X) - Z's statistical effect removed",
     y = "Test Score (Y) - original values"
-  ) +
-  ggplot2::theme_minimal(base_size = 16)
+  ) 
+  # ggplot2::theme_minimal(base_size = 16)
 
 
 # Method 3: Show the unique contribution concept
@@ -929,8 +998,8 @@ p3 <- ggplot2::ggplot(venn_data) +
     title = "Semi-Partial Correlation Concept",
     subtitle = "Unique contribution of X to Y"
   ) +
-  ggplot2::theme_void() +
-  ggplot2::theme(legend.position = "none") +
+  # ggplot2::theme_void() +
+  # ggplot2::theme(legend.position = "none") +
   ggplot2::coord_fixed()
 
 
@@ -953,9 +1022,9 @@ p4 <- ggplot2::ggplot(r2_data, ggplot2::aes(x = Type, y = Percentage, fill = Typ
     title = "R² Interpretation",
     subtitle = "Percentage of covariance shared by Variables",
     y = "Percentage of Y Variance Shared with X"
-  ) +
-  ggplot2::theme_minimal(base_size = 16) +
-  ggplot2::theme(legend.position = "none")
+  ) 
+  # ggplot2::theme_minimal(base_size = 16) +
+  # ggplot2::theme(legend.position = "none")
 
 
 # Combine all plots
@@ -1018,14 +1087,27 @@ This is particularly useful in regression contexts because the square of the sem
 
 ***Comparing All Four Methods***
 
-| Method | Result | Interpretation |
-|:------------------|:-----------------:|:---------------------------------|
-| Regular correlation | 0.565 | Total covariance between X and Y |
-| Partial correlation | 0.315 | covariance between X and Y with Z's statistical effect removed from both |
-| Semi-partial correlation | 0.251 | Unique statistical influence of X to Y beyond the statistical influence of Z |
-| Multiple regression coefficient | 0.324 | statistical effect of X on Y when Z is held constant |
+```{r}
+#| label: tbl-correlation-methods
+#| tbl-cap: "Comparison of Correlation Methods"
 
-: Comparison of Correlation Methods {#tbl-correlation-methods .striped}
+correlation_methods <- base::data.frame(
+  Method = base::c("Regular correlation", "Partial correlation", "Semi-partial correlation", "Multiple regression coefficient"),
+  Result = base::c("0.565", "0.315", "0.251", "0.324"),
+  Interpretation = base::c(
+    "Total covariance between X and Y",
+    "covariance between X and Y with Z's statistical effect removed from both",
+    "Unique statistical influence of X to Y beyond the statistical influence of Z",
+    "statistical effect of X on Y when Z is held constant"
+  )
+)
+
+flextable::flextable(correlation_methods) |>
+  flextable::set_caption(caption = "Comparison of Correlation Methods") |>
+  flextable::align(j = "Result", align = "center", part = "body") |>
+  flextable::autofit() |>
+  flextable::theme_zebra()
+```
 
 The semi-partial correlation is particularly valuable in research contexts where you want to determine the unique contribution of specific predictors, especially when deciding which variables to include in a model.
 
@@ -1041,14 +1123,27 @@ Z \<- rnorm(n) \# Random variable Z x \<- 0.6 \* Z + rnorm(n, 0, 0.7) \# X depen
 
 ***How This Relates to Our Results***
 
-| Method | Result | Relation to Data-Generating Equations |
-|------------------|------------------|------------------------------------|
-| Regular correlation | 0.565 | This high correlation exists because: (1) X directly statistical influences Y (0.3 coefficient) AND (2) Z creates an indirect path between X and Y (0.6 \* 0.5 = 0.3) |
-| Partial correlation | 0.315 | Close to the true direct statistical effect of X on Y (0.3) in your equation since it removes Z's statistical influence on both X and Y |
-| Semi-partial correlation | 0.251 | Lower than 0.3 because it only removes Z's statistical effect from X but not from Y |
-| Multiple regression coefficient | 0.324 | Approximates the 0.3 coefficient you specified for X's statistical effect on Y |
+```{r}
+#| label: tbl-data-covariances
+#| tbl-cap: "Covariance Between Statistical Results and Data-Generating Equations"
 
-: covariance Between Statistical Results and Data-Generating Equations {#tbl-data-covariances}
+data_covariances <- base::data.frame(
+  Method = base::c("Regular correlation", "Partial correlation", "Semi-partial correlation", "Multiple regression coefficient"),
+  Result = base::c("0.565", "0.315", "0.251", "0.324"),
+  Relation_to_Equations = base::c(
+    "This high correlation exists because: (1) X directly statistical influences Y (0.3 coefficient) AND (2) Z creates an indirect path between X and Y (0.6 * 0.5 = 0.3)",
+    "Close to the true direct statistical effect of X on Y (0.3) in your equation since it removes Z's statistical influence on both X and Y",
+    "Lower than 0.3 because it only removes Z's statistical effect from X but not from Y",
+    "Approximates the 0.3 coefficient you specified for X's statistical effect on Y"
+  )
+)
+
+flextable::flextable(data_covariances) |>
+  flextable::set_caption(caption = "Covariance Between Statistical Results and Data-Generating Equations") |>
+  flextable::align(j = "Result", align = "center", part = "body") |>
+  flextable::autofit() |>
+  flextable::theme_zebra()
+```
 
 <br>
 
@@ -1143,22 +1238,22 @@ Let's visualize how controlling for a variable works:
 ```{r}
 #| fig-width: 9 
 #| fig-height: 3
-#| fig-cap: "VisualiZation of controlling for Z"
+#| fig-cap: "Visualization of controlling for Z"
 #| message: false
 
 # Original covariance
 p1 <- ggplot2::ggplot(data, ggplot2::aes(x = x, y = y)) +
   ggplot2::geom_point(alpha = 0.6) +
   ggplot2::geom_smooth(method = "lm", se = FALSE) +
-  ggplot2::labs(title = "Original X-Y covariance") +
-  ggplot2::theme_minimal()
+  ggplot2::labs(title = "Original X-Y covariance") 
+  # ggplot2::theme_minimal()
 
 # covariance after controlling for Z
 p2 <- ggplot2::ggplot(base::data.frame(x = x_residuals, y = y_residuals), ggplot2::aes(x = x, y = y)) +
   ggplot2::geom_point(alpha = 0.6) +
   ggplot2::geom_smooth(method = "lm", se = FALSE) +
-  ggplot2::labs(title = "X-Y after controlling for Z") +
-  ggplot2::theme_minimal()
+  ggplot2::labs(title = "X-Y after controlling for Z") 
+  # ggplot2::theme_minimal()
 
 p1 | p2
 ```
@@ -1352,12 +1447,27 @@ base::cat("  errors still make this useless for trading!\n\n")
 
 **R-Squared and absolute error size are partially independent:**
 
-| Scenario | R² | Absolute Error | Practical Value |
-|:---------|:---|:---------------|:----------------|
-| Weather (°F) | 0.85 | ±3°F | Excellent! |
-| Weather (°K) | 0.85 | ±3°K | Same accuracy, different units |
-| Stock prices | 0.85 | ±$50/share | Useless for trading |
-| Manufacturing | 0.30 | ±0.1mm | Perfect for quality control |
+```{r}
+#| label: tbl-key-insight
+#| tbl-cap: "The Key Insight: R² vs Absolute Error"
+
+key_insight <- base::data.frame(
+  Scenario = base::c("Weather (°F)", "Weather (°K)", "Stock prices", "Manufacturing"),
+  R_squared = base::c("0.85", "0.85", "0.85", "0.30"),
+  Absolute_Error = base::c("±3°F", "±3°K", "±$50/share", "±0.1mm"),
+  Practical_Value = base::c("Excellent!", "Same accuracy, different units", "Useless for trading", "Perfect for quality control")
+)
+
+flextable::flextable(key_insight) |>
+  flextable::set_caption(caption = "The Key Insight: R² vs Absolute Error") |>
+  flextable::align(j = "R_squared", align = "center", part = "body") |>
+  flextable::bg(i = 1, bg = "#90EE90") |>
+  flextable::bg(i = 2, bg = "#FFFF99") |>
+  flextable::bg(i = 3, bg = "#FFB6C1") |>
+  flextable::bg(i = 4, bg = "#90EE90") |>
+  flextable::autofit() |>
+  flextable::theme_vanilla()
+```
 
 
 
