@@ -174,18 +174,20 @@ flextable::set_flextable_defaults(
   # flextable::theme_vanilla() |>   # NOT SPECIAL
   # flextable::theme_zebra()	|>
   #
-  # flextable::flextable(confounding_vars) |>
-  # lextable::add_header_lines(values = "Confounding Variables Often Ignored in So-Called #   Equity' Research") |>
-  # flextable::color(i = 1, color = "blue", part = "header") |>
-  # flextable::italic(i = 1, part = "header") |>
-  # flextable::align(i = 1, align = "center", part = "header") |>
-  # flextable::fontsize(i = 1, size = 14, part = "header") |>
-  # flextable::bg(i = 1, bg = "white", part = "header") |>
-  # flextable::bg(i = 2, bg = "palegreen", part = "header") |>
-  # flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = #   #ffcccc") |>
-  # flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = #   #ffffcc") |>
-  # ftExtra::colformat_md() |> 
-  # flextable::autofit()
+  # flextable::flextable(variance_comparison) |>
+  #  flextable::add_header_lines(values = "The Within-Group vs Between-Group Variance Problem") |>
+  #  flextable::color(i = 1, color = "blue", part = "header") |>
+  #  flextable::italic(i = 1, part = "header") |>
+  #  flextable::align(i = 1, align = "center", part = "header") |>
+  #  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  #  flextable::bg(i = 1, bg = "white", part = "header") |>
+  #  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+    #  # flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = # #ffcccc") |>
+    #  # flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = # #ffffcc") |>
+  #  ftExtra::colformat_md() |> 
+  #  flextable::autofit()  
+ 
+ 
   # # or (col in base::names(hypotheses_data)) {
   # yes_rows <- base::which(hypotheses_data[[col]] == "Yes")
   # if (base::length(yes_rows) > 0) {
