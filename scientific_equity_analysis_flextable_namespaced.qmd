@@ -1,6 +1,6 @@
 ---
-title: "Most Education Research is ***NOT*** Science"
-subtitle: "It's Ideology Masquerading as Scientific Inquiry"
+title: "Ideology Masquerading as Scientific Inquiry"
+subtitle: "Most Education Research is ***NOT*** Science"
 bibliography: manual-refs.bib
 authors: 
   - name: "Dan Swart, CPA (ret)"
@@ -159,11 +159,30 @@ flextable::set_flextable_defaults(
   digits = 2,
   decimal.mark = ".",
   big.mark = " ",
-  na_str = "<na>",
-  post_process_html = identity,
-  post_process_docx = identity
+  na_str = "<na>"
 )
   
+# # Sample Code:
+# flextable::flextable(violations) |>
+ # flextable::set_header_labels(
+ #    Variable = "Variable",
+ #    Measurement = "Measurement",
+ #    Likely_Impact = "Likely Impact"
+ #  ) |>
+#    flextable::add_header_lines(values = "Frequent Violations of Scientific Method in Current So-Called 'Equity' Research") |>
+#   flextable::color(i = 1, color = "blue", part = "header") |>
+#   flextable::italic(i = 1, part = "header") |>
+#   flextable::align(i = 1, align = "center", part = "header") |>
+#   flextable::fontsize(i = 1, size = 14, part = "header") |>
+#   flextable::bg(i = 1, bg = "white", part = "header") |>
+#   flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+#   flextable::bold(i = 1:2, part = "header") |>
+#   flextable::bold(i = 1:7, j = 1, part = "body") |>
+#   ftExtra::colformat_md() |> 
+#   flextable::autofit()
+  
+
+# Flextable built-in themes:
   # flextable::theme_alafoli()	|>  # BLAH
   # flextable::theme_apa()  # THIS IS NICE
   # flextable::theme_booktabs() |>  # NICE, MORE COMPACT
@@ -174,36 +193,37 @@ flextable::set_flextable_defaults(
   # flextable::theme_vanilla() |>   # NOT SPECIAL
   # flextable::theme_zebra()	|>
   #
+
+# Flextable titles:
+  # flextable::colformat_double(j = c("Mean", "SD", "N"), big.mark = ",", digits = 1) |>
   # flextable::flextable(variance_comparison) |>
   #  flextable::add_header_lines(values = "The Within-Group vs Between-Group Variance Problem") |>
+
+# Flextable Title theming at table-level:
   #  flextable::color(i = 1, color = "blue", part = "header") |>
   #  flextable::italic(i = 1, part = "header") |>
   #  flextable::align(i = 1, align = "center", part = "header") |>
   #  flextable::fontsize(i = 1, size = 14, part = "header") |>
   #  flextable::bg(i = 1, bg = "white", part = "header") |>
+
+# Flextable standard table background colors:
   #  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
-    #  # flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = # #ffcccc") |>
-    #  # flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = # #ffffcc") |>
+  
+
+# Flextable reading markdown:
   #  ftExtra::colformat_md() |> 
-  #  flextable::autofit()  
+
+# Flextable auto-sizing cell widths:
+  #  flextable::autofit() 
  
- 
-  # # or (col in base::names(hypotheses_data)) {
-  # yes_rows <- base::which(hypotheses_data[[col]] == "Yes")
-  # if (base::length(yes_rows) > 0) {
-  #   ft <- ft |>
-  #     flextable::bg(i = yes_rows, j = col, bg = "yellow", part = "body")
-  # }
-  # 
-  #
+ # Flextable background based on SPECIFIC cell contents:
   #
   # flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = "#ffcccc") |>
  # flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = "#ffffcc") |>
   #
-  # flextable::bg(bg = "palegreen", part = "header") |> 
-  # flextable::autofit()
   # 
-  # # Apply yellow background to any cell containing "Yes"
+  # Apply yellow background to any cell containing "Yes":
+
   # for (col in base::names(hypotheses_data)) {
   #   yes_rows <- base::which(hypotheses_data[[col]] == "Yes")
   #   if (base::length(yes_rows) > 0) {
@@ -212,9 +232,9 @@ flextable::set_flextable_defaults(
   #   }
   # } 
   #
-  # ft
-
-  # 
+  # Apply to last row of table:
+  #
+  #
 
 
 
@@ -423,7 +443,7 @@ hypothesis_test <- new_education_data |>
 
 ## Abstract
 
-An earnest discussion of poor research methods in current educational research, including 'equity' claims;  contrasts rigorous scientific methodologies with current practice when investigating group differences in academic results. The astonishing fact is that most of the important research questions are never presented, or even asked for.
+An earnest discussion of poor research methods in current educational research, including 'so-called 'Equity' ' claims;  contrasts rigorous scientific methodologies with current practice when investigating group differences in academic results. The astonishing fact is that most of the important research questions are never presented, or even asked for.
 
 
 
@@ -434,7 +454,7 @@ An earnest discussion of poor research methods in current educational research, 
 
 We begin with an example frim a textbook designed to teach data 'scientists' how to examine data using pseudo-scientific methods, searching for evidence demonstrating institutional racism:
 
-> "For example, one way for school systems to support efforts towards equity in student results is to frequently examine any differences in results among student subgroups (Chapter 3)." [@bovee2024data]
+> "For example, one way for school systems to support efforts towards so-called 'Equity'  in student results is to frequently examine any differences in results among student subgroups (Chapter 3)." [@bovee2024data]
 
 This statement comes early in the book and is repeated elsewhere.  It starts with an **unproven assumption:** that group differences from population demographic percentages inherently indicate systemic bias requiring intervention.
 
@@ -474,7 +494,7 @@ Nearly all education research is based on observational studies.  To be rigorous
 
 There are experimental studies taking place in education reserch.  The What Works Clearinghouse is the best source of finding such studies.  The requirements to be accepted for review are rigorous and require experimental design (either with experimental data, or observational data). 
 
-I have yet to run into anyone in the K-12 delivery system in Texas that has even heard of the website or its study review requirements.  Certainly, the claims regarding 'equity', 'diversity' or 'school board affects on student achievement' will never be found there.  Those types of 'studies' would not even qualify for review.
+I have yet to run into anyone in the K-12 delivery system in Texas that has even heard of the website or its study review requirements.  Certainly, the claims regarding 'so-called 'Equity' ', 'diversity' or 'school board affects on student achievement' will never be found there.  Those types of 'studies' would not even qualify for review.
 
 ### Experimental Data: Ideal Scientific Approach
 
@@ -531,6 +551,7 @@ hypotheses_data <- base::data.frame(
 )
 
 ft <- flextable::flextable(hypotheses_data) |>
+  
   flextable::add_header_lines(values = "Multiple Competing Hypotheses for Observed Group Differences") |>
   flextable::color(i = 1, color = "blue", part = "header") |>
   flextable::italic(i = 1, part = "header") |>
@@ -559,7 +580,7 @@ ft
 ::: {.callout-warning}
 ## Critical Issue: Rational Subgrouping
 
-Current equity research fails to address whether compared groups are actually comparable.
+Current so-called 'Equity'  research fails to address whether compared groups are actually comparable.
 :::
 
 
@@ -573,12 +594,17 @@ confounding_vars <- base::data.frame(
   Measurement = base::c("Family income, parent education", "Two-parent vs single-parent", 
                   "Hours per week", "Days present/total days", "Primary language",
                   "Previous test scores, coursework", "Survey responses", 
-                  "Friend academic performance", "Teacher quality, resources"),
-  Impact_on_Validity = base::c("High", "High", "High", "Medium", "High", "High", "High", "Medium", "High")
+                  "Friends' academic performance", "Teacher quality, resources"),
+  Likely_Impact = base::c("High", "High", "High", "Medium", "High", "High", "High", "Medium", "High")
 )
 
 
 flextable::flextable(confounding_vars) |>
+   flextable::set_header_labels(
+    Variable = "Variable",
+    Measurement = "Measurement",
+    Likely_Impact = "Likely Impact"
+  ) |>
 flextable::add_header_lines(values = "Confounding Variables Often Ignored in So-Called 'Equity' Research") |>
   flextable::color(i = 1, color = "blue", part = "header") |>
   flextable::italic(i = 1, part = "header") |>
@@ -586,8 +612,8 @@ flextable::add_header_lines(values = "Confounding Variables Often Ignored in So-
   flextable::fontsize(i = 1, size = 14, part = "header") |>
   flextable::bg(i = 1, bg = "white", part = "header") |>
   flextable::bg(i = 2, bg = "palegreen", part = "header") |>
-  flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = "#ffcccc") |>
-  flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = "#ffffcc") |>
+  flextable::bg(i = ~ Likely_Impact == "High", j = "Likely_Impact", bg = "#ffcccc") |>
+  flextable::bg(i = ~ Likely_Impact == "Medium", j = "Likely_Impact", bg = "#ffffcc") |>
   ftExtra::colformat_md() |> 
   flextable::autofit()
 
@@ -611,7 +637,7 @@ for (col in base::names(hypotheses_data)) {
 ### Step 4: Establish Proper Experimental Controls
 
 **Control Group Requirements:**
-- Schools with similar demographics but different "equity" interventions
+- Schools with similar demographics but different "so-called 'Equity' " interventions
 - Baseline measurements before any interventions
 - Matched comparison groups
 
@@ -627,7 +653,7 @@ for (col in base::names(hypotheses_data)) {
 ::: {.callout-important}
 ## Statistical Reality
 
-Differences will **ALWAYS** exist between any groups measured at any time, even between the same individuals tested at different times of day.
+Differences will **ALWAYS** exist between any groups measured at any time, even between the same individuals tested at different times ON THE SAME DAY.
 :::
 
 ```{r}
@@ -635,41 +661,50 @@ Differences will **ALWAYS** exist between any groups measured at any time, even 
 #| fig-cap: "Normal Statistical Variation Between Groups"
 
 # Simulate test scores for demonstration
-base::set.seed(42)
+
+base::set.seed(123)
 n_students <- 1000
 
-# Create random groups - no systematic differences
+# Create random groups - with distinct systematic differences
 group_assignment <- base::sample(base::c("Red", "Green", "Blue"), n_students, replace = TRUE)
-base_scores <- stats::rnorm(n_students, mean = 1200, sd = 200)
 
-# Add tiny random group effects (noise)
-group_effects <- base::c(n_students)
-group_effects[group_assignment == "Red"] <- stats::rnorm(base::sum(group_assignment == "Red"), 0, 10)
-group_effects[group_assignment == "Green"] <- stats::rnorm(base::sum(group_assignment == "Green"), 0, 10)
-group_effects[group_assignment == "Blue"] <- stats::rnorm(base::sum(group_assignment == "Blue"), 0, 10)
-
-final_scores <- base_scores + group_effects
+# Assign distinct means to each group
+final_scores <- base::numeric(n_students)
+final_scores[group_assignment == "Red"] <- stats::rnorm(base::sum(group_assignment == "Red"), mean = 800, sd = 80)
+final_scores[group_assignment == "Green"] <- stats::rnorm(base::sum(group_assignment == "Green"), mean = 1100, sd = 80)
+final_scores[group_assignment == "Blue"] <- stats::rnorm(base::sum(group_assignment == "Blue"), mean = 1400, sd = 80)
 
 demo_data <- base::data.frame(
   Group = group_assignment,
   Score = final_scores
 )
 
-# Create visualization - density plots
+# Calculate group means for vertical lines
+group_means <- demo_data |> 
+  dplyr::group_by(Group) |> 
+  dplyr::summarise(mean_score = base::mean(Score), .groups = "drop")
+
+# Create visualization - all on one plot
 p1 <- ggplot2::ggplot(demo_data, ggplot2::aes(x = Score, fill = Group)) +
   ggplot2::geom_density(alpha = 0.7) +
-  ggplot2::facet_wrap(~Group, ncol = 3) +
   ggplot2::scale_fill_manual(values = base::c("Red" = "#FF6B6B", "Green" = "#51CF66", "Blue" = "#74C0FC")) +
-  ggplot2::labs(title = "Statistical Variation in Randomly Assigned Groups",
-       subtitle = "Groups differ despite NO systematic treatment differences",
-       x = "Test Score",
-       y = "Density") +
-  ggplot2::geom_vline(data = demo_data |> 
-                        dplyr::group_by(Group) |> 
-                        dplyr::summarise(mean_score = base::mean(Score)),
-             ggplot2::aes(xintercept = mean_score), linetype = "dashed", color = "black", size = 1)
+  ggplot2::scale_y_continuous(labels = NULL) +
+  ggplot2::geom_vline(data = group_means,
+             ggplot2::aes(xintercept = mean_score, color = Group), 
+             linetype = "dashed", linewidth = 1) +
+  ggplot2::scale_color_manual(values = base::c("Red" = "#FF6B6B", "Green" = "#51CF66", "Blue" = "#74C0FC")) +
+  ggplot2::labs(
+    title = "Statistical Variation in Randomly Assigned Groups",
+    subtitle = "Groups WILL DIFFER despite NO systematic treatment differences",
+    x = "Test Scores",
+    y = "Mean and Spread of Distribution"
+  ) +
+  ggplot2::theme(legend.position = "bottom")
 
 base::print(p1)
+
+
+
 
 # Summary statistics
 summary_stats <- demo_data |>
@@ -681,7 +716,14 @@ summary_stats <- demo_data |>
     .groups = 'drop'
   )
 
+
 flextable::flextable(summary_stats) |>
+  flextable::set_header_labels(
+    Mean = "Mean",
+    SD = "SD",
+    N = "Sample Size"
+  ) |>
+  flextable::colformat_double(j = c("Mean", "SD", "N"), big.mark = ",", digits = 1) |>
 flextable::add_header_lines(values = "Group Differences That Exist Due to Random Chance Alone") |>
   flextable::color(i = 1, color = "blue", part = "header") |>
   flextable::italic(i = 1, part = "header") |>
@@ -689,8 +731,6 @@ flextable::add_header_lines(values = "Group Differences That Exist Due to Random
   flextable::fontsize(i = 1, size = 14, part = "header") |>
   flextable::bg(i = 1, bg = "white", part = "header") |>
   flextable::bg(i = 2, bg = "palegreen", part = "header") |>
-  # flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = "#ffcccc") |>
-  # flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = "#ffffcc") |>
   ftExtra::colformat_md() |> 
   flextable::autofit()
 
@@ -745,6 +785,11 @@ methodology_matrix <- base::data.frame(
 )
 
 flextable::flextable(methodology_matrix) |>
+  flextable::set_header_labels(
+    Step  = " Step",
+    Experimental_Data = "Experimental_Data",
+    Observational_Data = "Observational Data"
+  ) |>
   flextable::add_header_lines(values = "Methodology Requirements by Study Type") |>
   flextable::color(i = 1, color = "blue", part = "header") |>
   flextable::italic(i = 1, part = "header") |>
@@ -784,7 +829,7 @@ flextable::flextable(methodology_matrix) |>
 ::: {.callout-critical}
 ## Fundamental Statistical Assumption Violation
 
-All analytical statistics comparing groups rely on the mathematical requirement that **within-group variance should be small relative to between-group variance**. Current equity research systematically violates this assumption, rendering the statistical results mathematically meaningless.
+All analytical statistics comparing groups rely on the mathematical requirement that **within-group variance should be small relative to between-group variance**. Current so-called 'Equity'  research systematically violates this assumption, rendering the statistical results mathematically meaningless.
 :::
 
 ### The Mathematical Requirements for Valid Group Comparisons
@@ -802,7 +847,7 @@ Where:
 ```{r}
 #| label: variance-violation-demo
 
-# Example: Current educational equity research
+# Example: Current educational so-called 'Equity'  research
 base::set.seed(123)
 red_students <- base::c(300, 850, 1200, 1540, 1580)  # SAT scores within "Red" category
 blue_students <- base::c(400, 900, 1300, 1520, 1600)  # SAT scores within "Blue" category
@@ -819,6 +864,7 @@ variance_comparison <- base::data.frame(
 )
 
 flextable::flextable(variance_comparison) |>
+  flextable::colformat_double(j = "Value", big.mark = ",", digits = 1) |> 
   flextable::add_header_lines(values = "The Within-Group vs Between-Group Variance Problem") |>
   flextable::color(i = 1, color = "blue", part = "header") |>
   flextable::italic(i = 1, part = "header") |>
@@ -826,9 +872,7 @@ flextable::flextable(variance_comparison) |>
   flextable::fontsize(i = 1, size = 14, part = "header") |>
   flextable::bg(i = 1, bg = "white", part = "header") |>
   flextable::bg(i = 2, bg = "palegreen", part = "header") |>
-  # flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = "#ffcccc") |>
-  # flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = "#ffffcc") |>
-  ftExtra::colformat_md() |> 
+  ftExtra::colformat_md() |>
   flextable::autofit()  
   
 ```
@@ -872,19 +916,19 @@ When within-group variance is enormous (heterogeneous groups), the denominator i
 
 ```{r}
 #| label: heterogeneous-groups-demo
-#| fig-cap: "Heterogeneous Group Problem in Educational Research"
+
+# Create problem with heterogeneity within the group
 
 # "Red students" category might include:
 base::set.seed(456)
-high_achieving_subgroup <- stats::rnorm(50, mean = 1450, sd = 50)    # High-achieving
-middle_class_subgroup <- stats::rnorm(100, mean = 1275, sd = 100)    # Middle-class  
-disadvantaged_subgroup <- stats::rnorm(75, mean = 400, sd = 80)      # Low-resourced
+high_achieving_subgroup <- stats::rnorm(50, mean = 1200, sd = 90)    # High-achieving
+middle_class_subgroup <- stats::rnorm(100, mean = 900, sd = 100)     # Middle-class (moved to center, wider spread)
+disadvantaged_subgroup <- stats::rnorm(75, mean = 700, sd = 100)      # Low-resourced
 
-# Create detailed data
+# Create problem with heterogenity within the group
 subgroup_labels <- base::c(base::rep("High-achieving Red", 50),
                     base::rep("Middle-class Red", 100), 
                     base::rep("Disadvantaged Red", 75))
-
 all_red_students <- base::c(high_achieving_subgroup, middle_class_subgroup, disadvantaged_subgroup)
 
 heterogeneous_demo <- base::data.frame(
@@ -893,25 +937,52 @@ heterogeneous_demo <- base::data.frame(
   MainGroup = "Red Students"
 )
 
+# Add combined group for fourth facet
+combined_demo <- base::data.frame(
+  Subgroup = base::rep("All Red Students Combined", base::length(all_red_students)),
+  Score = all_red_students,
+  MainGroup = "Red Students"
+)
+
+# Bind together
+plot_data <- dplyr::bind_rows(heterogeneous_demo, combined_demo) |>
+  dplyr::mutate(Subgroup = base::factor(Subgroup, levels = c(
+    "All Red Students Combined",
+    "High-achieving Red", 
+    "Middle-class Red", 
+    "Disadvantaged Red"
+  )))
+
 # Calculate variances
 within_red_variance <- stats::var(all_red_students)
 within_subgroup_variances <- heterogeneous_demo |>
   dplyr::group_by(Subgroup) |>
   dplyr::summarize(Variance = stats::var(Score), .groups = 'drop')
 
-p3 <- ggplot2::ggplot(heterogeneous_demo, ggplot2::aes(x = Score, fill = Subgroup)) +
+p3 <- ggplot2::ggplot(plot_data, ggplot2::aes(x = Score, fill = Subgroup)) +
   ggplot2::geom_density(alpha = 0.7) +
   ggplot2::facet_wrap(~Subgroup, ncol = 2, scales = "free_y") +
-  ggplot2::scale_fill_manual(values = base::c("#FF9999", "#FF6666", "#FF3333")) +
-  ggplot2::labs(title = "The 'Red Students' Category Contains Multiple Distinct Populations",
-       subtitle = "Treating this as one group violates statistical assumptions",
-       x = "Test Score",
-       y = "Density"
-       )
+  ggplot2::scale_fill_manual(values = base::c(
+    "All Red Students Combined" = "#CC0000",
+    "High-achieving Red" = "#FF9999", 
+    "Middle-class Red" = "#FF6666", 
+    "Disadvantaged Red" = "#FF3333"
+  )) +
+  ggplot2::scale_y_continuous(labels = NULL) +
+  ggplot2::labs(
+    title = "The 'Red Students' Category Contains Multiple Distinct Populations",
+    subtitle = "Treating this as one group violates statistical assumptions",
+    x = "Test Scores",
+    y = "Mean and Spread of Distribution"
+  )
 
 base::print(p3)
 
-# Summary table
+
+
+
+
+# Summary Flextable
 variance_breakdown <- base::data.frame(
   Analysis_Level = base::c("All Red Students Combined", "High-achieving Red", "Middle-class Red", "Disadvantaged Red"),
   N = base::c(225, 50, 100, 75),
@@ -926,12 +997,19 @@ variance_breakdown <- base::data.frame(
 )
 
 flextable::flextable(variance_breakdown) |>
-  flextable::set_caption(caption = "Why Disaggregation Matters: Variance Within 'Red' Category") |>
+  flextable::colformat_double(j = c("Mean", "Variance"), big.mark = ",", digits = 1) |>
+  flextable::add_header_lines(values = "Why Disaggregation Matters: Huge Variance WITHIN 'Red' Students as a Whole") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
   flextable::bg(i = ~ Variance > 50000, j = "Variance", bg = "#FFB6C1") |>
   flextable::bg(i = ~ Variance > 10000 & Variance <= 50000, j = "Variance", bg = "#FFFF99") |>
-  flextable::bg(i = ~ Variance <= 10000, j = "Variance", bg = "#90EE90") |>
+  flextable::bg(i = ~ Variance <= 10000, j = "Variance", bg = "lightblue") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
-
 ```
 
 ---
@@ -947,6 +1025,8 @@ A perfect medical example of the same mathematical errors:
 
 ```{r}
 #| label: whi-parallel
+
+set.seed(123)
 
 # Simulated HRT effect by age (based on actual WHI findings)
 ages <- 50:79
@@ -968,14 +1048,19 @@ p4 <- ggplot2::ggplot(whi_demo, ggplot2::aes(x = Age, y = HRT_Effect, color = Ag
   ggplot2::labs(title = "Women's Health Initiative: Why Age Disaggregation Mattered",
        subtitle = "HRT beneficial for younger women, harmful for older women",
        x = "Age",
-       y = "HRT Effect (positive = beneficial)",
+       y = "Below Zero = HRT Bad______________Above Zero = HRT Good,",
        color = "Age Group") +
   ggplot2::annotate("text", x = 55, y = 0.3, label = "Beneficial\nEffect", fontface = "bold") +
-  ggplot2::annotate("text", x = 70, y = -0.4, label = "Harmful\nEffect", fontface = "bold")
+  ggplot2::annotate("text", x = 70, y = -0.4, label = "Harmful\nEffect", fontface = "bold") +
+  ggplot2::theme(
+  legend.position = "bottom",
+  legend.text = ggplot2::element_text(size = 12),
+  legend.title = ggplot2::element_text(size = 14)
+)
 
 base::print(p4)
 
-# Summary by age group
+# Summary Table
 whi_summary <- whi_demo |>
   dplyr::group_by(Age_Group) |>
   dplyr::summarize(
@@ -985,9 +1070,20 @@ whi_summary <- whi_demo |>
     .groups = 'drop'
   )
 
+
+
 flextable::flextable(whi_summary) |>
-  flextable::set_caption(caption = "HRT Effects by Age Group: Importance of Disaggregation") |>
+   flextable::colformat_double(j = c("Mean_Effect"), big.mark = ",", digits = 3) |>
+flextable::add_header_lines(values = "HRT Effects by Age Group: Importance of Disaggregation") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+
 
 ```
 
@@ -1027,22 +1123,31 @@ homogeneity_results <- base::data.frame(
 )
 
 flextable::flextable(homogeneity_results) |>
-  flextable::set_caption(caption = "Homogeneity Tests: Most Demographic Comparisons Are Invalid") |>
-  flextable::bg(i = ~ Valid_Comparison == "Yes", j = "Valid_Comparison", bg = "#90EE90") |>
+  flextable::colformat_double(j = c("Levene_Test_p"), big.mark = ",", digits = 3) |>
+  flextable::add_header_lines(values = "Homogeneity Tests: Most Demographic Comparisons Are Invalid") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bg(i = ~ Groups_Homogeneous == "Yes", j = "Groups_Homogeneous", bg = "yellow") |>
+  flextable::bg(i = ~ Valid_Comparison == "Yes", j = "Valid_Comparison", bg = "yellow") |>
   flextable::bg(i = ~ Valid_Comparison == "No", j = "Valid_Comparison", bg = "#FFB6C1") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+  
 ```
 
-Before any group comparison, researchers should test for equal variances. If p < 0.05, groups are not homogeneous and comparison is statistically invalid.
+Before any group comparison, test for equal variances. If p < 0.05, groups are not homogeneous and comparisons are invalid.
 
 ### The Mathematical Reality in Educational Research
 
 ```{r}
 #| label: variance-decomposition-demo
-#| fig-cap: "Variance Decomposition in Educational Data"
 
 # Simulate realistic educational variance structure
-base::set.seed(789)
+base::set.seed(123)
 n_total <- 2000
 
 # Create students with various characteristics
@@ -1103,11 +1208,22 @@ variance_decomp <- base::data.frame(
                 base::round(100 - pct_between_demo - pct_within_demo, 1))
 )
 
-flextable::flextable(variance_decomp) |>
-  flextable::set_caption(caption = "Typical Variance Decomposition in Educational Data") |>
-  flextable::colformat_double(j = "Variance", digits = 0) |>
-  flextable::autofit()
 
+
+flextable::flextable(variance_decomp) |>
+  flextable::colformat_double(j = c("Variance"), big.mark = ",", digits = 0) |>
+  flextable::colformat_double(j = c("Percentage"), big.mark = ",", digits = 0, suffix = "%") |>
+  flextable::add_header_lines(values = "Typical Variance Decomposition in Educational Data") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  ftExtra::colformat_md() |> 
+  flextable::autofit()
+  
+  
 # Visualization - histogram with faceting
 p5 <- ggplot2::ggplot(student_data, ggplot2::aes(x = test_score, fill = ses_level)) +
   ggplot2::geom_histogram(alpha = 0.7, bins = 30, position = "identity") +
@@ -1135,7 +1251,7 @@ When within-group variance exceeds between-group variance, you're not measuring 
 ::: {.callout-important}
 ## The Core Issue: Comparing Apples to Oranges
 
-Current equity research fails at the most basic level - it doesn't establish that comparison groups are actually comparable. The fundamental flaw is treating government-defined demographic categories as if they represent homogeneous groups.
+Current so-called 'Equity'  research fails at the most basic level - it doesn't establish that comparison groups are actually comparable. The fundamental flaw is treating government-defined demographic categories as if they represent homogeneous groups.
 :::
 
 #### The Self-Designation Problem
@@ -1172,8 +1288,19 @@ within_group_demo <- base::data.frame(
 )
 
 flextable::flextable(within_group_demo) |>
-  flextable::set_caption(caption = "Hidden Heterogeneity Within Government-Defined Categories") |>
+  flextable::add_header_lines(values = "Hidden Heterogeneity Within Government-Defined Categories") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::color(i = 1:4, color = "firebrick", part = "body") |> 
+  flextable::color(i = 5:8, color = "#004d00", part = "body") |> 
+  flextable::color(i = 9:12, color = "dodgerblue", part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+  
 ```
 
 #### The Thomas Sowell Principle: Disaggregate Until Comparable
@@ -1228,7 +1355,7 @@ overall_comparison <- doctor_data |>
     N = dplyr::n(),
     .groups = 'drop'
   ) |>
-  dplyr::mutate(Analysis = "Overall Comparison")
+  dplyr::mutate(Analysis = "Comparison of Groups before Disaggregation")
 
 # Comparable groups comparison
 comparable_doctors <- doctor_data |>
@@ -1241,15 +1368,27 @@ comparable_comparison <- comparable_doctors |>
     N = dplyr::n(),
     .groups = 'drop'
   ) |>
-  dplyr::mutate(Analysis = "Comparable Groups (No children, No career breaks, Single)")
+  dplyr::mutate(Analysis = "Comparable Groups (No children, No career breaks, Never-Married)")
 
 # Combine results
 sowell_demo <- dplyr::bind_rows(overall_comparison, comparable_comparison)
 
 flextable::flextable(sowell_demo) |>
-  flextable::set_caption(caption = "The Thomas Sowell Principle: Disaggregate Until Comparable") |>
-  flextable::colformat_num(j = "Mean_Salary", prefix = "$", big.mark = ",", digits = 0) |>
+  flextable::colformat_double(j = "Mean_Salary", prefix = "$", big.mark = ",", digits = 0) |>
+  flextable::add_header_lines(values = "Disaggregate Until Groups are Truly Comparable") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bg(i = 1:2, j = 1, bg = "lightblue", part = "body") |>
+  flextable::bg(i = 3:4, j = 1, bg = "yellow", part = "body") |>
+  flextable::bg(i = 2, j = 2, bg = "lightblue", part = "body") |>
+  flextable::bg(i = 3, j = 2, bg = "yellow", part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+  
 
 # Visualization
 p6 <- doctor_data |>
@@ -1308,8 +1447,22 @@ high_performers <- student_data |>
   dplyr::arrange(dplyr::desc(Mean_Score))
 
 flextable::flextable(high_performers) |>
-  flextable::set_caption(caption = "High Performers: More Similarity Across Demographics Than Within") |>
+  flextable::add_header_lines(values = "For High Performers Family Structure Matters\n(among other things)") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::color(i = 1:3, color = "firebrick", part = "body") |> 
+  flextable::color(i = 4:6, color = "#004d00", part = "body") |> 
+  flextable::color(i = 7:9, color = "blue", part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+
+```
+
+```{r}
 
 # Show correlation matrix
 correlation_data <- student_data |>
@@ -1336,11 +1489,20 @@ correlation_table <- base::data.frame(
 )
 
 flextable::flextable(correlation_table) |>
-  flextable::set_caption(caption = "What Actually Predicts Academic Success") |>
-  flextable::bg(i = ~ Importance == "High", j = "Importance", bg = "#90EE90") |>
-  flextable::bg(i = ~ Importance == "Medium", j = "Importance", bg = "#FFFF99") |>
+  flextable::add_header_lines(values = "Some Predictors For Academic Success\n(among other things)") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bg(i = ~ Importance == "High", j = "Importance", bg = "yellow") |>
+  flextable::bg(i = ~ Importance == "Medium", j = "Importance", bg = "lightblue") |>
   flextable::bg(i = ~ Importance == "Low", j = "Importance", bg = "#FFB6C1") |>
+  flextable::bg(i = 1, bg = "yellow", part = "body") |> 
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+  
 ```
 
 **This suggests the real variables of interest are:**
@@ -1354,7 +1516,7 @@ flextable::flextable(correlation_table) |>
 
 ## The Current Pseudo-Scientific Approach
 
-Instead of proper methodology, current "equity research" follows this pattern:
+Instead of proper methodology, current "so-called 'Equity'  research" follows this pattern:
 
 ```{r}
 #| label: pseudo-science-steps
@@ -1367,20 +1529,31 @@ pseudo_science_steps <- base::data.frame(
     "**Implement interventions** based on assumptions", 
     "**Declare success** regardless of actual results"
   ),
+  Validity = base::c("Invalid", "Invalid", "Invalid", "Invalid"
+                     ),
   Scientific_Approach = base::c(
     "**Test hypotheses** about possible causes",
     "**Control for confounds** and alternative explanations",
     "**Require evidence** before implementing interventions",
     "**Measure actual results** with proper controls"
   ),
-  Validity = base::c("Invalid", "Invalid", "Invalid", "Invalid")
+  Validity = base::c("Valid", "Valid", "Valid", "Valid"
+                     )
 )
 
 flextable::flextable(pseudo_science_steps) |>
-  flextable::set_caption(caption = "Current vs. Scientific Approaches to Educational Equity") |>
+  flextable::add_header_lines(values = "Current Practice vs. Scientific Approaches to Educational Equity") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
   flextable::bg(i = ~ Validity == "Invalid", j = "Validity", bg = "#FFB6C1") |>
-  flextable::autofit() |>
-  ftExtra::colformat_md()
+  flextable::bg(i = ~ Validity.1 == "Valid", j = "Validity.1", bg = "yellow") |>
+  ftExtra::colformat_md() |> 
+  flextable::autofit()
+  
 ```
 
 ## Medical Research Analogy
@@ -1392,31 +1565,40 @@ Imagine if pharmaceutical companies could:
 
 pharma_analogy <- base::data.frame(
   Invalid_Practice = base::c(
-    "Assume their drug works without testing",
+    "Assume intervention works without testing",
     "Only test on people likely to improve anyway",
     "Ignore side effects",
     "Skip control groups",
-    "Get FDA approval based on 'equity' rather than efficacy"
+    "Get FDA approval based on 'so-called 'Equity' ' rather than efficacy"
   ),
   Educational_Equivalent = base::c(
     "Assume interventions work without testing",
-    "Only measure favorable results",
-    "Ignore negative consequences for some students",
-    "No comparison schools or baseline measurements",
+    "Only report favorable results",
+    "Ignore negative consequences for populations",
+    "No comparison groups or baseline measurements",
     "Implement policies based on ideology rather than evidence"
   ),
   Consequence = base::c(
-    "Ineffective or harmful treatments",
+    "Ineffective or harmful interventions",
     "Biased and unreliable results",
-    "Unrecognized harm to patients",
+    "Unrecognized harm to populations",
     "Cannot determine causation",
     "Public health catastrophe"
   )
 )
 
 flextable::flextable(pharma_analogy) |>
-  flextable::set_caption(caption = "Medical Research Standards vs. Educational Equity Research") |>
+  flextable::add_header_lines(values = "Medical Research Standards vs. Educational Equity Research Standards") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bg(j = 3, bg = "yellow", part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+  
 ```
 
 **Result:** Public health catastrophe
@@ -1433,14 +1615,14 @@ flextable::flextable(pharma_analogy) |>
 checklist_before <- base::data.frame(
   Requirement = base::c(
     "Define hypotheses clearly",
-    "Specify effect sizes", 
+    "Specify meaningful effect sizes", 
     "Identify confounds",
     "Plan rational subgrouping",
     "Plan sensitivity tests"
   ),
   Question_to_Ask = base::c(
     "What specific claims are you testing?",
-    "How large a difference would be meaningful?",
+    "In your specific case, how large a difference would be meaningful?",
     "What other variables could explain group differences?",
     "How will you ensure comparable groups?",
     "How will you check if results are robust?"
@@ -1449,8 +1631,24 @@ checklist_before <- base::data.frame(
 )
 
 flextable::flextable(checklist_before) |>
-  flextable::set_caption(caption = "Pre-Analysis Requirements") |>
+  flextable::set_header_labels(
+    Requirement = "Requirement",
+    Question_to_Ask = "Questions to Ask",
+    Status = "Status",
+    Interpretation = "Interpretation"
+  ) |>
+  flextable::add_header_lines(values = "Pre-Analysis Requirements") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bg(i = ~ Status == "Required", j = "Status", bg = "yellow", part = "body") |>
+  flextable::bg(i = 1:5, j = "Requirement", bg = "yellow", part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+  
 ```
 
 ### During Analysis: Rational Subgrouping
@@ -1474,14 +1672,28 @@ analysis_requirements <- base::data.frame(
   Interpretation = base::c(
     "If p<0.05, groups not homogeneous - comparison invalid",
     "Only compare students with similar characteristics",
-    "Not entire demographic categories", 
-    "Most variation should be between, not within groups"
+    "Demographic categories more complex than skin color", 
+    "Greatest variation must be between, not within groups"
   )
 )
 
 flextable::flextable(analysis_requirements) |>
-  flextable::set_caption(caption = "Analysis Requirements for Valid Group Comparisons") |>
+  flextable::set_header_labels(
+    Check = "Check",
+    Method = "Method",
+    Interpretation = "Interpretation"
+  ) |>
+  flextable::add_header_lines(values = "Analysis Requirements for Valid Group Comparisons") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bg(i = 1:4, j = 3, bg = "yellow", part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+
 ```
 
 ### Standard Analysis Checks
@@ -1510,38 +1722,52 @@ red_flags <- base::data.frame(
     "How many different analyses did I try before getting this result?",
     "Would I be willing to bet money that this result will replicate?",
     "Am I controlling for the most obvious alternative explanations?",
-    "Am I comparing truly comparable individuals or just demographic categories?",
-    "Is most of the variation within groups or between groups?"
+    "Am I grouping truly comparable individuals or just demographic categories?",
+    "Is most of the observed variation within groups or between groups?"
   ),
   Good_Answer = base::c("Yes", "Just one", "Yes", "Yes", "Comparable individuals", "Between groups"),
   Warning_Sign = base::c("No", "Many", "No", "No", "Just demographics", "Within groups")
 )
 
 flextable::flextable(red_flags) |>
-  flextable::set_caption(caption = "Red Flags for Data Mining vs. Hypothesis Testing") |>
-  flextable::bg(j = "Warning_Sign", bg = "#FFB6C1") |>
-  flextable::bg(j = "Good_Answer", bg = "#90EE90") |>
+   flextable::set_header_labels(
+    Question = "Question",
+    Good_Answer = "Good Answer",
+    Warning_Sign = "Warning Signs"
+  ) |>
+  flextable::add_header_lines(values = "Analysis Requirements for Valid Group Comparisons") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bg(i = 1:6, j = 3, bg = "pink", part = "body") |>
+  flextable::bg(i = 1:6, j = 2, bg = "yellow", part = "body") |>
+  flextable::bold(i = 1:6, j = 1, part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+  
 ```
 
 If you can't answer these satisfactorily, you're probably data mining rather than hypothesis testing.
 
 ## Conclusions
 
-The current approach to educational equity research violates fundamental principles of scientific investigation:
+The current approach to educational so-called 'Equity'  research violates fundamental principles of scientific investigation:
 
 ```{r}
 #| label: violations-summary
 
 violations <- base::data.frame(
   Violation = base::c(
-    "No hypothesis testing of core assumptions",
-    "No control for confounding variables", 
-    "No proper control groups",
-    "No accounting for natural variation",
-    "No replication requirements",
+    "Inadequate hypothesis testing of core assumptions",
+    "Inadequate control for confounding variables", 
+    "Inadequate or missing control groups",
+    "Inadequate accounting for natural variation",
+    "Inadequate replication requirements",
     "Policy implementation without evidence",
-    "No rational subgrouping"
+    "Inadequate rational subgrouping"
   ),
   Consequence = base::c(
     "Unproven assumptions treated as fact",
@@ -1549,23 +1775,38 @@ violations <- base::data.frame(
     "Cannot establish causal relationships", 
     "Chasing statistical noise",
     "Unreliable and irreproducible results",
-    "Harm to students from ineffective policies",
+    "Harm to subjects from ineffective policies",
     "Comparing apples to oranges"
   ),
   Scientific_Standard = base::c(
     "Test competing hypotheses",
     "Control for alternative explanations",
-    "Use matched comparison groups",
+    "Use properly matched comparison groups",
     "Calculate confidence intervals", 
     "Independent replication required",
     "Evidence required before implementation",
-    "Disaggregate until comparable"
+    "Disaggregate until individuals within groups are comparable"
   )
 )
 
 flextable::flextable(violations) |>
-  flextable::set_caption(caption = "Violations of Scientific Method in Current Equity Research") |>
+   flextable::set_header_labels(
+    Violation = "Violation",
+    Consequence = "Consequence",
+    Scientific_Standard = "Scientific Standard"
+  ) |>
+   flextable::add_header_lines(values = "Frequent Violations of Scientific Method in Current So-Called 'Equity' Research") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bold(i = 1:2, part = "header") |>
+  flextable::bold(i = 1:7, j = 1, part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+  
 ```
 
 ::: {.callout-note}
