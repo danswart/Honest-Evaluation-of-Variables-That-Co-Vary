@@ -1,7 +1,10 @@
 ---
 title: "Scientific Inquiry is Difficult, Data Surfing is Easy"
 subtitle: "Most Education Research is ***NOT*** Science"
-bibliography: manual-refs.bib
+description: ""
+authors: 
+  - name: "Dan Swart, CPA (ret)"
+  - name: "Claude Sonnet 4.5"
 date: today
 date-format: long
 # bibliography: manual-refs.bib
@@ -61,6 +64,7 @@ format:
     fontsize: 16pt
     mainfont: "Cabin"
   
+
     
   revealjs:
     slide-number: true
@@ -143,6 +147,7 @@ options(shiny.maxRequestSize = 50 * 1024^2) # Set upload maximum to 50 MB
 options(tigris_use_cache = TRUE)
 
 
+# Flextable defaults:
 flextable::set_flextable_defaults(
   font.size = 14, 
   font.family = "Cabin",
@@ -153,10 +158,90 @@ flextable::set_flextable_defaults(
   padding.left = 4, padding.right = 4,
   line_spacing = 1.3,
   digits = 2,
-  decimal.mark = ",",
+  decimal.mark = ".",
   big.mark = " ",
-  na_str = "<na>"
-  )
+  na_str = "<na>",
+  post_process_html = identity,
+  post_process_docx = identity
+)
+
+
+#
+# # Sample Code:
+# flextable::flextable(violations) |>
+ #  flextable::set_header_labels(
+ #    Variable = "Variable",
+ #    Measurement = "Measurement",
+ #    Likely_Impact = "Likely Impact"
+ #  ) |>
+#    flextable::add_header_lines(values = "Frequent Violations of Scientific Method in Current So-Called 'Equity' Research") |>
+#   flextable::color(i = 1, color = "blue", part = "header") |>
+#   flextable::italic(i = 1, part = "header") |>
+#   flextable::align(i = 1, align = "center", part = "header") |>
+#   flextable::fontsize(i = 1, size = 14, part = "header") |>
+#   flextable::bg(i = 1, bg = "white", part = "header") |>
+#   flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+#   flextable::bold(i = 1:2, part = "header") |>
+#   flextable::bold(i = 1:7, j = 1, part = "body") |>
+#   ftExtra::colformat_md() |> 
+#   flextable::autofit()
+  
+
+# Flextable built-in themes:
+  # flextable::theme_alafoli()	|>  # BLAH
+  # flextable::theme_apa()  # THIS IS NICE
+  # flextable::theme_booktabs() |>  # NICE, MORE COMPACT
+  # flextable::theme_box() |>   # OK, INCLUDES CELL BORDERS
+  # flextable::theme_tron() |>  # 'DARK MODE' BLUE TEXT
+  # flextable::theme_tron_legacy() |>   # 'DARK MODE' YELLOW TEXT
+  # flextable::theme_vader() |>    # 'DARK MODE' WHITE TEXT
+  # flextable::theme_vanilla() |>   # NOT SPECIAL
+  # flextable::theme_zebra()	|>
+  #
+
+# Flextable titles:
+  # flextable::colformat_double(j = c("Mean", "SD", "N"), big.mark = ",", digits = 1) |>
+  # flextable::flextable(variance_comparison) |>
+  #  flextable::add_header_lines(values = "The Within-Group vs Between-Group Variance Problem") |>
+
+# Flextable Title theming at table-level:
+  #  flextable::color(i = 1, color = "blue", part = "header") |>
+  #  flextable::italic(i = 1, part = "header") |>
+  #  flextable::bold(i = 1, part = "header") |> 
+  #  flextable::align(i = 1, align = "center", part = "header") |>
+  #  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  #  flextable::bg(i = 1, bg = "white", part = "header") |>
+
+# Flextable standard table background colors:
+  #  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  
+
+# Flextable reading markdown:
+  #  ftExtra::colformat_md() |> 
+
+# Flextable auto-sizing cell widths:
+  #  flextable::autofit() 
+ 
+ # Flextable background based on SPECIFIC cell contents:
+  #
+  # flextable::bg(i = ~ Impact_on_Validity == "High", j = "Impact_on_Validity", bg = "#ffcccc") |>
+ # flextable::bg(i = ~ Impact_on_Validity == "Medium", j = "Impact_on_Validity", bg = "#ffffcc") |>
+  #
+  # 
+  # Apply yellow background to any cell containing "Yes":
+
+  # for (col in base::names(hypotheses_data)) {
+  #   yes_rows <- base::which(hypotheses_data[[col]] == "Yes")
+  #   if (base::length(yes_rows) > 0) {
+  #     ft <- ft |>
+  #       flextable::bg(i = yes_rows, j = col, bg = "yellow", part = "body")
+  #   }
+  # } 
+  #
+  # Apply to last specifi cells of table:
+  #
+  # flextable::bg(i = 2, j = 1, bg = "yellow", part = "body") |>
+
 
 
 # Set global theme for consistent plots
@@ -168,9 +253,9 @@ ggplot2::theme_set(
         family = "Cabin",
         face = "bold",
         color = "darkgreen",
-        size = 22,
+        size = 26,
         fill = "yellow",
-        lineheight = 1.0,
+        lineheight = 1.2,
         padding = ggplot2::margin(5.5, 5.5, 0.0, 5.5),
         margin = ggplot2::margin(0, 0, 5.5, 0)
       ),
@@ -178,15 +263,15 @@ ggplot2::theme_set(
         family = "Cabin",
         color = "darkgreen",
         face = "bold",
-        size = 20,
+        size = 24,
         fill = "yellow",
-        lineheight = 1.0,
-        padding = ggplot2::margin(0.0, 5.5, 5.5, 5.5),
-        margin = ggplot2::margin(0, 0, 5.5, 0)
+        lineheight = 1.2,
+        padding = ggplot2::margin(5.5, 5.5, 5.5, 5.5),
+        margin = ggplot2::margin(10.5, 0, 5.5, 0)
       ),
       plot.caption = ggtext::element_markdown(
         family = "Cabin",
-        size = 16,
+        size = 22,
         hjust = 1,
         color = "darkblue",
         face = "italic",
@@ -196,8 +281,8 @@ ggplot2::theme_set(
       axis.text.x = ggtext::element_markdown(
         family = "Cabin",
         face = "bold",
-        color = "black",
-        size = 18,
+        color = "blue",
+        size = 20,
         angle = 45,
         hjust = 1
       ),
@@ -211,8 +296,8 @@ ggplot2::theme_set(
       axis.text.y = ggtext::element_markdown(
         family = "Cabin",
         face = "bold",
-        color = "black",
-        size = 16,
+        color = "blue",
+        size = 20,
         angle = 45,
         hjust = 1
       ),
@@ -246,7 +331,7 @@ ggplot2::theme_set(
 
   
 # Set seed for reproducibility
-set.seed(123)
+base::set.seed(123)
 
 ```
 
@@ -337,12 +422,12 @@ When within-group variation is large relative to the between-group variation sig
 For example, education researchers love to compare standardized scores of subgroups based solely on skin color, or other arbitrary categorization. Without further stratefication individuals within those subgroups can vary wildly in characteristics that also influence scores. This is within-group variation (noise). For example:
 
 ```{r}
+#| label: noise-makers
 
-# Create the data frame - a list objects.
-
+# Create the dataframe as a flextable object
 tbl <- flextable::flextable(
   data.frame(
-    `Noise WITHIN Subgroups\nThat Will Drown Out any Signals\n BETWEEN Subgroups` = c(
+    "Variables" = c(
       "Socioeconomic status",
       "Family structure",
       "Time spent on homework",
@@ -360,14 +445,18 @@ tbl <- flextable::flextable(
   )
 )
 
-# Formatting that cannot be applied in set_flextable_defaults 
+# Format the flextable
 tbl <- tbl |>
-  flextable::align(align = "left", part = "all") |>
-  flextable::bold(part = "header") |>
-  flextable::bg(part = "header", bg = "#FFE97A") |>
+  flextable::add_header_lines(values = "Noise WITHIN Subgroups That Wll Drown Out Signals BETWEEN Subgroups") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::bold(i = 1:2, part = "header") |> 
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
-
-
 
 tbl
 
@@ -595,6 +684,9 @@ ggplot2::theme(legend.position = "bottom")
 
 base::print(p_paradox)
 
+```
+
+```{r}
 
 # Calculate the overall regression when age is ignored
 overall_model <- stats::lm(HRT_Effect ~ Age, data = whi_demo)
@@ -650,20 +742,33 @@ paradox_summary <- base::data.frame(
   stringsAsFactors = FALSE
 )
 
+```
+
+
 # Create table for Simpson's Paradox Summary
 
 # ---- Main summary table ----
+
+```{r}
 
 # Create the flextable from your data frame
 ft_paradox_summary <- flextable::flextable(paradox_summary)
 
 # Add a descriptive caption and align text
 ft_paradox_summary <- ft_paradox_summary |>
-  flextable::set_caption(
-    caption = "Simpson's Paradox Summary Table: How a $1B Study Got it Wrong"
-  ) |>
-  flextable::align(align = "center", part = "all") |>
+  flextable::add_header_lines(values = "Simpson's Paradox Summary Table: How a $1B Study Got it Wrong") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::bold(i = 1:2, part = "header") |> 
+  flextable::align(i = 1, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  flextable::bg(i = 2, j = 5, bg = "#ccffcc", part = "body") |>
+  flextable::bg(i = 3, j = 5, bg = "#FFC0C0", part = "body") |>
+  ftExtra::colformat_md() |> 
   flextable::autofit()
+
 
 # --- Apply conditional background shading to Mean_Effect column ---
 
