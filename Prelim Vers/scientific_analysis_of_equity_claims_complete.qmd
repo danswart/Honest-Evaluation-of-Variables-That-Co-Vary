@@ -83,7 +83,7 @@ set.seed(123)
 An earnest discussion of the methodological deficiencies in current educational equity research, demonstrating how proper scientific investigation would approach claims about group differences in academic outcomes.  The astonishing fact is that most of the important research information is never presented, or even asked for!
 
 
-## The Problematic Claim
+## The Problem Claim
 
 > "For example, one way for school systems to support efforts towards equity in student outcomes is to frequently examine any differences in outcomes among student subgroups (Chapter 3)."
 
@@ -97,6 +97,7 @@ This statement comes early in the book and contains an **unproven assumption** t
 Most social science researchers work with datasets containing government-specified subgroups (race, ethnicity, SES categories) rather than rationally selected variables for experimental validity. This creates systematic bias in research design from the outset.
 
 **Additional Complications:**
+
 - **Self-designation**: Individuals choose their own racial/ethnic categories
 - **Multiple categories**: Many people belong to more than one subgroup
 - **Assumed homogeneity**: Massive within-group differences are ignored
@@ -118,14 +119,43 @@ When working with existing datasets (most social science research), rigorous met
 
 ### Step 1: Question the Fundamental Premises
 
+```{r}
+#| label: premises
+#| 
+# Create the dataframe as a flextable object
+premises <- flextable::flextable(
+  data.frame(
+    " Checklist for Scientific Approach" = c("What creditable emperical evidence supports the assumption that group differences in outcomes indicate systemic bias?", 
+                    "Have appeals to authorities been examined carefully?", 
+                    "Under what conditions would group differences be expected even in perfectly 'fair' systems?",
+                    "Have confounders been adequately addressed in the model (sex, home environment, economic factors, etc)"
+                    ),
+    check.names = FALSE
+    )
+)
 
-**Scientific Approach:**
+  
+  # Format the flextable
+premises <- premises |>
+  flextable::add_header_lines(values = "Step 1: Question the Fundamental Premises") |>
+  flextable::color(i = 1, color = "blue", part = "header") |>
+  flextable::italic(i = 1, part = "header") |>
+  flextable::bold(i = 1:2, part = "header") |> 
+  flextable::align(i = 2, align = "center", part = "header") |>
+  flextable::fontsize(i = 1, size = 14, part = "header") |>
+  flextable::bg(i = 1, bg = "white", part = "header") |>
+  flextable::bg(i = 2, bg = "palegreen", part = "header") |>
+  ftExtra::colformat_md() |> 
+  flextable::autofit()
 
-- What creditable evidence supports the assumption that group differences in outcomes indicate systemic bias?  Appeals to authorities must be examined carefully.
+premises
 
-- Under what conditions would group differences be expected even in perfectly fair systems?
+```
 
-- Are we conflating correlation with causation?
+
+
+
+
 
 **Current "Equity Research" Approach:**
 
@@ -2762,14 +2792,15 @@ results_by_school <- analyze_gaps(group_by = "school_quality")
 #### Step 5: Heterogeneity Analysis
 Government categories often hide important variation:
 
-```r
-# Don't just report "Black-White gap"
-# Report gaps by:
+
+Don't just report "Black-White gap"
+  Report gaps by:
+  
 # - Immigrant status within racial groups
 # - SES within racial groups  
 # - Geographic region within racial groups
 # - Family structure within racial groups
-```
+
 
 ### Red Flags for "Data Mining" vs. Hypothesis Testing
 
